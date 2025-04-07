@@ -82,13 +82,13 @@ For some valid `base_name`, this function exports:
 ### `get_style`
 
 ```js
-$TDSM.get_style(string code) -> style
+$TDSM.get_style(string id) -> style
 ```
 
-**Returns** the [`style`](./style.md) matching `code`.
+**Returns** the [`style`](./style.md) matching `id`.
 
 **Parameters:**
-* `string` `code` - A unique identifier code associated with a particular sprite style
+* `string` `id` - A unique identifier code associated with a particular sprite style
 
 <!-- TODO - list of supported sprite identifier codes -->
 
