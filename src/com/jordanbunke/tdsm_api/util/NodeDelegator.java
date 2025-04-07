@@ -9,6 +9,7 @@ import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm.data.Edge;
 import com.jordanbunke.tdsm.util.EnumUtils;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
+import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.type.*;
 
 public final class NodeDelegator {
@@ -34,6 +35,7 @@ public final class NodeDelegator {
     public static ExpressionNode globalConstant(
             final TextPosition pos, final String constID
     ) {
+        // edge constants
         if (EnumUtils.matches(constID, Edge.class))
             return new EdgeConstNode(pos, Edge.valueOf(constID));
 
@@ -66,7 +68,10 @@ public final class NodeDelegator {
             final ExpressionNode... args
     ) {
         return switch (fID) {
-            // TODO - extend here
+            case GetStyleNode.NAME -> new GetStyleNode(pos, args);
+            case IsExportFlagNode.JSON, IsExportFlagNode.STIP ->
+                    new IsExportFlagNode(pos, args, fID);
+            // extend here
             default -> new IllegalExpressionNode(pos,
                     "Undefined function \"" + formatGlobal(fID, true) + "\"");
         };
@@ -77,7 +82,10 @@ public final class NodeDelegator {
             final ExpressionNode... args
     ) {
         return switch (fID) {
-            // TODO - extend here
+            case SetExportFlagNode.JSON, SetExportFlagNode.STIP ->
+                    new SetExportFlagNode(pos, args, fID);
+            case ExportNode.NAME -> new ExportNode(pos, args);
+            // extend here
             default -> new IllegalStatementNode(pos,
                     "Undefined function \"" + formatGlobal(fID, true) + "\"");
         };
