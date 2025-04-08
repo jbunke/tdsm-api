@@ -131,6 +131,7 @@ public final class NodeDelegator {
             case SpriteDimsNode.DEF_DIMS ->
                     SpriteDimsNode.defDims(pos, scope, args);
             case SpriteDimsNode.DIMS -> SpriteDimsNode.dims(pos, scope, args);
+            case HasOutputNode.NAME -> new HasOutputNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -146,6 +147,9 @@ public final class NodeDelegator {
             case RandomizeNode.NAME -> new RandomizeNode(pos, scope, args);
             case SetAnimsNode.NAME -> new SetAnimsNode(pos, scope, args);
             case SetDirsNode.NAME -> new SetDirsNode(pos, scope, args);
+            case ResetConfigNode.RESET_LAYOUT, ResetConfigNode.RESET_PADDING,
+                 ResetConfigNode.RESET_SEQUENCING ->
+                    new ResetConfigNode(pos, scope, args, fID);
             // TODO - extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +
