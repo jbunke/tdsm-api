@@ -8,8 +8,13 @@ import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm.data.Edge;
 import com.jordanbunke.tdsm.util.EnumUtils;
+import com.jordanbunke.tdsm_api.ast.expr.IDPropertyNode;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
+import com.jordanbunke.tdsm_api.ast.expr.style.GetAnimsNode;
+import com.jordanbunke.tdsm_api.ast.expr.style.GetDirsNode;
+import com.jordanbunke.tdsm_api.ast.expr.style.RenderNode;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
+import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
 import com.jordanbunke.tdsm_api.ast.type.*;
 
 public final class NodeDelegator {
@@ -103,6 +108,7 @@ public final class NodeDelegator {
             final String propID
     ) {
         return switch (propID) {
+            case IDPropertyNode.NAME -> new IDPropertyNode(pos, scope);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No property \"" + propID + "\" exists");
@@ -114,6 +120,11 @@ public final class NodeDelegator {
             final String fID, final ExpressionNode... args
     ) {
         return switch (fID) {
+            case RenderNode.NAME -> new RenderNode(pos, scope, args);
+            case GetAnimsNode.ALL -> GetAnimsNode.all(pos, scope, args);
+            case GetAnimsNode.GET -> GetAnimsNode.get(pos, scope, args);
+            case GetDirsNode.ALL -> GetDirsNode.all(pos, scope, args);
+            case GetDirsNode.GET -> GetDirsNode.get(pos, scope, args);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -126,6 +137,7 @@ public final class NodeDelegator {
             final String fID, final ExpressionNode... args
     ) {
         return switch (fID) {
+            case RandomizeNode.NAME -> new RandomizeNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

@@ -1,5 +1,6 @@
 package com.jordanbunke.tdsm_api.ast.stat.global;
 
+import com.jordanbunke.delta_time.io.FileIO;
 import com.jordanbunke.delta_time.scripting.ast.nodes.expression.ExpressionNode;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
@@ -36,6 +37,9 @@ public final class ExportNode extends GlobalStatNode {
         final Path fp = PathHelper.process(folder,
                 symbolTable, arguments.get(1).getPosition());
 
+        if (!fp.toFile().exists())
+            FileIO.safeMakeDirectory(fp);
+
         if (!Export.validFileName(baseName))
             TDSMInterpreter.failure(
                     "Could not export due to an invalid base name",
@@ -45,6 +49,10 @@ public final class ExportNode extends GlobalStatNode {
                     "Current configuration of sprite style \"" +
                             style.id + "\" does not export any frames",
                     arguments.get(0).getPosition());
+        else if (!fp.toFile().exists())
+            TDSMInterpreter.failure(
+                    "Failed to create the directory \"" + fp + "\"",
+                    arguments.get(1).getPosition());
         else {
             Sprite.get().setStyle(style);
 

@@ -1,7 +1,10 @@
 package com.jordanbunke.tdsm_api;
 
 import com.jordanbunke.delta_time.scripting.Interpreter;
+import com.jordanbunke.delta_time.scripting.ast.nodes.function.HeadFuncNode;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
+
+import java.nio.file.Path;
 
 public final class TDSMInterpreter extends Interpreter {
     static {
@@ -13,8 +16,24 @@ public final class TDSMInterpreter extends Interpreter {
     }
 
     public static void failure(final String message, final TextPosition pos) {
-        println("FAILURE: " + message + " [" + pos + "]");
+        // TODO: move to CLI
+        println("FAILURE: " + message + " [at " + pos + "]");
     }
 
-    // TODO - script validation
+    public void runScript(final String content, final Path filepath) {
+        final HeadFuncNode script = build(content);
+
+        if (validateScript(script))
+            run(script, filepath);
+        else if (script != null)
+            println("Invalid script"); // TODO: move to CLI
+        else
+            println("Failed to compile script at \"" + filepath + "\""); // TODO: move to CLI
+    }
+
+    private boolean validateScript(final HeadFuncNode script) {
+        if (script == null) return false;
+
+        return script.paramsMatch() && script.getReturnType() == null;
+    }
 }
