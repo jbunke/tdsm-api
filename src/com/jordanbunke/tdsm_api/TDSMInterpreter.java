@@ -15,7 +15,15 @@ public final class TDSMInterpreter extends Interpreter {
         return new TDSMInterpreter();
     }
 
-    public static void failure(final String message, final TextPosition pos) {
+    public static void failure(
+            final String attempt, final String reason, final TextPosition pos
+    ) {
+        failure(attempt + " because " + reason, pos);
+    }
+
+    public static void failure(
+            final String message, final TextPosition pos
+    ) {
         // TODO: move to CLI
         println("FAILURE: " + message + " [at " + pos + "]");
     }

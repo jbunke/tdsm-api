@@ -64,6 +64,12 @@ S.get_anims() -> anim[]
 S.get_dirs() -> string[]
 ```
 
+### `get_edge`
+
+```js
+S.get_edge(int edge) -> int
+```
+
 ### `has_output`
 
 ```js

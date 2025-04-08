@@ -132,6 +132,7 @@ public final class NodeDelegator {
                     SpriteDimsNode.defDims(pos, scope, args);
             case SpriteDimsNode.DIMS -> SpriteDimsNode.dims(pos, scope, args);
             case HasOutputNode.NAME -> new HasOutputNode(pos, scope, args);
+            case GetEdgeNode.NAME -> new GetEdgeNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -150,6 +151,8 @@ public final class NodeDelegator {
             case ResetConfigNode.RESET_LAYOUT, ResetConfigNode.RESET_PADDING,
                  ResetConfigNode.RESET_SEQUENCING ->
                     new ResetConfigNode(pos, scope, args, fID);
+            case SetEdgeNode.NAME -> new SetEdgeNode(pos, scope, args);
+            case SetPaddingNode.NAME -> new SetPaddingNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +
