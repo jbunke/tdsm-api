@@ -133,6 +133,13 @@ public final class NodeDelegator {
             case SpriteDimsNode.DIMS -> SpriteDimsNode.dims(pos, scope, args);
             case HasOutputNode.NAME -> new HasOutputNode(pos, scope, args);
             case GetEdgeNode.NAME -> new GetEdgeNode(pos, scope, args);
+            case GetFramesPerDimNode.NAME ->
+                    new GetFramesPerDimNode(pos, scope, args);
+            case GetOrientationNode.NAME ->
+                    new GetOrientationNode(pos, scope, args);
+            case IsStyleFlagNode.SINGLE, IsStyleFlagNode.MULTIPLE,
+                 IsStyleFlagNode.WRAP ->
+                    new IsStyleFlagNode(pos, scope, args, fID);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -153,6 +160,13 @@ public final class NodeDelegator {
                     new ResetConfigNode(pos, scope, args, fID);
             case SetEdgeNode.NAME -> new SetEdgeNode(pos, scope, args);
             case SetPaddingNode.NAME -> new SetPaddingNode(pos, scope, args);
+            case SetFramesPerDimNode.NAME ->
+                    new SetFramesPerDimNode(pos, scope, args);
+            case SetOrientationNode.NAME ->
+                    new SetOrientationNode(pos, scope, args);
+            case SetStyleFlagNode.SINGLE, SetStyleFlagNode.MULTIPLE,
+                 SetStyleFlagNode.WRAP ->
+                    new SetStyleFlagNode(pos, scope, args, fID);
             // TODO - extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

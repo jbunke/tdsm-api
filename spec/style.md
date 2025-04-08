@@ -70,6 +70,18 @@ S.get_dirs() -> string[]
 S.get_edge(int edge) -> int
 ```
 
+### `get_frames_per_dim`
+
+```js
+S.get_frames_per_dim() -> int
+```
+
+### `get_orientation`
+
+```js
+S.get_orientation() -> bool
+```
+
 ### `has_output`
 
 ```js
@@ -77,6 +89,24 @@ S.has_output() -> bool
 ```
 
 **Returns** `true` if the current animation and direction configuration is valid and yields at least one animation frame, `false` otherwise.
+
+### `is_all_anims_single_dim`
+
+```js
+S.is_all_anims_single_dim() -> bool
+```
+
+### `is_multiple_anims_per_dim`
+
+```js
+S.is_multiple_anims_per_dim() -> bool
+```
+
+### `is_wrap_anims_across_dims`
+
+```js
+S.is_wrap_anims_across_dims() -> bool
+```
 
 ### `randomize`
 
@@ -108,6 +138,12 @@ S.reset_padding();
 S.reset_sequencing();
 ```
 
+### `set_all_anims_single_dim`
+
+```js
+S.set_all_anims_single_dim(bool single_dim);
+```
+
 ### `set_anims`
 
 ```js
@@ -128,10 +164,34 @@ S.set_dirs(string<> directions);
 S.set_edge(int edge, int value);
 ```
 
+### `set_frames_per_dim`
+
+```js
+S.set_frames_per_dim(int fpd);
+```
+
+### `set_multiple_anims_per_dim`
+
+```js
+S.set_multiple_anims_per_dim(bool mapd);
+```
+
+### `set_orientation`
+
+```js
+S.set_orientation(bool orientation);
+```
+
 ### `set_padding`
 
 ```js
 S.set_padding(int left, int right, int top, int bottom);
+```
+
+### `set_wrap_anims_across_dims`
+
+```js
+S.set_wrap_anims_across_dims(bool wrap);
 ```
 
 ### `sprite_dims`
