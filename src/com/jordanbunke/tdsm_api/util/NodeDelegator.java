@@ -10,11 +10,10 @@ import com.jordanbunke.tdsm.data.Edge;
 import com.jordanbunke.tdsm.util.EnumUtils;
 import com.jordanbunke.tdsm_api.ast.expr.IDPropertyNode;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
-import com.jordanbunke.tdsm_api.ast.expr.style.GetAnimsNode;
-import com.jordanbunke.tdsm_api.ast.expr.style.GetDirsNode;
-import com.jordanbunke.tdsm_api.ast.expr.style.RenderNode;
+import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
+import com.jordanbunke.tdsm_api.ast.stat.style.*;
 import com.jordanbunke.tdsm_api.ast.type.*;
 
 public final class NodeDelegator {
@@ -125,6 +124,13 @@ public final class NodeDelegator {
             case GetAnimsNode.GET -> GetAnimsNode.get(pos, scope, args);
             case GetDirsNode.ALL -> GetDirsNode.all(pos, scope, args);
             case GetDirsNode.GET -> GetDirsNode.get(pos, scope, args);
+            case GetLayersNode.ASSEMBLY ->
+                    GetLayersNode.assembly(pos, scope, args);
+            case GetLayersNode.CUSTOM ->
+                    GetLayersNode.custom(pos, scope, args);
+            case SpriteDimsNode.DEF_DIMS ->
+                    SpriteDimsNode.defDims(pos, scope, args);
+            case SpriteDimsNode.DIMS -> SpriteDimsNode.dims(pos, scope, args);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -138,6 +144,8 @@ public final class NodeDelegator {
     ) {
         return switch (fID) {
             case RandomizeNode.NAME -> new RandomizeNode(pos, scope, args);
+            case SetAnimsNode.NAME -> new SetAnimsNode(pos, scope, args);
+            case SetDirsNode.NAME -> new SetDirsNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +
