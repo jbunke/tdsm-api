@@ -5,3 +5,7 @@ This repository houses the [specification](./spec/README.md) and [implementation
 <!-- TODO - Possibilities of scripting -->
 
 <!-- TODO - Written in DeltaScript -->
+
+## Command-Line Interface
+
+The best way to interact with the API is through *TDSM*'s [command-line interface](./cli/README.md).

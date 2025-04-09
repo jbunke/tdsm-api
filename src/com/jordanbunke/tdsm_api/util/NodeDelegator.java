@@ -109,7 +109,9 @@ public final class NodeDelegator {
             final String propID
     ) {
         return switch (propID) {
+            // multi-type
             case IDPropertyNode.NAME -> new IDPropertyNode(pos, scope);
+            // layer
             case LayerTypePropNode.NAME -> new LayerTypePropNode(pos, scope);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
@@ -122,6 +124,7 @@ public final class NodeDelegator {
             final String fID, final ExpressionNode... args
     ) {
         return switch (fID) {
+            // style
             case RenderNode.NAME -> new RenderNode(pos, scope, args);
             case GetAnimsNode.ALL -> GetAnimsNode.all(pos, scope, args);
             case GetAnimsNode.GET -> GetAnimsNode.get(pos, scope, args);
@@ -143,6 +146,7 @@ public final class NodeDelegator {
             case IsStyleFlagNode.SINGLE, IsStyleFlagNode.MULTIPLE,
                  IsStyleFlagNode.WRAP ->
                     new IsStyleFlagNode(pos, scope, args, fID);
+            // layer
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -155,7 +159,9 @@ public final class NodeDelegator {
             final String fID, final ExpressionNode... args
     ) {
         return switch (fID) {
+            // multi-type
             case RandomizeNode.NAME -> new RandomizeNode(pos, scope, args);
+            // style
             case SetAnimsNode.NAME -> new SetAnimsNode(pos, scope, args);
             case SetDirsNode.NAME -> new SetDirsNode(pos, scope, args);
             case ResetConfigNode.RESET_LAYOUT, ResetConfigNode.RESET_PADDING,
@@ -170,6 +176,7 @@ public final class NodeDelegator {
             case SetStyleFlagNode.SINGLE, SetStyleFlagNode.MULTIPLE,
                  SetStyleFlagNode.WRAP ->
                     new SetStyleFlagNode(pos, scope, args, fID);
+            // layer
             case LockLayerNode.LOCK -> LockLayerNode.lock(pos, scope, args);
             case LockLayerNode.UNLOCK ->
                     LockLayerNode.unlock(pos, scope, args);
