@@ -1,6 +1,7 @@
 package com.jordanbunke.tdsm_api.util;
 
 import com.jordanbunke.tdsm.data.layer.CustomizationLayer;
+import com.jordanbunke.tdsm.data.layer.support.ColorSelection;
 import com.jordanbunke.tdsm.data.style.Style;
 
 import java.util.HashMap;
@@ -15,10 +16,12 @@ public final class UpdateChecker {
 
     private final Map<Style, Boolean> updateMap;
     private final Map<CustomizationLayer, Style> layerMap;
+    private final Map<ColorSelection, CustomizationLayer> csMap;
 
     private UpdateChecker() {
         updateMap = new HashMap<>();
         layerMap = new HashMap<>();
+        csMap = new HashMap<>();
     }
 
     public static UpdateChecker get() {
@@ -29,6 +32,10 @@ public final class UpdateChecker {
         layerMap.put(l, s);
     }
 
+    public void link(final ColorSelection cs, final CustomizationLayer l) {
+        csMap.put(cs, l);
+    }
+
     private void ping() {
         updateMap.replaceAll((s, v) -> true);
     }
@@ -36,6 +43,13 @@ public final class UpdateChecker {
     public void ping(final CustomizationLayer l) {
         if (layerMap.containsKey(l))
             ping(layerMap.get(l));
+        else
+            ping();
+    }
+
+    public void ping(final ColorSelection cs) {
+        if (csMap.containsKey(cs))
+            ping(csMap.get(cs));
         else
             ping();
     }
