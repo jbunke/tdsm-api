@@ -10,8 +10,10 @@ import com.jordanbunke.tdsm.data.Edge;
 import com.jordanbunke.tdsm.util.EnumUtils;
 import com.jordanbunke.tdsm_api.ast.expr.IDPropertyNode;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
+import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
+import com.jordanbunke.tdsm_api.ast.stat.layer.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
 import com.jordanbunke.tdsm_api.ast.stat.style.*;
 import com.jordanbunke.tdsm_api.ast.type.*;
@@ -108,6 +110,7 @@ public final class NodeDelegator {
     ) {
         return switch (propID) {
             case IDPropertyNode.NAME -> new IDPropertyNode(pos, scope);
+            case LayerTypePropNode.NAME -> new LayerTypePropNode(pos, scope);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No property \"" + propID + "\" exists");
@@ -167,6 +170,11 @@ public final class NodeDelegator {
             case SetStyleFlagNode.SINGLE, SetStyleFlagNode.MULTIPLE,
                  SetStyleFlagNode.WRAP ->
                     new SetStyleFlagNode(pos, scope, args, fID);
+            case LockLayerNode.LOCK -> LockLayerNode.lock(pos, scope, args);
+            case LockLayerNode.UNLOCK ->
+                    LockLayerNode.unlock(pos, scope, args);
+            case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
+            case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

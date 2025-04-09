@@ -8,6 +8,7 @@ import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm.data.layer.CustomizationLayer;
 import com.jordanbunke.tdsm.data.style.Style;
 import com.jordanbunke.tdsm_api.ast.type.LayerTypeNode;
+import com.jordanbunke.tdsm_api.util.UpdateChecker;
 
 import java.util.List;
 
@@ -52,6 +53,8 @@ public final class GetLayersNode extends StyleExprNode {
                 ? style.layers.assembly()
                 : style.layers.customization();
 
-        return new ScriptList(list.stream().map(l -> l));
+        return new ScriptList(list.stream()
+                .peek(l -> UpdateChecker.get().link(l, style))
+                .map(l -> l));
     }
 }

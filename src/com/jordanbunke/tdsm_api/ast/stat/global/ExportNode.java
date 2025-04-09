@@ -12,6 +12,7 @@ import com.jordanbunke.tdsm.data.style.Style;
 import com.jordanbunke.tdsm.io.Export;
 import com.jordanbunke.tdsm_api.TDSMInterpreter;
 import com.jordanbunke.tdsm_api.ast.type.StyleTypeNode;
+import com.jordanbunke.tdsm_api.util.UpdateChecker;
 
 import java.nio.file.Path;
 
@@ -54,8 +55,9 @@ public final class ExportNode extends GlobalStatNode {
                     "Failed to create the directory \"" + fp + "\"",
                     arguments.get(1).getPosition());
         else {
-            Sprite.get().setStyle(style);
+            UpdateChecker.get().check(style);
 
+            Sprite.get().setStyle(style);
             Export.get().setFolder(fp);
             Export.get().setFileName(baseName);
 

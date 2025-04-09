@@ -2,7 +2,7 @@
 
 ## Contents
 
-The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_language) extension** of the [*DeltaScript* programming language](https://github.com/jbunke/deltascript), which introduces the following new **namespaces** and **types**:
+The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_language) extension** of the [*DeltaScript* programming language](https://github.com/jbunke/deltascript), which introduces the following **namespace** and **new types**:
 
 ### Namespaces
 

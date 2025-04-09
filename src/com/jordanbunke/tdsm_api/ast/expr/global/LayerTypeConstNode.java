@@ -3,6 +3,7 @@ package com.jordanbunke.tdsm_api.ast.expr.global;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
+import com.jordanbunke.tdsm_api.util.ScriptConstants;
 
 public final class LayerTypeConstNode extends ConstNode {
     public static final String
@@ -25,12 +26,9 @@ public final class LayerTypeConstNode extends ConstNode {
     @Override
     public Integer evaluate(final SymbolTable symbolTable) {
         return switch (code) {
-            case ACL -> 0;
-            case COL_SEL_L -> 1;
-            case DECISION_L -> 2;
-            case MATH_L -> 3;
-            case CHOICE_L -> 4;
-            default -> -1;
+            case ACL, COL_SEL_L, DECISION_L, MATH_L, CHOICE_L ->
+                    ScriptConstants.LayerType.valueOf(code).ordinal();
+            default -> ScriptConstants.OTHER;
         };
     }
 }
