@@ -34,10 +34,10 @@ C.swatches -> color[]
 
 ## Functions
 
-### `get`
+### `get_color`
 
 ```js
-C.get() -> color
+C.get_color() -> color
 ```
 
 ### `randomize`
@@ -46,10 +46,10 @@ C.get() -> color
 C.randomize();
 ```
 
-### `set`
+### `set_color`
 
 ```js
-C.set(color c);
+C.set_color(color c);
 ```
 
 <!-- TODO -->

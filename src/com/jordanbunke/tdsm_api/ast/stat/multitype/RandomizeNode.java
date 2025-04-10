@@ -32,7 +32,7 @@ public final class RandomizeNode extends GenericFStatNode {
     }
 
     @Override
-    public FuncControlFlow execute(SymbolTable symbolTable) {
+    public FuncControlFlow execute(final SymbolTable symbolTable) {
         final TypeNode type = receiver.getType(symbolTable);
         final Object scopeVal = receiver.evaluate(symbolTable);
 

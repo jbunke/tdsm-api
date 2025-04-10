@@ -8,11 +8,16 @@ import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm.data.Edge;
 import com.jordanbunke.tdsm.util.EnumUtils;
-import com.jordanbunke.tdsm_api.ast.expr.IDPropertyNode;
+import com.jordanbunke.tdsm_api.ast.expr.*;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
+// TODO - import com.jordanbunke.tdsm_api.ast.expr.anim.*;
+import com.jordanbunke.tdsm_api.ast.expr.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
+// TODO - import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
+// TODO - import com.jordanbunke.tdsm_api.ast.stat.no_choice.*;
+import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.stat.layer.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
 import com.jordanbunke.tdsm_api.ast.stat.style.*;
@@ -111,8 +116,12 @@ public final class NodeDelegator {
         return switch (propID) {
             // multi-type
             case IDPropertyNode.NAME -> new IDPropertyNode(pos, scope);
+            case NamePropertyNode.NAME -> new NamePropertyNode(pos, scope);
             // layer
             case LayerTypePropNode.NAME -> new LayerTypePropNode(pos, scope);
+            // col_sel
+            case ColSelAnyNode.NAME -> new ColSelAnyNode(pos, scope);
+            case ColSelSwatchesNode.NAME -> new ColSelSwatchesNode(pos, scope);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No property \"" + propID + "\" exists");
@@ -147,6 +156,10 @@ public final class NodeDelegator {
                  IsStyleFlagNode.WRAP ->
                     new IsStyleFlagNode(pos, scope, args, fID);
             // layer
+            case GetColSelLayerNode.NAME ->
+                    new GetColSelLayerNode(pos, scope, args);
+            // col_sel
+            case GetColorNode.NAME -> new GetColorNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -182,6 +195,8 @@ public final class NodeDelegator {
                     LockLayerNode.unlock(pos, scope, args);
             case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
             case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
+            // col_sel
+            case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

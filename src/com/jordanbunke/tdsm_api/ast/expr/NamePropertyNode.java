@@ -7,25 +7,24 @@ import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.Arguments;
 import com.jordanbunke.delta_time.scripting.util.Receiver;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
-import com.jordanbunke.tdsm.data.Animation;
-import com.jordanbunke.tdsm.data.layer.CustomizationLayer;
+import com.jordanbunke.tdsm.data.layer.support.ColorSelection;
 import com.jordanbunke.tdsm.data.style.Style;
-import com.jordanbunke.tdsm_api.ast.type.AnimTypeNode;
-import com.jordanbunke.tdsm_api.ast.type.LayerTypeNode;
+import com.jordanbunke.tdsm_api.ast.type.ColSelTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.StyleTypeNode;
 
-public final class IDPropertyNode extends DefFuncCallNode {
-    public static final String NAME = "id";
+public final class NamePropertyNode extends DefFuncCallNode {
+    public static final String NAME = "name";
 
     private final Receiver receiver;
 
-    public IDPropertyNode(
+    public NamePropertyNode(
             final TextPosition pos, final ExpressionNode scope
     ) {
         super(Arguments.none(), TypeNode.getString(), pos);
 
         receiver = new Receiver(scope, new TypeNode[] {
-                StyleTypeNode.get(), LayerTypeNode.get(), AnimTypeNode.get()
+                ColSelTypeNode.get(), StyleTypeNode.get()
+                // TODO - consider adding more
         });
     }
 
@@ -50,16 +49,12 @@ public final class IDPropertyNode extends DefFuncCallNode {
         if (type instanceof StyleTypeNode) {
             // style
             final Style style = (Style) receiver.evaluate(symbolTable);
-            return style.id;
-        } else if (type instanceof LayerTypeNode) {
-            // layer
-            final CustomizationLayer layer =
-                    (CustomizationLayer) receiver.evaluate(symbolTable);
-            return layer.id;
+            return style.name();
         } else {
             // anim
-            final Animation anim = (Animation) receiver.evaluate(symbolTable);
-            return anim.id;
+            final ColorSelection cs =
+                    (ColorSelection) receiver.evaluate(symbolTable);
+            return cs.name;
         }
     }
 }
