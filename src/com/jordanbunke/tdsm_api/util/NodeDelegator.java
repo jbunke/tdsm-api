@@ -13,10 +13,9 @@ import com.jordanbunke.tdsm_api.ast.expr.global.*;
 import com.jordanbunke.tdsm_api.ast.expr.anim.*;
 import com.jordanbunke.tdsm_api.ast.expr.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
-// TODO - import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
+import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
-// TODO - import com.jordanbunke.tdsm_api.ast.stat.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.stat.layer.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
@@ -122,7 +121,12 @@ public final class NodeDelegator {
             // col_sel
             case ColSelAnyNode.NAME -> new ColSelAnyNode(pos, scope);
             case ColSelSwatchesNode.NAME -> new ColSelSwatchesNode(pos, scope);
-            // TODO - extend here
+            // no_choice
+            case NoChoiceBoolPropNode.VALID ->
+                    NoChoiceBoolPropNode.valid(pos, scope);
+            case NoChoiceBoolPropNode.EQUAL ->
+                    NoChoiceBoolPropNode.equal(pos, scope);
+            // extend here
             default -> new IllegalExpressionNode(pos,
                     "No property \"" + propID + "\" exists");
         };
@@ -158,12 +162,16 @@ public final class NodeDelegator {
             // layer
             case GetColSelLayerNode.NAME ->
                     new GetColSelLayerNode(pos, scope, args);
+            // TODO
             // col_sel
             case GetColorNode.NAME -> new GetColorNode(pos, scope, args);
             // anim
             case GetFrameCountNode.NAME ->
                     new GetFrameCountNode(pos, scope, args);
-            // TODO - extend here
+            // no_choice
+            case NoChoiceProbNode.NAME ->
+                    new NoChoiceProbNode(pos, scope, args);
+            // extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
                             args.length + " arguments exists");
@@ -198,9 +206,10 @@ public final class NodeDelegator {
                     LockLayerNode.unlock(pos, scope, args);
             case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
             case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
+            // TODO
             // col_sel
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
-            // TODO - extend here
+            // extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +
                             args.length + " arguments exists");
