@@ -35,7 +35,7 @@ public final class ChooseNoneNode extends LayerStatNode {
                 UpdateChecker.get().ping(acl);
             } else
                 TDSMInterpreter.failure(
-                        "This layer does not support a no asset choice",
+                        "This asset choice layer does not support a no asset choice",
                         getPosition());
         } else
             TDSMInterpreter.failure(

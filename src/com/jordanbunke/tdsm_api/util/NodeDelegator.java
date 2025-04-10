@@ -206,6 +206,7 @@ public final class NodeDelegator {
                     LockLayerNode.unlock(pos, scope, args);
             case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
             case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
+            case ChooseNode.NAME -> new ChooseNode(pos, scope, args);
             // TODO
             // col_sel
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
