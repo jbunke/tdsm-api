@@ -10,7 +10,7 @@ import com.jordanbunke.tdsm.data.Edge;
 import com.jordanbunke.tdsm.util.EnumUtils;
 import com.jordanbunke.tdsm_api.ast.expr.*;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
-// TODO - import com.jordanbunke.tdsm_api.ast.expr.anim.*;
+import com.jordanbunke.tdsm_api.ast.expr.anim.*;
 import com.jordanbunke.tdsm_api.ast.expr.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 // TODO - import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
@@ -160,6 +160,9 @@ public final class NodeDelegator {
                     new GetColSelLayerNode(pos, scope, args);
             // col_sel
             case GetColorNode.NAME -> new GetColorNode(pos, scope, args);
+            // anim
+            case GetFrameCountNode.NAME ->
+                    new GetFrameCountNode(pos, scope, args);
             // TODO - extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
