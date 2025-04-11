@@ -1,0 +1,115 @@
+() {
+    string folder = "C:/Users/Jordan/Pictures/tdsm-script-output-test";
+
+    $TDSM.set_json(false);
+    $TDSM.set_stip(false);
+
+    export_style("hokkaido", folder);
+    export_style("kyushu", folder);
+}
+
+export_style(string id, string folder) {
+    style s = $TDSM.get_style(id);
+
+    list_customization_layers(s);
+
+    layout(s);
+    sprite_size(s);
+    left_and_down(s);
+    every_second_anim(s);
+
+    ~ int TO_SAVE = 200;
+
+    image{} saved = {};
+    string{} names = {};
+
+    for (int i = 0; i < TO_SAVE; i++) {
+        s.randomize();
+
+        image render = s.render();
+
+        if (saved.has(render)) {
+            i--;
+            print(id + ": Discarded duplicate");
+        } else {
+            string name = gen_name();
+
+            while (names.has(name))
+                name = gen_name();
+
+            saved.add(render);
+            names.add(name);
+            $TDSM.export(s, folder + "/" + id, name);
+            print(id + ": Saved " + name + " [" + (i + 1) + "/" + TO_SAVE + "]");
+        }
+    }
+}
+
+list_customization_layers(style s) {
+    layer<> cls = s.custom();
+
+    for (cl in cls) {
+        print(cl.id + ": " + write_type(cl.type));
+
+        if (cl.id == "eye-height") {
+            cl.set_value(0);
+            cl.lock();
+            print("Set and locked eye height to average");
+        }
+    }
+}
+
+write_type(int type -> string) {
+    when (type) {
+        is $TDSM.ACL -> return "Asset choice layer";
+        is $TDSM.COL_SEL_L -> return "Color selection layer";
+        is $TDSM.DECISION_L -> return "Decision layer";
+        is $TDSM.MATH_L -> return "Math layer";
+        is $TDSM.CHOICE_L -> return "Choice layer";
+        otherwise -> return "Unknown layer type";
+    }
+}
+
+layout(style s) {
+    s.set_orientation($TDSM.HORZ);
+    s.set_all_anims_single_dim(true);
+    s.set_multiple_anims_per_dim(true);
+}
+
+sprite_size(style s) {
+    int[] def = s.def_sprite_dims();
+    ~ int w = def[$TDSM.X];
+    ~ int h = def[$TDSM.Y];
+
+    int aug_x = (32 - w) / 2;
+    int aug_y = (32 - h) / 2;
+
+    s.set_padding(aug_x, aug_x, aug_y, aug_y);
+    print(s.sprite_dims());
+}
+
+left_and_down(style s) {
+    s.set_dirs([ $TDSM.W, $TDSM.S ]);
+}
+
+every_second_anim(style s) {
+    anim<> anims = <>;
+
+    anim[] source_anims = s.all_anims();
+
+    for (int i = 0; i < #| source_anims; i += 2)
+        anims.add(source_anims[i]);
+
+    s.set_anims(anims);
+}
+
+gen_name(-> string) {
+    string s = "";
+
+    for (int i = 0; i < 5; i++)
+        s += rand_digit();
+
+    return s;
+}
+
+rand_digit(-> string) -> (string) rand(0, 10)

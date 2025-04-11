@@ -1,15 +1,26 @@
 package com.jordanbunke.tdsm_api;
 
-import com.jordanbunke.delta_time.io.FileIO;
+import com.jordanbunke.tdsm.util.ParserUtils;
 
 import java.nio.file.Path;
 
 public class Runner {
-    public static void main(String[] args) {
-        final String fp = "C:\\Users\\Jordan\\Documents\\code\\_misc\\tdsm\\scripts\\simple_export.tds";
-        final Path path = Path.of(fp);
-        final String content = FileIO.readFile(path);
+    private static final Path FOLDER = Path.of("scripts");
+    private static final String EXT = ".tds";
 
-        TDSMInterpreter.get().runScript(content, path);
+    public static void main(String[] args) {
+        final String[] scriptCodes = readScriptsCSV();
+
+        for (String scriptCode : scriptCodes) {
+            final Path path = FOLDER.resolve(scriptCode + EXT);
+            final String script = ParserUtils.read(path);
+            System.out.println("Running \"" + scriptCode + "\"");
+            TDSMInterpreter.get().runScript(script, path);
+        }
+    }
+
+    private static String[] readScriptsCSV() {
+        final Path path = Path.of("scripts.csv");
+        return ParserUtils.read(path).split(",");
     }
 }
