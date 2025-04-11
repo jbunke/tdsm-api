@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="tdsm-core">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../tdsm/out/artifacts/tdsm_core/tdsm-core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../tdsm/src" />
+      <root url="file://$PROJECT_DIR$/../delta-time/.core/src" />
+    </SOURCES>
+  </library>
+</component>
