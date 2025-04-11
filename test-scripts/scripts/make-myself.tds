@@ -1,0 +1,76 @@
+() {
+    string folder = "C:/Users/Jordan/Pictures/tdsm-script-output-test";
+
+    $TDSM.set_json(false);
+    $TDSM.set_stip(false);
+
+    style s = $TDSM.get_style("hokkaido");
+
+    s.set_dirs([ $TDSM.S, $TDSM.W ]);
+    s.set_anims(anim_subset(s));
+
+    s.randomize();
+
+    layer<> ls = s.custom();
+
+    for (l in ls) {
+        when (l.id) {
+            is "body", "eyes" -> l.choose(0);
+            is "head" -> l.choose("square-jaw");
+            is "skin" -> {
+                col_sel[] sels = l.get_col_sels();
+                set_swatch(sels[0], 1);
+            }
+            is "eye-color" -> {
+                col_sel[] sels = l.get_col_sels();
+                set_swatch(sels[0], 0);
+            }
+            is "hair-color" -> {
+                col_sel[] sels = l.get_col_sels();
+                set_swatch(sels[0], 1);
+                set_swatch(sels[1], 1);
+            }
+            is "hair" -> l.choose("waves");
+            is "hat" -> l.none();
+            is "outfit-type" -> l.choose("Combined outfit");
+            is "outfit" -> {
+                // here
+                print(l.type);
+            }
+        }
+
+        when (l) {
+            matches _.type == $TDSM.MATH_L -> l.set_value(0);
+        }
+    }
+
+    $TDSM.export(s, folder + "/me", gen_name());
+}
+
+set_swatch(col_sel sel, int index) {
+    color[] swatches = sel.swatches;
+    sel.set_color(swatches[index]);
+}
+
+anim_subset(style s -> anim<>) {
+    anim<> anims = <>;
+
+    for (a in s.all_anims()) {
+        when (a.id) {
+            is "walk", "run" -> anims.add(a);
+        }
+    }
+
+    return anims;
+}
+
+gen_name(-> string) {
+    string s = "";
+
+    for (int i = 0; i < 5; i++)
+        s += rand_digit();
+
+    return s;
+}
+
+rand_digit(-> string) -> (string) rand(0, 10)
