@@ -162,7 +162,12 @@ public final class NodeDelegator {
             // layer
             case GetColSelLayerNode.NAME ->
                     new GetColSelLayerNode(pos, scope, args);
-            // TODO
+            case GetNoChoiceNode.NAME -> new GetNoChoiceNode(pos, scope, args);
+            case IsLockedNode.NAME -> new IsLockedNode(pos, scope, args);
+            case GetValueNode.GET -> new GetValueNode(pos, scope, args);
+            case GetValueNode.MAX -> GetValueNode.max(pos, scope, args);
+            case GetValueNode.MIN -> GetValueNode.min(pos, scope, args);
+            case IsNoneNode.NAME -> new IsNoneNode(pos, scope, args);
             // col_sel
             case GetColorNode.NAME -> new GetColorNode(pos, scope, args);
             // anim
@@ -207,7 +212,6 @@ public final class NodeDelegator {
             case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
             case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
             case ChooseNode.NAME -> new ChooseNode(pos, scope, args);
-            // TODO
             // col_sel
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
             // extend here
