@@ -18,7 +18,6 @@ public class ScriptTests {
             runScript(scriptCode);
     }
 
-
     public static void main(final String[] args) {
         try {
             String code = "";

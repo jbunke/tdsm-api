@@ -32,13 +32,9 @@ def random_color(-> color) {_
 
 These four lines will be processed as a single command, because each line except the last line terminates with `_`.
 
-<!-- TODO -->
-
-<!-- TODO - multi-line commands end with _ -->
-
 ## Commands
 
-<!-- TODO -->
+The following is an exhaustive list of the commands that can be run in the *TDSM* CLI.
 
 ### `help`
 
@@ -47,18 +43,23 @@ help                          # Basic; lists commands and help categories
 help <category>               # Specific; explains topic in detail
 ```
 
-<!-- TODO -->
+**Description:**
+
+Prints a help guide.
 
 `<category>` options:
-* `--here` - Description
+* `--code` - Information related to *DeltaScript* code
+* `--settings` - Information related to settings
 
 ### `check`
 
 ```shell
-get <setting>
+check <setting>
 ```
 
-**Description:** Prints the value of `<setting>`
+**Description:**
+
+Prints the value of `<setting>`
 
 **See:**
 * [Settings](#settings)
@@ -69,7 +70,12 @@ get <setting>
 def <func>
 ```
 
-<!-- TODO -->
+**Description:**
+
+Defines a *DeltaScript* function `<func>`. The function can then be invoked.
+
+**See:**
+* [Functions in the *DeltaScript* language specification](https://github.com/jbunke/deltascript/blob/master/docs/ls-6-func.md)
 
 ### `eval`
 
@@ -77,7 +83,22 @@ def <func>
 eval <expr>
 ```
 
-<!-- TODO -->
+**Description:**
+
+Evaluates a *DeltaScript* expression `<expr>` and prints its value.
+
+**See:**
+* [Expressions in the *DeltaScript* language specification](https://github.com/jbunke/deltascript/blob/master/docs/ls-4-expr.md)
+
+### `quit`
+
+```shell
+quit
+```
+
+**Description:**
+
+Closes the command-line interface
 
 ### `reset`
 
@@ -85,7 +106,9 @@ eval <expr>
 reset
 ```
 
-<!-- TODO -->
+**Description:**
+
+Resets the *DeltaScript* symbol table, wiping all functions and variables. This action is irreversible.
 
 ### `run`
 
@@ -93,7 +116,9 @@ reset
 run <script_path>
 ```
 
-<!-- TODO -->
+**Description:**
+
+Attempts to interpret and run the file at `<script_path>`. The file's contents must be a valid [*Top Down Sprite Maker* script](../spec/README.md).
 
 ### `set`
 
@@ -101,7 +126,9 @@ run <script_path>
 set <setting> <value>
 ```
 
-**Description:** Sets `<setting>` to `<value>` if `<value>` is valid for `<setting>`
+**Description:**
+
+Sets `<setting>` to `<value>` if `<value>` is valid for `<setting>`
 
 **See:**
 * [Settings](#settings)
@@ -112,7 +139,12 @@ set <setting> <value>
 <stat>
 ```
 
-<!-- TODO -->
+**Description:**
+
+Executes a *DeltaScript* statement `<stat>`.
+
+**See:**
+* [Statements in the *DeltaScript* language specification](https://github.com/jbunke/deltascript/blob/master/docs/ls-5-stat.md)
 
 ## Settings
 
@@ -125,3 +157,6 @@ The following settings can be used as arguments for the [`check`](#check) and [`
 |  Type  | `<value>` options |
 |:------:|:-----------------:|
 | `bool` |  `true`, `false`  |
+
+### Special `<value>` options
+* `default` - Default value of the setting
