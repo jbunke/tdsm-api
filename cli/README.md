@@ -113,12 +113,22 @@ Resets the *DeltaScript* symbol table, wiping all functions and variables. This 
 ### `run`
 
 ```shell
-run <script_path>
+run <path>
 ```
 
 **Description:**
 
-Attempts to interpret and run the file at `<script_path>`. The file's contents must be a valid [*Top Down Sprite Maker* script](../spec/README.md).
+Attempts to interpret and run the file at `<path>`. The file's contents must be a valid [*DeltaScript* script](../spec/README.md).
+
+### `script`
+
+```shell
+script <path>
+```
+
+**Description:**
+
+Runs the file at `<path>` as a shell script.
 
 ### `set`
 
