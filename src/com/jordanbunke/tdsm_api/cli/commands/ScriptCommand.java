@@ -1,6 +1,8 @@
 package com.jordanbunke.tdsm_api.cli.commands;
 
 import com.jordanbunke.clink.Clink;
+import com.jordanbunke.tdsm_api.cli.CLI;
+import com.jordanbunke.tdsm_api.cli.CommandProcessor;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +16,8 @@ public final class ScriptCommand {
             return true;
         else {
             try {
-                Clink.setInputStream(new FileInputStream(file));
+                CLI.setInputStream(new FileInputStream(file),
+                        CommandProcessor.SCRIPT);
                 Clink.writeUpdate("Running script file " +
                         Clink.highlight(path, Clink.Mode.UPDATE));
             } catch (FileNotFoundException ignored) {

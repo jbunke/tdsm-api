@@ -4,8 +4,10 @@ import com.jordanbunke.clink.Clink;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.tdsm.ProgramInfo;
 import com.jordanbunke.tdsm_api.cli.commands.HelpCommand;
+import com.jordanbunke.tdsm_api.cli.settings.Setting;
 import com.jordanbunke.tdsm_api.cli.util.StringProc;
 
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
@@ -16,6 +18,8 @@ public final class CLI {
 
     static SymbolTable symbolTable;
 
+    private static String caller;
+
     public static void main(final String[] args) {
         setup();
         welcomeMessage();
@@ -25,7 +29,9 @@ public final class CLI {
     }
 
     private static void setup() {
-        Clink.setPromptEnd("> ");
+        Clink.setPromptEnd(" > ");
+
+        caller = Setting.getUsername();
     }
 
     private static void welcomeMessage() {
@@ -48,10 +54,10 @@ public final class CLI {
 
     private static void commandCycle() {
         while (true) {
-            prompt();
-
             if (!(Clink.isStdIn() || Clink.hasNext()))
-                Clink.setInputStream(System.in);
+                setInputStream(System.in, Setting.getUsername());
+
+            prompt();
 
             final StringBuilder commandBuilder = new StringBuilder();
             boolean cont = true;
@@ -80,13 +86,24 @@ public final class CLI {
     }
 
     private static void prompt() {
-        Clink.writePrompt("");
+        Clink.writePrompt(caller);
     }
 
     private static void echoCommand(final String command) {
+        writeGreyLine(command);
+    }
+
+    public static void writeGreyLine(final String line) {
         final String formatted = Clink.CLI_TEXT_GREY_BOLD +
-                command + Clink.CLI_TEXT_RESET;
+                line + Clink.CLI_TEXT_RESET;
         Clink.write(formatted, true);
+    }
+
+    public static void setInputStream(
+            final InputStream in, final String caller
+    ) {
+        Clink.setInputStream(in);
+        CLI.caller = caller;
     }
 
     static void reset() {

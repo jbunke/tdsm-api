@@ -33,24 +33,31 @@ public final class HelpCommand {
                 SET_W_ARGS = assembleCommand(SET, SETTING, VALUE),
                 STAT = placeholder("stat");
 
-        Clink.writeUpdate("Commands:" +
-                commandDocumentation(
-                        new Pair<>(HELP, "Lists valid commands and their use"),
-                        new Pair<>(HELP_CODE, "Explains commands and concepts related to the API"),
-                        new Pair<>(HELP_SETTINGS, "Explains commands related to CLI settings")) +
-                commandDocumentation(new Pair<>(CHECK_W_ARGS, "")) +
-                commandDocumentation(new Pair<>(DEF_FUNC, "")) +
-                commandDocumentation(new Pair<>(EVAL_EXPR, "")) +
+        Clink.writeUpdate(lines("List of valid commands:",
+                "(Keywords surrounded by " + placeholder("") + " are placeholders)") +
+                commandDocumentation(new Pair<>(CHECK_W_ARGS,
+                        "Retrieves the current value of " + SETTING)) +
+                commandDocumentation(new Pair<>(DEF_FUNC,
+                        "Defines a DeltaScript function " + FUNC)) +
+                commandDocumentation(new Pair<>(EVAL_EXPR,
+                        "Evaluates a DeltaScript expression " + EXPR)) +
+                commandDocumentation(new Pair<>(HELP,
+                                "Lists valid commands and their use"),
+                        new Pair<>(HELP_CODE,
+                                "Detailed explanation of commands and concepts related to the API"),
+                        new Pair<>(HELP_SETTINGS,
+                                "Detailed explanation of commands related to CLI settings")) +
                 commandDocumentation(new Pair<>(QUIT,
                         "Quits the command-line interface")) +
                 commandDocumentation(new Pair<>(RESET,
-                        "Resets the DeltaScript symbol table, deleting all functions and variables.")) +
+                        "Resets the DeltaScript symbol table, deleting all functions and variables (irreversible operation)")) +
                 commandDocumentation(new Pair<>(RUN_PATH,
                         "Attempts to interpret and run the file at " +
                                 PATH + " as a DeltaScript script")) +
                 commandDocumentation(new Pair<>(SCRIPT_PATH,
                         "Executes the commands in the text file at " + PATH)) +
-                commandDocumentation(new Pair<>(SET_W_ARGS, "")) +
+                commandDocumentation(new Pair<>(SET_W_ARGS,
+                        "Sets " + SETTING + " to " + VALUE)) +
                 commandDocumentation(new Pair<>(STAT,
                         "Executes a DeltaScript statement " + STAT)));
     }
