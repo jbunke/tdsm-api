@@ -103,6 +103,10 @@ public final class CLI {
             final InputStream in, final String caller
     ) {
         Clink.setInputStream(in);
+        setCaller(caller);
+    }
+
+    public static void setCaller(final String caller) {
         CLI.caller = caller;
     }
 

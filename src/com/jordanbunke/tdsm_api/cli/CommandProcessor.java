@@ -2,7 +2,9 @@ package com.jordanbunke.tdsm_api.cli;
 
 import com.jordanbunke.clink.Clink;
 import com.jordanbunke.delta_time.scripting.util.PathHelper;
+import com.jordanbunke.delta_time.utility.math.Pair;
 import com.jordanbunke.tdsm_api.cli.commands.*;
+import com.jordanbunke.tdsm_api.cli.settings.Setting;
 import com.jordanbunke.tdsm_api.cli.util.StringProc;
 
 import java.util.Arrays;
@@ -52,6 +54,33 @@ public final class CommandProcessor {
                     if (ScriptCommand.process(path))
                         syntaxError("The path ", comps[1],
                                 " did not contain a readable file");
+                }
+            }
+            case CHECK -> {
+                if (comps.length != 2)
+                    syntaxError("", CHECK, " command must have ",
+                            String.valueOf(1), " argument");
+                else if (Setting.processCheck(comps[1]))
+                    syntaxError("The code ", comps[1],
+                            " does not correspond to a setting");
+            }
+            case SET -> {
+                if (comps.length != 3)
+                    syntaxError("", SET, " command must have ",
+                            String.valueOf(2), " arguments");
+                else {
+                    final String code = comps[1], value = comps[2];
+                    final Pair<Boolean, Boolean> ret =
+                            Setting.processSet(code, value);
+
+                    if (ret.a())
+                        syntaxError(ret.b() ? new String[] {
+                                "The value ", value,
+                                " is invalid for the setting ", code
+                        } : new String[] {
+                                "The code ", code,
+                                " does not correspond to a setting"
+                        });
                 }
             }
             // TODO - extend here

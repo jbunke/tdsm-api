@@ -76,8 +76,8 @@ public final class Setting<T> {
             else
                 Clink.disableANSI();
         }));
-        map.put(USER, stringSetting(USER, DEF_USER,
-                s -> {}, s -> !s.trim().isEmpty()));
+        map.put(USER, stringSetting(USER, DEF_USER, CLI::setCaller,
+                s -> !s.trim().isEmpty()));
         // TODO - extend here
     }
 
