@@ -3,15 +3,17 @@ package com.jordanbunke.tdsm_api.cli;
 import com.jordanbunke.clink.Clink;
 import com.jordanbunke.delta_time.scripting.util.PathHelper;
 import com.jordanbunke.tdsm_api.cli.commands.*;
+import com.jordanbunke.tdsm_api.cli.util.StringProc;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 public final class CommandProcessor {
-    static final String QUIT = "quit",
-            HELP = "help",
+    public static final String QUIT = "quit",
             RESET = "reset",
-            SCRIPT = "script";
+            SCRIPT = "script",
+            CHECK = "check", SET = "set",
+            DEF = "def", EVAL = "eval", RUN = "run";
 
     static void process(final String command) {
         if (command.isEmpty())
@@ -19,24 +21,25 @@ public final class CommandProcessor {
 
         switch (command) {
             // commands without args
-            case HELP -> HelpCommand.printHelp();
+            case HelpCommand.HELP -> HelpCommand.printHelp();
             case RESET -> CLI.reset();
             default -> processComplex(command);
         }
     }
 
     private static void processComplex(final String command) {
-        final String[] comps = command.split(" ");
+        final String[] comps = splitCommand(command);
 
         switch (comps[0]) {
-            case HELP -> {
+            case HelpCommand.HELP -> {
                 if (comps.length != 2)
-                    syntaxError("", HELP, " command must have ",
+                    syntaxError("", HelpCommand.HELP, " command must have ",
                             String.valueOf(0), " or ",
                             String.valueOf(1), " argument(s)");
                 else if (HelpCommand.process(comps[1]))
                     syntaxError("The argument ", comps[1],
-                            " is invalid for the ", HELP, " command");
+                            " is invalid for the ", HelpCommand.HELP,
+                            " command");
             }
             case SCRIPT -> {
                 if (comps.length < 2)
@@ -60,21 +63,17 @@ public final class CommandProcessor {
         // TODO - no first comp match
     }
 
+    private static String[] splitCommand(final String command) {
+        return Arrays.stream(command.split(" "))
+                .filter(s -> !s.trim().isEmpty()).toArray(String[]::new);
+    }
+
     private static String path(final Stream<String> components) {
         return PathHelper.formatPathString(
                 components.reduce("", String::concat));
     }
 
     private static void syntaxError(final String... message) {
-        final StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < message.length; i++) {
-            final String comp = message[i];
-
-            sb.append(i % 2 == 0 ? comp
-                    : Clink.highlight(comp, Clink.Mode.ERROR));
-        }
-
-        Clink.writeError(sb.toString());
+        Clink.writeError(StringProc.altHighlight(Clink.Mode.ERROR, message));
     }
 }

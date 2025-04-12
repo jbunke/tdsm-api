@@ -2,8 +2,12 @@ package com.jordanbunke.tdsm_api.cli;
 
 import com.jordanbunke.clink.Clink;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
+import com.jordanbunke.tdsm.ProgramInfo;
+import com.jordanbunke.tdsm_api.cli.commands.HelpCommand;
+import com.jordanbunke.tdsm_api.cli.util.StringProc;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static com.jordanbunke.tdsm_api.cli.CommandProcessor.*;
 
@@ -14,9 +18,7 @@ public final class CLI {
 
     public static void main(final String[] args) {
         setup();
-
-        // TODO - welcome message
-
+        welcomeMessage();
         commandCycle();
 
         // TODO - closing
@@ -24,6 +26,24 @@ public final class CLI {
 
     private static void setup() {
         Clink.setPromptEnd("> ");
+    }
+
+    private static void welcomeMessage() {
+        ProgramInfo.readProgramFile(false);
+
+        final String[] lines = new String[] {
+                "Command-line interface for " + ProgramInfo.PROGRAM_NAME +
+                        " " + ProgramInfo.getVersion(),
+                "(c) 2025 Jordan Bunke",
+                StringProc.altHighlight(Clink.Mode.UPDATE,
+                        "Type ", HelpCommand.HELP, " to get started")
+        };
+
+        final int max = Arrays.stream(lines)
+                .peek(Clink::writeUpdate).mapToInt(String::length)
+                .reduce(0, Math::max);
+
+        Clink.writeUpdate("-".repeat(max));
     }
 
     private static void commandCycle() {
