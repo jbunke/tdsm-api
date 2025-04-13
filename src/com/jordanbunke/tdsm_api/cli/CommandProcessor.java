@@ -16,7 +16,8 @@ public final class CommandProcessor {
             RESET = "reset",
             SCRIPT = "script",
             CHECK = "check", SET = "set",
-            DEF = "def", EVAL = "eval", RUN = "run";
+            DEF = "def", EVAL = "eval", RUN = "run",
+            STATUS = "status";
 
     static void process(final String command) {
         if (command.isEmpty())
@@ -26,6 +27,7 @@ public final class CommandProcessor {
             // commands without args
             case HelpCommand.HELP -> HelpCommand.printHelp();
             case RESET -> CLI.reset(true);
+            case STATUS -> Clink.writeUpdate(CLI.getSymbolTable().toString());
             default -> processComplex(command);
         }
     }

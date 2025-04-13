@@ -58,6 +58,8 @@ public final class HelpCommand {
                         "Executes the commands in the text file at " + PATH)) +
                 commandDocumentation(new Pair<>(SET_W_ARGS,
                         "Sets " + SETTING + " to " + VALUE)) +
+                commandDocumentation(new Pair<>(STATUS,
+                        "Shows the variables and functions currently defined in the symbol table")) +
                 commandDocumentation(new Pair<>(STAT,
                         "Executes a DeltaScript statement " + STAT)));
     }

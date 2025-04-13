@@ -143,6 +143,10 @@ Sets `<setting>` to `<value>` if `<value>` is valid for `<setting>`
 **See:**
 * [Settings](#settings)
 
+### `status`
+
+<!-- TODO -->
+
 ### *Execute statement*
 
 ```shell
