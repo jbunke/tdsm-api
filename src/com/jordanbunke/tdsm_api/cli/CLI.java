@@ -16,7 +16,7 @@ import static com.jordanbunke.tdsm_api.cli.CommandProcessor.*;
 public final class CLI {
     private static final String CONT = "_";
 
-    static SymbolTable symbolTable;
+    private static SymbolTable symbolTable;
 
     private static String caller;
 
@@ -115,5 +115,9 @@ public final class CLI {
                 null, Paths.get("").toAbsolutePath());
 
         Clink.writeUpdate("Reset symbol table");
+    }
+
+    public static SymbolTable getSymbolTable() {
+        return symbolTable;
     }
 }

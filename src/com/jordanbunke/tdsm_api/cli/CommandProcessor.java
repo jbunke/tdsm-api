@@ -8,6 +8,7 @@ import com.jordanbunke.tdsm_api.cli.settings.Setting;
 import com.jordanbunke.tdsm_api.cli.util.StringProc;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public final class CommandProcessor {
@@ -43,15 +44,19 @@ public final class CommandProcessor {
                             " is invalid for the ", HelpCommand.HELP,
                             " command");
             }
-            case SCRIPT -> {
+            case SCRIPT, RUN -> {
                 if (comps.length < 2)
-                    syntaxError("", SCRIPT, " command must have ",
+                    syntaxError("", comps[0], " command must have ",
                             String.valueOf(1), " argument");
                 else {
                     final String path = path(Arrays.stream(
                             comps, 1, comps.length));
 
-                    if (ScriptCommand.process(path))
+                    final Predicate<String> processor = SCRIPT.equals(comps[0])
+                            ? ScriptCommand::process
+                            : RunCommand::process;
+
+                    if (processor.test(path))
                         syntaxError("The path ", comps[1],
                                 " did not contain a readable file");
                 }
@@ -85,6 +90,17 @@ public final class CommandProcessor {
             }
             // TODO - extend here
             default -> {
+                final String EVAL_START = EVAL + " ";
+
+                if (command.startsWith(EVAL_START)) {
+                    final String expression =
+                            command.substring(EVAL_START.length());
+
+                    if (DSCommands.processEval(expression))
+                        syntaxError("", expression, " is not a valid DeltaScript expression");
+                }
+                // TODO - extend here
+
                 // TODO - attempt to process as DeltaScript statement
             }
         }
