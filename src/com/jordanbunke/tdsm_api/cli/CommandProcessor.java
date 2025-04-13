@@ -25,7 +25,7 @@ public final class CommandProcessor {
         switch (command) {
             // commands without args
             case HelpCommand.HELP -> HelpCommand.printHelp();
-            case RESET -> CLI.reset();
+            case RESET -> CLI.reset(true);
             default -> processComplex(command);
         }
     }
@@ -88,24 +88,29 @@ public final class CommandProcessor {
                         });
                 }
             }
-            // TODO - extend here
+            // extend here
             default -> {
-                final String EVAL_START = EVAL + " ";
+                final String EVAL_START = EVAL + " ", DEF_START = DEF + " ";
 
                 if (command.startsWith(EVAL_START)) {
                     final String expression =
                             command.substring(EVAL_START.length());
 
                     if (DSCommands.processEval(expression))
-                        syntaxError("", expression, " is not a valid DeltaScript expression");
-                }
-                // TODO - extend here
+                        syntaxError("", expression, " is not a valid command or DeltaScript expression");
+                } else if (command.startsWith(DEF_START)) {
+                    final String function =
+                            command.substring(DEF_START.length());
 
-                // TODO - attempt to process as DeltaScript statement
+                    if (DSCommands.processFunc(function))
+                        syntaxError("", function, " is not a valid DeltaScript function");
+                    // extend here
+                } else {
+                    if (DSCommands.processStat(command))
+                        syntaxError("", command, " is not a valid DeltaScript statement");
+                }
             }
         }
-
-        // TODO - no first comp match
     }
 
     private static String[] splitCommand(final String command) {

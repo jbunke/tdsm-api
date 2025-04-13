@@ -31,6 +31,8 @@ public final class CLI {
     private static void setup() {
         Clink.setPromptEnd(" > ");
 
+        reset(false);
+
         caller = Setting.getUsername();
     }
 
@@ -110,11 +112,12 @@ public final class CLI {
         CLI.caller = caller;
     }
 
-    static void reset() {
+    static void reset(final boolean print) {
         symbolTable = new SymbolTable(CLIScopeNode.get(),
                 null, Paths.get("").toAbsolutePath());
 
-        Clink.writeUpdate("Reset symbol table");
+        if (print)
+            Clink.writeUpdate("Reset symbol table");
     }
 
     public static SymbolTable getSymbolTable() {
