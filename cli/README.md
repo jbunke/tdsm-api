@@ -128,7 +128,7 @@ script <path>
 
 **Description:**
 
-Runs the file at `<path>` as a shell script.
+Runs the file at `<path>` as a shell script
 
 ### `set`
 
@@ -145,7 +145,13 @@ Sets `<setting>` to `<value>` if `<value>` is valid for `<setting>`
 
 ### `status`
 
-<!-- TODO -->
+```shell
+status
+```
+
+**Description:**
+
+Shows the variables and functions currently defined in the symbol table
 
 ### *Execute statement*
 

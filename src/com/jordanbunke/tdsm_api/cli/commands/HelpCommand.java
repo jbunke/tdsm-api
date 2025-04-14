@@ -2,6 +2,8 @@ package com.jordanbunke.tdsm_api.cli.commands;
 
 import com.jordanbunke.clink.Clink;
 import com.jordanbunke.delta_time.utility.math.Pair;
+import com.jordanbunke.tdsm.ProgramInfo;
+import com.jordanbunke.tdsm_api.cli.CLI;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -100,10 +102,83 @@ public final class HelpCommand {
     }
 
     private static void printCode() {
-        // TODO
+        final String API_SPEC_URL = "https://github.com/jbunke/tdsm-api",
+                DELTASCRIPT_URL = "https://github.com/jbunke/deltascript",
+                FUNC_GRAMMAR_SUB_PATH = "/blob/master/docs/ls-6-func.md#632--helper-functions",
+                EXPR_SUB_PATH = "/blob/master/docs/ls-4-expr.md",
+                STAT_SUB_PATH = "/blob/master/docs/ls-5-stat.md",
+                PATH = placeholder("path"),
+                RUN_PATH = assembleCommand(RUN, PATH),
+                EXPR = placeholder("expr"),
+                EVAL_EXPR = assembleCommand(EVAL, EXPR),
+                FUNC = placeholder("func"),
+                DEF_FUNC = assembleCommand(DEF, FUNC),
+                STAT = placeholder("stat"),
+                prg = ProgramInfo.PROGRAM_NAME;
+
+        Clink.writeUpdate(
+                lines("The following commands are used to interact with the " +
+                                prg + " scripting API.", "",
+                        prg + " scripts are written in an extension dialect of DeltaScript.",
+                        "Read the API specification: " + API_SPEC_URL,
+                        "Read about DeltaScript: " + DELTASCRIPT_URL, "",
+                        altHighlight(Clink.Mode.UPDATE,
+                                "Commands can be extended to the following line by terminating a line with ",
+                                CLI.CONT, ".")) +
+                        commandDetail(DEF_FUNC,
+                                altHighlight(Clink.Mode.UPDATE,
+                                        "Defines a function ", FUNC,
+                                        " and adds it to the current symbol table."),
+                                altHighlight(Clink.Mode.UPDATE,
+                                        "The function can then be invoked by the ",
+                                        EVAL_EXPR, " and ", STAT, " commands, as well as within future ",
+                                        DEF_FUNC, " commands."),
+                                altHighlight(Clink.Mode.UPDATE,
+                                        "Note that resetting the symbol table (",
+                                        RESET, "), will irreversibly delete the function."),
+                                "", "A syntactically correct DeltaScript function is defined by the grammar rule 'helper':",
+                                DELTASCRIPT_URL + FUNC_GRAMMAR_SUB_PATH) +
+                        commandDetail(EVAL_EXPR,
+                                altHighlight(Clink.Mode.UPDATE,
+                                        "Evaluates an expression ", EXPR, "."),
+                                "", "A syntactically correct DeltaScript expression is defined by the grammar rule 'expr':",
+                                DELTASCRIPT_URL + EXPR_SUB_PATH) +
+                        commandDetail(RUN_PATH,
+                                altHighlight(Clink.Mode.UPDATE,
+                                        "Runs the file at ", PATH, " as a " + prg + " script."),
+                                "Script header functions must be void return and accept no parameters.",
+                                "Note that a script execution runs with its own symbol table; it does not use the CLI symbol table.",
+                                prg + " scripts conventionally use the extension '.tds'."
+                                /* TODO - use public constant for extension in
+                                    tdsm or tdsm-api sources somewhere */) +
+                        commandDetail(STATUS,
+                                "Prints the current status of the CLI's symbol table.",
+                                "", "Syntax",
+                                "Functions: ::" + placeholder("name") +
+                                        " -> final " +
+                                        placeholder("return_type") + ":" +
+                                        placeholder("signature"),
+                                "Variables: " + placeholder("name") + " -> " +
+                                        placeholder("final") + "? " +
+                                        placeholder("type") + ":" +
+                                        placeholder("value")) +
+                        commandDetail(STAT, altHighlight(Clink.Mode.UPDATE,
+                                        "Executes a statement ", STAT, "."),
+                                "", "A syntactically correct DeltaScript statement is defined by the grammar rule 'stat':",
+                                DELTASCRIPT_URL + STAT_SUB_PATH));
     }
 
     private static void printSettings() {
         // TODO
+        Clink.writeUpdate("");
+    }
+
+    private static String commandDetail(
+            final String command, final String... description
+    ) {
+        return altHighlight(Clink.Mode.UPDATE,
+                lines("", "", ""), command + Clink.NEW_LINE,
+                "-".repeat(command.length()) +
+                        Clink.NEW_LINE + lines(description));
     }
 }

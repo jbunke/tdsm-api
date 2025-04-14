@@ -14,7 +14,7 @@ import java.util.Arrays;
 import static com.jordanbunke.tdsm_api.cli.CommandProcessor.*;
 
 public final class CLI {
-    private static final String CONT = "_";
+    public static final String CONT = "_";
 
     private static SymbolTable symbolTable;
 
@@ -29,6 +29,8 @@ public final class CLI {
     }
 
     private static void setup() {
+        // TODO - read settings: ref. Stipple Effect file I/O
+
         Clink.setPromptEnd(" > ");
 
         reset(false);
