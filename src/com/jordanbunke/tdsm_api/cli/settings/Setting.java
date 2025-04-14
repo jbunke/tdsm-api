@@ -1,6 +1,7 @@
 package com.jordanbunke.tdsm_api.cli.settings;
 
 import com.jordanbunke.clink.Clink;
+import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.utility.math.Pair;
 import com.jordanbunke.tdsm_api.cli.CLI;
 
@@ -11,11 +12,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public final class Setting<T> {
-    private static final String ANSI = "ansi", USER = "user";
+    public static final String ANSI = "ansi", USER = "user";
 
     private static final String DEF_USER = "User";
 
-    private static final String DEF = "default",
+    public static final String DEF = "default",
             FALSE = "false", F = "f",
             TRUE = "true", T = "t";
 
@@ -69,6 +70,17 @@ public final class Setting<T> {
         return map.get(USER).check();
     }
 
+    public static String getType(final String code) {
+        final Class<?> type = map.get(code).type;
+
+        if (Integer.class == type)
+            return TypeNode.getInt().toString();
+        else if (Boolean.class == type)
+            return TypeNode.getBool().toString();
+        else
+            return TypeNode.getString().toString();
+    }
+
     private static void make() {
         map.put(ANSI, boolSetting(ANSI, Clink.supportsANSI(), b -> {
             if (b)
@@ -78,7 +90,7 @@ public final class Setting<T> {
         }));
         map.put(USER, stringSetting(USER, DEF_USER, CLI::setCaller,
                 s -> !s.trim().isEmpty()));
-        // TODO - extend here
+        // extend here
     }
 
     public static Pair<Boolean, Boolean> processSet(

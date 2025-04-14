@@ -1,10 +1,13 @@
 package com.jordanbunke.tdsm_api.cli.commands;
 
 import com.jordanbunke.clink.Clink;
+import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.utility.math.Pair;
 import com.jordanbunke.tdsm.ProgramInfo;
 import com.jordanbunke.tdsm_api.cli.CLI;
+import com.jordanbunke.tdsm_api.cli.settings.Setting;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -169,8 +172,32 @@ public final class HelpCommand {
     }
 
     private static void printSettings() {
-        // TODO
-        Clink.writeUpdate("");
+        final String prg = ProgramInfo.PROGRAM_NAME,
+                SETTING = placeholder("setting"),
+                VALUE = placeholder("value"),
+                CHECK_W_ARGS = assembleCommand(CHECK, SETTING),
+                SET_W_ARGS = assembleCommand(SET, SETTING, VALUE);
+
+        Clink.writeUpdate(
+                lines("The " + prg + " command-line interface has the following settings.",
+                        "", "Each setting has a type:",
+                        " - '" + TypeNode.getBool().toString() +
+                                "' for settings that can be either 'true' or 'false' (i.e. enabled or disabled),",
+                        " - '" + TypeNode.getInt().toString() +
+                                "' for numeric settings",
+                        " - '" + TypeNode.getString().toString() +
+                                "' for textual settings", "",
+                        altHighlight(Clink.Mode.UPDATE,
+                                "Values of settings can be checked with ",
+                                CHECK_W_ARGS, " and overwritten with ", SET_W_ARGS, "."),
+                        altHighlight(Clink.Mode.UPDATE,
+                                "All settings can be reset with ",
+                                assembleCommand(SET, SETTING, Setting.DEF), ".")) +
+                settingDetail(Setting.ANSI, "ANSI codes" +
+                        " (https://en.wikipedia.org/wiki/ANSI_escape_code)" +
+                        " are used to color text.", "[Recommended]") +
+                settingDetail(Setting.USER, "The username")
+        );
     }
 
     private static String commandDetail(
@@ -180,5 +207,17 @@ public final class HelpCommand {
                 lines("", "", ""), command + Clink.NEW_LINE,
                 "-".repeat(command.length()) +
                         Clink.NEW_LINE + lines(description));
+    }
+
+    private static String settingDetail(
+            final String setting, final String... description
+    ) {
+        final List<String> lines = new LinkedList<>();
+
+        lines.add("Type: " + Setting.getType(setting));
+        lines.add("");
+        lines.addAll(Arrays.asList(description));
+
+        return commandDetail(setting, lines.toArray(String[]::new));
     }
 }
