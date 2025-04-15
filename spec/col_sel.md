@@ -52,4 +52,10 @@ C.randomize();
 C.set_color(color c);
 ```
 
+### `set_from_swatch`
+
+```js
+C.set_from_swatch(int index);
+```
+
 <!-- TODO -->

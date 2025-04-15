@@ -76,10 +76,24 @@ S.get_edge(int edge) -> int
 S.get_frames_per_dim() -> int
 ```
 
+### `get_layer`
+
+**Precondition:** `S.has_layer(id)`
+
+```js
+S.get_layer(string id) -> layer
+```
+
 ### `get_orientation`
 
 ```js
 S.get_orientation() -> bool
+```
+
+### `has_layer`
+
+```js
+S.has_layer(string id) -> bool
 ```
 
 ### `has_output`

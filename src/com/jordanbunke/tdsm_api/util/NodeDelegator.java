@@ -159,6 +159,8 @@ public final class NodeDelegator {
             case IsStyleFlagNode.SINGLE, IsStyleFlagNode.MULTIPLE,
                  IsStyleFlagNode.WRAP ->
                     new IsStyleFlagNode(pos, scope, args, fID);
+            case GetLayerNode.GET -> new GetLayerNode(pos, scope, args);
+            case GetLayerNode.HAS -> GetLayerNode.has(pos, scope, args);
             // layer
             case GetColSelLayerNode.NAME ->
                     new GetColSelLayerNode(pos, scope, args);
@@ -168,6 +170,7 @@ public final class NodeDelegator {
             case GetValueNode.MAX -> GetValueNode.max(pos, scope, args);
             case GetValueNode.MIN -> GetValueNode.min(pos, scope, args);
             case IsNoneNode.NAME -> new IsNoneNode(pos, scope, args);
+            case GetDecisionNode.NAME -> new GetDecisionNode(pos, scope, args);
             // col_sel
             case GetColorNode.NAME -> new GetColorNode(pos, scope, args);
             // anim
@@ -214,6 +217,7 @@ public final class NodeDelegator {
             case ChooseNode.NAME -> new ChooseNode(pos, scope, args);
             // col_sel
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
+            case SetFromSwatchNode.NAME -> new SetFromSwatchNode(pos, scope, args);
             // extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

@@ -47,6 +47,14 @@ L.choose(int asset_index);
 L.get_col_sels() -> col_sel[]
 ```
 
+### `get_decision`
+
+**Precondition:** `L.type == $TDSM.DECISION_L`
+
+```js
+L.get_decision() -> layer
+```
+
 ### `get_no_choice`
 
 **Precondition:** `L.type == $TDSM.ACL`
