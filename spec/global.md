@@ -108,6 +108,37 @@ $TDSM.is_stip() -> bool
 
 **Returns** `true` if the *Export as Stipple Effect project* flag is turned on, `false` otherwise.
 
+<!-- TODO -->
+
+### `load_from_json`
+
+```js
+$TDSM.load_from_json(string json);
+```
+
+Attempts to set the customization and configuration data of a particular sprite style based on `json`.
+
+**Parameters:**
+* `string` `json` - The JSON-formatted text contents corresponding to a previous export operation.
+
+> **Note:**
+> 
+> `json` should be of the form:
+>   ```json
+>   {
+>       "style_id": /* style id */,
+>       "customization": { /* ... */ },
+>       "config": {
+>           "directions": [ /* ... */ ], 
+>           "animations": { /* ... */ },
+>           "padding": { /* ... */ }, 
+>           "layout": { /* ... */ }
+>       },
+>       "size": { /* ... */ },
+>       "frames": [ /* ... */ ]
+>   }
+>   ```
+
 ### `set_json`
 
 ```js
