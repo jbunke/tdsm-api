@@ -1,0 +1,51 @@
+() {
+    ~ string json = "{
+    \"style_id\": \"kyushu\",
+        \"customization\": {
+            \"skin\": [
+                \"#986860\"
+            ],
+            \"body\": {
+                \"choice\": \"default-female\",
+                \"colors\": []
+            },
+            \"head\": {
+                \"choice\": \"small-head\",
+                \"colors\": []
+            },
+            \"eyes\": {
+                \"choice\": \"intense\",
+                \"colors\": []
+            },
+            \"eye-color\": [
+                \"#7b4141\",
+                \"#dedbb8\"
+            ],
+            \"eye-height\": 0,
+            \"hair\": \"none\",
+            \"outfit-type\": \"Combined outfit\",
+            \"outfit\": {
+                \"choice\": \"dress-with-apron\",
+                \"colors\": [
+                    \"#609038\",
+                    \"#383838\"
+                ]
+            },
+            \"hat\": {
+                \"choice\": \"yakyu-cap\",
+                \"colors\": [
+                    \"#f8b020\",
+                    \"#609038\"
+                ]
+            },
+            \"capsule\": {
+                \"choice\": \"default\",
+                \"colors\": [
+                    \"#c0709c\",
+                    \"#e06040\"
+                ]
+            }
+        }
+    }";
+    $TDSM.load_from_json(json);
+}

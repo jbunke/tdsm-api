@@ -95,6 +95,7 @@ public final class NodeDelegator {
             case SetExportFlagNode.JSON, SetExportFlagNode.STIP ->
                     new SetExportFlagNode(pos, args, fID);
             case ExportNode.NAME -> new ExportNode(pos, args);
+            case LoadFromJSONNode.NAME -> new LoadFromJSONNode(pos, args);
             // extend here
             default -> new IllegalStatementNode(pos,
                     "Undefined function \"" + formatGlobal(fID, true) + "\"");
