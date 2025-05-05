@@ -1,7 +1,7 @@
 () {
     string folder = "C:/Users/Jordan/Pictures/tdsm-script-output-test";
 
-    $TDSM.set_json(false);
+    $TDSM.set_json(true);
     $TDSM.set_stip(false);
 
     export_style("hokkaido", folder);

@@ -2,6 +2,9 @@
   <artifact type="jar" name="tdsm-cli">
     <output-path>$PROJECT_DIR$/out/artifacts/tdsm_cli</output-path>
     <root id="archive" name="tdsm_cli.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/res/manifest/cli/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="tdsm-api" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../delta-time/out/artifacts/dt_modules/delta-time-sprite.jar" path-in-jar="/" />

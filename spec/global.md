@@ -108,8 +108,6 @@ $TDSM.is_stip() -> bool
 
 **Returns** `true` if the *Export as Stipple Effect project* flag is turned on, `false` otherwise.
 
-<!-- TODO -->
-
 ### `load_from_json`
 
 ```js

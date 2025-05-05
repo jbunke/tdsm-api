@@ -7,7 +7,6 @@ import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm.data.style.Style;
 import com.jordanbunke.tdsm.data.style.Styles;
-import com.jordanbunke.tdsm.util.EnumUtils;
 import com.jordanbunke.tdsm_api.ast.type.StyleTypeNode;
 
 public final class GetStyleNode extends GlobalExprNode {
@@ -24,20 +23,17 @@ public final class GetStyleNode extends GlobalExprNode {
 
     @Override
     public Style evaluate(final SymbolTable symbolTable) {
-        final Style[] options = EnumUtils.stream(Styles.class)
-                .map(Styles::get).toArray(Style[]::new);
         final ExpressionNode idExp = arguments.get(0);
         final String id = (String) idExp.evaluate(symbolTable);
 
-        for (Style option : options)
-            if (option.id.equals(id))
-                return option;
+        final Style style = Styles.get(id);
 
-        ScriptErrorLog.fireError(
-                ScriptErrorLog.Message.CUSTOM_RT, idExp.getPosition(),
-                "Could not identify a sprite style matching the id \"" +
-                        id + "\"");
+        if (style == null)
+            ScriptErrorLog.fireError(
+                    ScriptErrorLog.Message.CUSTOM_RT, idExp.getPosition(),
+                    "Could not identify a sprite style matching the id \"" +
+                            id + "\"");
 
-        return null;
+        return style;
     }
 }

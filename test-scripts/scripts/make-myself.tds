@@ -44,6 +44,7 @@
         }
     }
 
+    $TDSM.set_json(true);
     $TDSM.export(s, folder + "/me", gen_name());
 }
 
