@@ -1,0 +1,52 @@
+package com.jordanbunke.tdsm_api.util;
+
+import com.jordanbunke.delta_time.scripting.ast.nodes.function.ChildFuncNode;
+import com.jordanbunke.delta_time.scripting.ast.nodes.function.FuncNode;
+import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
+import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
+import com.jordanbunke.delta_time.scripting.util.FuncHelper;
+import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
+import com.jordanbunke.delta_time.scripting.util.TextPosition;
+
+import java.util.Objects;
+
+public class MetaFuncHelper {
+    public static Object evaluate(
+            final ChildFuncNode func,
+            final SymbolTable symbolTable, final Object[] args
+    ) {
+        final SymbolTable funcTable =
+                FuncHelper.getScopeTable(func, symbolTable);
+
+        return func.execute(funcTable, args);
+    }
+
+    public static <T> T evaluate(
+            final ChildFuncNode func, final SymbolTable symbolTable,
+            final Class<T> c, final TextPosition argPos, final Object... args
+    ) {
+        return asClass(c, evaluate(func, symbolTable, args), argPos);
+    }
+
+    public static <T> T asClass(
+            final Class<T> c, final Object obj, final TextPosition argPos
+    ) {
+        if (c.isInstance(obj))
+            return c.cast(obj);
+
+        ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
+                argPos, "Incompatible types: expected " + c.getName() +
+                        " but got " + (obj == null ? "null" : obj.getClass().getName()));
+        return null;
+    }
+
+    public static boolean validate(
+            final FuncNode func, final TypeNode returnType,
+            final TypeNode... paramSpec
+    ) {
+        if (func == null) return false;
+
+        return func.paramsMatch(paramSpec) &&
+                Objects.equals(returnType, func.getReturnType());
+    }
+}

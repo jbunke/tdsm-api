@@ -129,6 +129,8 @@ public final class NodeDelegator {
     ) {
         return switch (fID) {
             case InitStyleNode.NAME -> new InitStyleNode(pos, args);
+            case InitDecisionLayerNode.NAME ->
+                    new InitDecisionLayerNode(pos, args);
             default -> new IllegalExpressionNode(pos,
                     "Undefined function \"" +
                             formatInit(fID, true) + "\"");
