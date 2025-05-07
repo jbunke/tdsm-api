@@ -5,7 +5,7 @@ import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm_api.util.ScriptConstants;
 
-public final class LayerTypeConstNode extends ConstNode {
+public final class LayerTypeConstNode extends GlobalConstNode {
     public static final String
             ACL = "ACL", COL_SEL_L = "COL_SEL_L", DECISION_L = "DECISION_L",
             MATH_L = "MATH_L", CHOICE_L = "CHOICE_L", OTHER_L = "OTHER_L";

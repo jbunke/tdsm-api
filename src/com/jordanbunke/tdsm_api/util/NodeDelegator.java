@@ -12,6 +12,7 @@ import com.jordanbunke.tdsm_api.ast.expr.*;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
 import com.jordanbunke.tdsm_api.ast.expr.anim.*;
 import com.jordanbunke.tdsm_api.ast.expr.col_sel.*;
+import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
@@ -105,7 +106,45 @@ public final class NodeDelegator {
     private static String formatGlobal(
             final String subident, final boolean function
     ) {
-        return "$" + Tokens.GLOBAL_NAMESPACE + "." +
+        return formatNamespace(Tokens.GLOBAL_NAMESPACE, subident, function);
+    }
+
+    public static ExpressionNode initConstant(
+            final TextPosition pos, final String constID
+    ) {
+        return switch (constID) {
+            // layer scope constants
+            case LayerScopeConstNode.ASSEMBLY, LayerScopeConstNode.CUSTOM ->
+                    new LayerScopeConstNode(pos, constID);
+            // extend here
+            default -> new IllegalExpressionNode(pos,
+                    "No constant \"" + formatInit(constID, false) +
+                            "\" exists");
+        };
+    }
+
+    public static ExpressionNode initFExpr(
+            final TextPosition pos, final String fID,
+            final ExpressionNode... args
+    ) {
+        return switch (fID) {
+            case InitStyleNode.NAME -> new InitStyleNode(pos, args);
+            default -> new IllegalExpressionNode(pos,
+                    "Undefined function \"" +
+                            formatInit(fID, true) + "\"");
+        };
+    }
+
+    private static String formatInit(
+            final String subident, final boolean function
+    ) {
+        return formatNamespace(Tokens.INIT_NAMESPACE, subident, function);
+    }
+
+    private static String formatNamespace(
+            final String namespace, final String subident, final boolean function
+    ) {
+        return "$" + namespace + "." +
                 subident + (function ? "()" : "");
     }
 

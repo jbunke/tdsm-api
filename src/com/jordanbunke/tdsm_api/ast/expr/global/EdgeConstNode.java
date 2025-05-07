@@ -5,7 +5,7 @@ import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm.data.Edge;
 
-public final class EdgeConstNode extends ConstNode {
+public final class EdgeConstNode extends GlobalConstNode {
     private final Edge edge;
 
     public EdgeConstNode(TextPosition pos, final Edge edge) {

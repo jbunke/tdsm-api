@@ -4,7 +4,7 @@ import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 
-public final class DirConstNode extends ConstNode {
+public final class DirConstNode extends GlobalConstNode {
     public static final String N = "N", W = "W", S = "S", E = "E",
             NW = "NW", NE = "NE", SW = "SW", SE = "SE";
 

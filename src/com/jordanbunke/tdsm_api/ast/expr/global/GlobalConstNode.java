@@ -5,8 +5,8 @@ import com.jordanbunke.delta_time.scripting.util.Arguments;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm_api.util.Tokens;
 
-public abstract class ConstNode extends GlobalExprNode {
-    public ConstNode(final TextPosition pos, final TypeNode returnType) {
+public abstract class GlobalConstNode extends GlobalExprNode {
+    public GlobalConstNode(final TextPosition pos, final TypeNode returnType) {
         super(pos, returnType, Arguments.none());
     }
 

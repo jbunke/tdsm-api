@@ -53,11 +53,14 @@ public final class TDSMVisitor extends ScriptVisitor {
 
         final TextPosition position = TextPosition.fromToken(ctx.start);
 
-        // TODO - implement with switch if further namespaces added
-        return namespace.equals(Tokens.GLOBAL_NAMESPACE)
-                ? NodeDelegator.globalConstant(position, constID)
-                : new IllegalExpressionNode(position,
-                "\"" + namespace + "\" is an illegal namespace");
+        return switch (namespace) {
+            case Tokens.GLOBAL_NAMESPACE ->
+                    NodeDelegator.globalConstant(position, constID);
+            case Tokens.INIT_NAMESPACE ->
+                    NodeDelegator.initConstant(position, constID);
+            default -> new IllegalExpressionNode(position,
+                    "\"" + namespace + "\" is an illegal namespace");
+        };
     }
 
     @Override
@@ -72,11 +75,15 @@ public final class TDSMVisitor extends ScriptVisitor {
 
         final ExpressionNode[] args = unpackElements(ctx.args().elements());
 
-        // TODO - implement with switch if further namespaces added
-        return namespace.equals(Tokens.GLOBAL_NAMESPACE)
-                ? NodeDelegator.globalFExpr(position, fID, args)
-                : new IllegalExpressionNode(position, "Namespace \"" +
-                namespace + "\" does not exist or defines no value-returning functions");
+        return switch (namespace) {
+            case Tokens.GLOBAL_NAMESPACE ->
+                    NodeDelegator.globalFExpr(position, fID, args);
+            case Tokens.INIT_NAMESPACE ->
+                    NodeDelegator.initFExpr(position, fID, args);
+            default -> new IllegalExpressionNode(position,
+                    "Namespace \"" + namespace +
+                            "\" does not exist or defines no value-returning functions");
+        };
     }
 
     @Override
