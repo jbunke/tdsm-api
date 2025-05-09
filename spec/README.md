@@ -12,9 +12,11 @@ The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_l
 ### Types
 
 * [`anim`](./anim.md)
+* [`asset_choice`](./asset_choice.md)
 * [`col_sel`](./col_sel.md)
 * [`layer`](./layer.md)
 * [`no_choice`](./no_choice.md)
+* [`sheet`](./sheet.md)
 * [`style`](./style.md)
 
 ---

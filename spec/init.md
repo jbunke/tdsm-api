@@ -14,6 +14,24 @@ The `$Init` namespace contains constructor functions for initializing objects of
 $Init.anim(string id, int[] ticks_per_frame, (int -> int[]) frame_coord_func, bool is_pong) -> anim
 ```
 
+### `asset_choice`
+
+```js 
+$Init.asset_choice(string id, (color -> replacement) replace_func, col_sel[] selections) -> asset_choice
+```
+
+### `asset_choice_layer`
+
+```js 
+$Init.asset_choice_layer(string id, int[] dims, (string -> image) asset_fetcher_func, asset_choice[] choices, no_choice nc, (sheet -> (string -> image)) composer, int[] preview_coord) -> layer
+```
+
+### `asset_layer`
+
+```js 
+$Init.asset_layer(string id, int[] dims, image asset, (sheet -> (string -> image)) composer, (color -> replacement) replace_func) -> layer
+```
+
 ### `choice_layer`
 
 ```js 
@@ -36,6 +54,30 @@ $Init.composed_layer(string id, (string -> image) logic) -> layer
 
 ```js 
 $Init.decision_layer(string id, (-> layer) logic) -> layer
+```
+
+### `dependent_layer`
+
+```js 
+$Init.dependent_layer(string id, (string -> image) asset_fetcher_func, layer reference_layer, int relative_index) -> layer
+```
+
+### `group_layer`
+
+```js 
+$Init.group_layer(string id, layer[] members) -> layer
+```
+
+### `mask_layer`
+
+```js 
+$Init.mask_layer(string id, layer[] targets, (string -> image) logic) -> layer
+```
+
+### `math_layer`
+
+```js 
+$Init.math_layer(string id, int min, int max, int default, (int -> string) format_func) -> layer
 ```
 
 ### `no_choice_equal`

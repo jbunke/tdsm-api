@@ -16,6 +16,7 @@ import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.replacement.*;
+import com.jordanbunke.tdsm_api.ast.expr.sheet.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
@@ -30,10 +31,12 @@ public final class NodeDelegator {
     ) {
         final ExtTypeNode t = switch (typeID) {
             case AnimTypeNode.NAME -> new AnimTypeNode(pos);
+            case AssetChoiceTypeNode.NAME -> new AssetChoiceTypeNode(pos);
             case ColSelTypeNode.NAME -> new ColSelTypeNode(pos);
             case LayerTypeNode.NAME -> new LayerTypeNode(pos);
             case NoChoiceTypeNode.NAME -> new NoChoiceTypeNode(pos);
             case ReplacementTypeNode.NAME -> new ReplacementTypeNode(pos);
+            case SheetTypeNode.NAME -> new SheetTypeNode(pos);
             case StyleTypeNode.NAME -> new StyleTypeNode(pos);
             // extend here
             default -> null;
@@ -132,10 +135,22 @@ public final class NodeDelegator {
     ) {
         return switch (fID) {
             case InitAnimNode.NAME -> new InitAnimNode(pos, args);
+            case InitChoiceLayerNode.NAME ->
+                    new InitChoiceLayerNode(pos, args);
+            case InitColSelNode.NAME -> new InitColSelNode(pos, args);
             case InitComposedLayerNode.NAME ->
                     new InitComposedLayerNode(pos, args);
             case InitDecisionLayerNode.NAME ->
                     new InitDecisionLayerNode(pos, args);
+            case InitNoChoiceNoArgsNode.EQUAL,
+                 InitNoChoiceNoArgsNode.INVALID ->
+                    new InitNoChoiceNoArgsNode(pos, args, fID);
+            case InitNoChoiceProbNode.NAME ->
+                    new InitNoChoiceProbNode(pos, args);
+            case InitReplacementNode.NAME ->
+                    new InitReplacementNode(pos, args);
+            case InitSimpleCoordFuncNode.NAME ->
+                    new InitSimpleCoordFuncNode(pos, args);
             case InitStyleNode.NAME -> new InitStyleNode(pos, args);
             default -> new IllegalExpressionNode(pos,
                     "Undefined function \"" +
@@ -179,6 +194,13 @@ public final class NodeDelegator {
                     new ReplacementFuncNode(pos, scope);
             case ReplacementIndexNode.NAME ->
                     new ReplacementIndexNode(pos, scope);
+            // sheet
+            case SheetIntPropNode.SPRITES_X,
+                 SheetIntPropNode.SPRITES_Y,
+                 SheetIntPropNode.SPRITE_WIDTH,
+                 SheetIntPropNode.SPRITE_HEIGHT ->
+                    new SheetIntPropNode(pos, scope, propID);
+            case SheetSourceNode.NAME -> new SheetSourceNode(pos, scope);
             // extend here
             default -> new IllegalExpressionNode(pos,
                     "No property \"" + propID + "\" exists");
@@ -232,6 +254,9 @@ public final class NodeDelegator {
             // no_choice
             case NoChoiceProbNode.NAME ->
                     new NoChoiceProbNode(pos, scope, args);
+            // sheet
+            case SheetSpriteAtNode.NAME ->
+                    new SheetSpriteAtNode(pos, scope, args);
             // extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
