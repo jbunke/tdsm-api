@@ -62,6 +62,12 @@ $Init.no_choice_prob(float prob) -> no_choice
 $Init.replacement(int index, (color -> color) func) -> replacement
 ```
 
+### `simple_frame_coord_func`
+
+```js 
+$Init.simple_frame_coord_func(int first_frame_x, int first_frame_y, bool orientation) -> (int -> int[])
+```
+
 ### `style`
 
 ```js
