@@ -7,6 +7,7 @@ The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_l
 ### Namespaces
 
 * [Global namespace (`$TDSM`)](./global.md)
+* [`$Init`](./init.md)
 
 ### Types
 

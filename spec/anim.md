@@ -18,7 +18,7 @@
 A.id -> string
 ```
 
-The identifier code of an animation. This code should be unique among all of the animations of a [`style`](./style.md).
+The identifier code of an animation. This code should be unique among all the animations of a [`style`](./style.md).
 
 ## Functions
 

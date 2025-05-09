@@ -15,6 +15,7 @@ import com.jordanbunke.tdsm_api.ast.expr.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
+import com.jordanbunke.tdsm_api.ast.expr.replacement.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
@@ -32,7 +33,9 @@ public final class NodeDelegator {
             case ColSelTypeNode.NAME -> new ColSelTypeNode(pos);
             case LayerTypeNode.NAME -> new LayerTypeNode(pos);
             case NoChoiceTypeNode.NAME -> new NoChoiceTypeNode(pos);
+            case ReplacementTypeNode.NAME -> new ReplacementTypeNode(pos);
             case StyleTypeNode.NAME -> new StyleTypeNode(pos);
+            // extend here
             default -> null;
         };
 
@@ -128,9 +131,12 @@ public final class NodeDelegator {
             final ExpressionNode... args
     ) {
         return switch (fID) {
-            case InitStyleNode.NAME -> new InitStyleNode(pos, args);
+            case InitAnimNode.NAME -> new InitAnimNode(pos, args);
+            case InitComposedLayerNode.NAME ->
+                    new InitComposedLayerNode(pos, args);
             case InitDecisionLayerNode.NAME ->
                     new InitDecisionLayerNode(pos, args);
+            case InitStyleNode.NAME -> new InitStyleNode(pos, args);
             default -> new IllegalExpressionNode(pos,
                     "Undefined function \"" +
                             formatInit(fID, true) + "\"");
@@ -168,6 +174,11 @@ public final class NodeDelegator {
                     NoChoiceBoolPropNode.valid(pos, scope);
             case NoChoiceBoolPropNode.EQUAL ->
                     NoChoiceBoolPropNode.equal(pos, scope);
+            // replacement
+            case ReplacementFuncNode.NAME ->
+                    new ReplacementFuncNode(pos, scope);
+            case ReplacementIndexNode.NAME ->
+                    new ReplacementIndexNode(pos, scope);
             // extend here
             default -> new IllegalExpressionNode(pos,
                     "No property \"" + propID + "\" exists");

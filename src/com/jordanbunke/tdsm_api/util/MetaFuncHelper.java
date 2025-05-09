@@ -1,7 +1,6 @@
 package com.jordanbunke.tdsm_api.util;
 
-import com.jordanbunke.delta_time.scripting.ast.nodes.function.ChildFuncNode;
-import com.jordanbunke.delta_time.scripting.ast.nodes.function.FuncNode;
+import com.jordanbunke.delta_time.scripting.ast.nodes.function.*;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.FuncHelper;
@@ -10,7 +9,7 @@ import com.jordanbunke.delta_time.scripting.util.TextPosition;
 
 import java.util.Objects;
 
-public class MetaFuncHelper {
+public final class MetaFuncHelper {
     public static Object evaluate(
             final ChildFuncNode func,
             final SymbolTable symbolTable, final Object[] args
