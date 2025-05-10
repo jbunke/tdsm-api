@@ -22,6 +22,6 @@ public final class OrientationConstType extends GlobalConstNode {
 
     @Override
     public Boolean evaluate(final SymbolTable symbolTable) {
-        return code.equals(VERT);
+        return code.equals(HORZ);
     }
 }

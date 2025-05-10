@@ -78,6 +78,8 @@ public final class TDSMVisitor extends ScriptVisitor {
         return switch (namespace) {
             case Tokens.GLOBAL_NAMESPACE ->
                     NodeDelegator.globalFExpr(position, fID, args);
+            case Tokens.COLOR_PROC_NAMESPACE ->
+                    NodeDelegator.colorProcFExpr(position, fID, args);
             case Tokens.INIT_NAMESPACE ->
                     NodeDelegator.initFExpr(position, fID, args);
             default -> new IllegalExpressionNode(position,

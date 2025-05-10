@@ -30,6 +30,12 @@ L.type -> int
 
 <!-- TODO - more ACL-specific functionality -->
 
+### `add_influence`
+
+```js 
+L.add_influences(col_sel[] selections);
+```
+
 ### `choose`
 
 **Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`

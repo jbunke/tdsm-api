@@ -44,6 +44,12 @@ $Init.choice_layer(string id, string[] choices) -> layer
 $Init.col_sel(string name, bool any_color, color[] swatches) -> col_sel
 ```
 
+### `col_sel_layer`
+
+```js 
+$Init.col_sel_layer(string id, col_sel[] selections) -> layer
+```
+
 ### `composed_layer`
 
 ```js 
@@ -54,6 +60,12 @@ $Init.composed_layer(string id, (string -> image) logic) -> layer
 
 ```js 
 $Init.decision_layer(string id, (-> layer) logic) -> layer
+```
+
+### `default_composer`
+
+```js 
+$Init.default_composer(string[] directions, bool orientation, anim[] anims) -> (sheet -> (string -> image))
 ```
 
 ### `dependent_layer`

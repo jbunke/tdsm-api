@@ -12,6 +12,8 @@ import com.jordanbunke.tdsm_api.ast.expr.*;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
 import com.jordanbunke.tdsm_api.ast.expr.anim.*;
 import com.jordanbunke.tdsm_api.ast.expr.col_sel.*;
+import com.jordanbunke.tdsm_api.ast.expr.color_proc.*;
+import com.jordanbunke.tdsm_api.ast.expr.ext.*;
 import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
@@ -135,13 +137,18 @@ public final class NodeDelegator {
     ) {
         return switch (fID) {
             case InitAnimNode.NAME -> new InitAnimNode(pos, args);
+            case InitAssetLayerNode.NAME -> new InitAssetLayerNode(pos, args);
             case InitChoiceLayerNode.NAME ->
                     new InitChoiceLayerNode(pos, args);
             case InitColSelNode.NAME -> new InitColSelNode(pos, args);
+            case InitColSelLayerNode.NAME ->
+                    new InitColSelLayerNode(pos, args);
             case InitComposedLayerNode.NAME ->
                     new InitComposedLayerNode(pos, args);
             case InitDecisionLayerNode.NAME ->
                     new InitDecisionLayerNode(pos, args);
+            case DefaultComposerNode.NAME ->
+                    new DefaultComposerNode(pos, args);
             case InitNoChoiceNoArgsNode.EQUAL,
                  InitNoChoiceNoArgsNode.INVALID ->
                     new InitNoChoiceNoArgsNode(pos, args, fID);
@@ -164,6 +171,22 @@ public final class NodeDelegator {
         return formatNamespace(Tokens.INIT_NAMESPACE, subident, function);
     }
 
+    public static ExpressionNode colorProcFExpr(
+            final TextPosition pos, final String fID,
+            final ExpressionNode... args
+    ) {
+        return switch (fID) {
+            case ColorProcHSVNode.NAME -> args.length == 4
+                    ? ColorProcHSVNode.withAlpha(pos, args)
+                    : ColorProcHSVNode.justHSV(pos, args);
+            case NormalizeHueNode.NAME -> new NormalizeHueNode(pos, args);
+            default -> new IllegalExpressionNode(pos,
+                    "Undefined function \"" +
+                            formatNamespace(Tokens.COLOR_PROC_NAMESPACE,
+                                    fID, true) + "\"");
+        };
+    }
+
     private static String formatNamespace(
             final String namespace, final String subident, final boolean function
     ) {
@@ -179,6 +202,10 @@ public final class NodeDelegator {
             // multi-type
             case IDPropertyNode.NAME -> new IDPropertyNode(pos, scope);
             case NamePropertyNode.NAME -> new NamePropertyNode(pos, scope);
+            // color
+            case ColorHSVPropNode.HUE, ColorHSVPropNode.SAT,
+                 ColorHSVPropNode.VAL ->
+                    new ColorHSVPropNode(pos, scope, propID);
             // layer
             case LayerTypePropNode.NAME -> new LayerTypePropNode(pos, scope);
             // col_sel
@@ -293,9 +320,12 @@ public final class NodeDelegator {
             case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
             case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
             case ChooseNode.NAME -> new ChooseNode(pos, scope, args);
+            case AddInfluencesNode.NAME ->
+                    new AddInfluencesNode(pos, scope, args);
             // col_sel
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
-            case SetFromSwatchNode.NAME -> new SetFromSwatchNode(pos, scope, args);
+            case SetFromSwatchNode.NAME ->
+                    new SetFromSwatchNode(pos, scope, args);
             // extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

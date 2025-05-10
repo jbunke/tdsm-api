@@ -17,9 +17,7 @@ import com.jordanbunke.tdsm.data.style.FromFileStyle;
 import com.jordanbunke.tdsm_api.ast.type.AnimTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.LayerTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.StyleTypeNode;
-
-import java.util.Arrays;
-import java.util.Set;
+import com.jordanbunke.tdsm_api.util.DataProcessor;
 
 import static com.jordanbunke.tdsm.util.Constants.*;
 
@@ -62,8 +60,9 @@ public final class InitStyleNode extends InitExprNode {
 
         final Bounds2D bounds = extractBounds(wh,
                 arguments.get(1).getPosition());
-        final Directions directions = extractDirections(orientation,
-                dirStrings, arguments.get(2).getPosition());
+        final Directions directions =
+                DataProcessor.extractDirections(orientation,
+                        dirStrings, arguments.get(2).getPosition());
 
         if (custom == null || assembly == null ||
                 bounds == null || directions == null)
@@ -112,40 +111,5 @@ public final class InitStyleNode extends InitExprNode {
                     .toArray(CustomizationLayer[]::new);
         else
             return null;
-    }
-
-    private Directions extractDirections(
-            final boolean orientation,
-            final String[] dirStrings, final TextPosition argPos
-    ) {
-        final int amount = dirStrings.length;
-
-        final Directions.NumDirs numDirs =
-                Arrays.stream(Directions.NumDirs.values())
-                        .filter(nd -> Integer.parseInt(
-                                nd.toString()) == amount)
-                        .findFirst().orElse(null);
-
-        if (numDirs == null) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    argPos, "Passed " + amount +
-                            " directions to the style initializer, which is an invalid amount.");
-            return null;
-        }
-
-        final Set<Directions.Dir> included = numDirs.getIncluded();
-        final Directions.Dir[] order = Arrays.stream(dirStrings)
-                .map(Directions::get).filter(included::contains)
-                .peek(included::remove).toArray(Directions.Dir[]::new);
-
-        if (order.length != amount) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    argPos, (amount - order.length) +
-                            " directions provided were either invalid for a " +
-                            numDirs + "-directional sprite style or were duplicates");
-            return null;
-        }
-
-        return new Directions(numDirs, orientation, order);
     }
 }

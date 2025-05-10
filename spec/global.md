@@ -51,8 +51,8 @@ The global namespace is essentially a utility class containing constants and fun
 
 | Constant     |  Type  |  Value  | Represents                           |
 |:-------------|:------:|:-------:|:-------------------------------------|
-| `$TDSM.HORZ` | `bool` | `false` | Horizontal (L to R) frame sequencing |
-| `$TDSM.VERT` | `bool` | `true`  | Vertical (T to B) frame sequencing   |
+| `$TDSM.HORZ` | `bool` | `true`  | Horizontal (L to R) frame sequencing |
+| `$TDSM.VERT` | `bool` | `false` | Vertical (T to B) frame sequencing   |
 
 ## Functions
 

@@ -7,6 +7,7 @@ The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_l
 ### Namespaces
 
 * [Global namespace (`$TDSM`)](./global.md)
+* [`$ColorProc`](./color_proc.md)
 * [`$Init`](./init.md)
 
 ### Types
@@ -16,6 +17,7 @@ The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_l
 * [`col_sel`](./col_sel.md)
 * [`layer`](./layer.md)
 * [`no_choice`](./no_choice.md)
+* [`replacement`](./replacement.md)
 * [`sheet`](./sheet.md)
 * [`style`](./style.md)
 
