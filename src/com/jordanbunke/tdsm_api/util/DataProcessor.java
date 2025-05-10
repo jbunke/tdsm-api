@@ -18,10 +18,12 @@ import java.util.Arrays;
 import java.util.Set;
 
 public final class DataProcessor {
-    public static final FuncTypeNode COMPOSER_TYPE =
-            new FuncTypeNode(new TypeNode[] { SheetTypeNode.get() },
-                    new FuncTypeNode(new TypeNode[] { TypeNode.getString() },
-                            TypeNode.getImage())),
+    public static final FuncTypeNode ASSET_FETCHER_TYPE =
+            new FuncTypeNode(new TypeNode[] { TypeNode.getString() },
+                    TypeNode.getImage()),
+            COMPOSER_TYPE =
+                    new FuncTypeNode(new TypeNode[] { SheetTypeNode.get() },
+                    ASSET_FETCHER_TYPE),
             REPLACE_FUNC_TYPE =
                     new FuncTypeNode(new TypeNode[] { TypeNode.getColor() },
                             ReplacementTypeNode.get());

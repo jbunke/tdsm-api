@@ -30,7 +30,15 @@ L.type -> int
 
 <!-- TODO - more ACL-specific functionality -->
 
-### `add_influence`
+### `add_dependent`
+
+<!-- TODO - precondition: dependent layer cannot be L -->
+
+```js 
+L.add_dependent(layer dependent);
+```
+
+### `add_influences`
 
 ```js 
 L.add_influences(col_sel[] selections);

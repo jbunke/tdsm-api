@@ -137,6 +137,10 @@ public final class NodeDelegator {
     ) {
         return switch (fID) {
             case InitAnimNode.NAME -> new InitAnimNode(pos, args);
+            case InitAssetChoiceLayerNode.NAME ->
+                    new InitAssetChoiceLayerNode(pos, args);
+            case InitAssetChoiceNode.NAME ->
+                    new InitAssetChoiceNode(pos, args);
             case InitAssetLayerNode.NAME -> new InitAssetLayerNode(pos, args);
             case InitChoiceLayerNode.NAME ->
                     new InitChoiceLayerNode(pos, args);
@@ -320,6 +324,8 @@ public final class NodeDelegator {
             case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
             case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
             case ChooseNode.NAME -> new ChooseNode(pos, scope, args);
+            case AddDependentNode.NAME ->
+                    new AddDependentNode(pos, scope, args);
             case AddInfluencesNode.NAME ->
                     new AddInfluencesNode(pos, scope, args);
             // col_sel
