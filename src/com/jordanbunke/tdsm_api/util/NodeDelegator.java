@@ -62,7 +62,8 @@ public final class NodeDelegator {
             // layer type constants
             case LayerTypeConstNode.ACL, LayerTypeConstNode.COL_SEL_L,
                  LayerTypeConstNode.DECISION_L, LayerTypeConstNode.MATH_L,
-                 LayerTypeConstNode.CHOICE_L, LayerTypeConstNode.OTHER_L ->
+                 LayerTypeConstNode.CHOICE_L, LayerTypeConstNode.DEPENDENT_L,
+                 LayerTypeConstNode.OTHER_L ->
                     new LayerTypeConstNode(pos, constID);
             // direction constants
             case DirConstNode.N, DirConstNode.W, DirConstNode.S,
@@ -153,6 +154,10 @@ public final class NodeDelegator {
                     new InitDecisionLayerNode(pos, args);
             case DefaultComposerNode.NAME ->
                     new DefaultComposerNode(pos, args);
+            case InitDependentLayerNode.NAME ->
+                    new InitDependentLayerNode(pos, args);
+            case InitMaskLayerNode.NAME -> new InitMaskLayerNode(pos, args);
+            case InitMathLayerNode.NAME -> new InitMathLayerNode(pos, args);
             case InitNoChoiceNoArgsNode.EQUAL,
                  InitNoChoiceNoArgsNode.INVALID ->
                     new InitNoChoiceNoArgsNode(pos, args, fID);
@@ -160,6 +165,7 @@ public final class NodeDelegator {
                     new InitNoChoiceProbNode(pos, args);
             case InitReplacementNode.NAME ->
                     new InitReplacementNode(pos, args);
+            case InitSheetNode.NAME -> new InitSheetNode(pos, args);
             case InitSimpleCoordFuncNode.NAME ->
                     new InitSimpleCoordFuncNode(pos, args);
             case InitStyleNode.NAME -> new InitStyleNode(pos, args);
@@ -180,6 +186,7 @@ public final class NodeDelegator {
             final ExpressionNode... args
     ) {
         return switch (fID) {
+            case AlphaMaskNode.NAME -> new AlphaMaskNode(pos, args);
             case ColorProcHSVNode.NAME -> args.length == 4
                     ? ColorProcHSVNode.withAlpha(pos, args)
                     : ColorProcHSVNode.justHSV(pos, args);
@@ -268,6 +275,10 @@ public final class NodeDelegator {
             case GetLayerNode.GET -> new GetLayerNode(pos, scope, args);
             case GetLayerNode.HAS -> GetLayerNode.has(pos, scope, args);
             // layer
+            case NaiveMaskLogicNode.NAME ->
+                    new NaiveMaskLogicNode(pos, scope, args);
+            case LayerComposeNode.NAME ->
+                    new LayerComposeNode(pos, scope, args);
             case GetColSelLayerNode.NAME ->
                     new GetColSelLayerNode(pos, scope, args);
             case GetNoChoiceNode.NAME -> new GetNoChoiceNode(pos, scope, args);

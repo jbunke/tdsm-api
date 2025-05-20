@@ -8,7 +8,8 @@ import com.jordanbunke.tdsm_api.util.ScriptConstants;
 public final class LayerTypeConstNode extends GlobalConstNode {
     public static final String
             ACL = "ACL", COL_SEL_L = "COL_SEL_L", DECISION_L = "DECISION_L",
-            MATH_L = "MATH_L", CHOICE_L = "CHOICE_L", OTHER_L = "OTHER_L";
+            MATH_L = "MATH_L", CHOICE_L = "CHOICE_L",
+            DEPENDENT_L = "DEPENDENT_L", OTHER_L = "OTHER_L";
 
     private final String code;
 
@@ -25,10 +26,8 @@ public final class LayerTypeConstNode extends GlobalConstNode {
 
     @Override
     public Integer evaluate(final SymbolTable symbolTable) {
-        return switch (code) {
-            case ACL, COL_SEL_L, DECISION_L, MATH_L, CHOICE_L ->
-                    ScriptConstants.LayerType.valueOf(code).ordinal();
-            default -> ScriptConstants.OTHER;
-        };
+        return code.equals(OTHER_L)
+                ? ScriptConstants.OTHER
+                : ScriptConstants.LayerType.valueOf(code).ordinal();
     }
 }

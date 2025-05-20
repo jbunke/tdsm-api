@@ -4,6 +4,6 @@ public final class ScriptConstants {
     public static final int OTHER = -1;
 
     public enum LayerType {
-        ACL, COL_SEL_L, DECISION_L, MATH_L, CHOICE_L
+        ACL, COL_SEL_L, DECISION_L, MATH_L, CHOICE_L, DEPENDENT_L
     }
 }

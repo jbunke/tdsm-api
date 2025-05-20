@@ -53,6 +53,12 @@ L.choose(string asset_code);
 L.choose(int asset_index);
 ```
 
+### `compose`
+
+```js 
+L.compose() -> (string -> image)
+```
+
 ### `get_col_sels`
 
 **Precondition:** `L.type == $TDSM.COL_SEL_L`
@@ -119,6 +125,14 @@ L.max_value() -> int
 
 ```js
 L.min_value() -> int
+```
+
+### `naive_mask_logic`
+
+**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.DEPENDENT_L`
+
+```js 
+L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 ```
 
 ### `none`

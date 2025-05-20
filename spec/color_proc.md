@@ -8,6 +8,12 @@
 
 <!-- TODO - full documentation -->
 
+### `alpha_mask`
+
+```js 
+$ColorProc.alpha_mask(image source, image mask) -> image
+```
+
 ### `hsv`
 
 ```js 

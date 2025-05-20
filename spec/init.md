@@ -116,6 +116,12 @@ $Init.no_choice_prob(float prob) -> no_choice
 $Init.replacement(int index, (color -> color) func) -> replacement
 ```
 
+### `sheet`
+
+```js 
+$Init.sheet(image source, int sprite_width, int sprite_height) -> sheet
+```
+
 ### `simple_frame_coord_func`
 
 ```js 
