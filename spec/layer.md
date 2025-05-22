@@ -59,6 +59,30 @@ L.choose(int asset_index);
 L.compose() -> (string -> image)
 ```
 
+### `get_choice`
+
+**Precondition:** `(L.type == $TDSM.ACL && !L.is_none()) || L.type == $TDSM.CHOICE_L`
+
+```js 
+L.get_choice() -> string
+```
+
+### `get_choice_at`
+
+**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
+
+```js 
+L.get_choice_at(int index) -> string
+```
+
+### `get_choice_index`
+
+**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
+
+```js 
+L.get_choice_index() -> int
+```
+
 ### `get_col_sels`
 
 **Precondition:** `L.type == $TDSM.COL_SEL_L`

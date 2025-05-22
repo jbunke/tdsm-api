@@ -25,6 +25,7 @@ import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.stat.layer.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
 import com.jordanbunke.tdsm_api.ast.stat.style.*;
+import com.jordanbunke.tdsm_api.ast.stat.util.*;
 import com.jordanbunke.tdsm_api.ast.type.*;
 
 public final class NodeDelegator {
@@ -156,6 +157,8 @@ public final class NodeDelegator {
                     new DefaultComposerNode(pos, args);
             case InitDependentLayerNode.NAME ->
                     new InitDependentLayerNode(pos, args);
+            case InitGroupLayerNode.NAME ->
+                    new InitGroupLayerNode(pos, args);
             case InitMaskLayerNode.NAME -> new InitMaskLayerNode(pos, args);
             case InitMathLayerNode.NAME -> new InitMathLayerNode(pos, args);
             case InitNoChoiceNoArgsNode.EQUAL,
@@ -194,6 +197,21 @@ public final class NodeDelegator {
             default -> new IllegalExpressionNode(pos,
                     "Undefined function \"" +
                             formatNamespace(Tokens.COLOR_PROC_NAMESPACE,
+                                    fID, true) + "\"");
+        };
+    }
+
+    public static StatementNode utilFStat(
+            final TextPosition pos, final String fID,
+            final ExpressionNode... args
+    ) {
+        return switch (fID) {
+            case ParallelMatchersNode.NAME ->
+                    new ParallelMatchersNode(pos, args);
+            // extend here
+            default -> new IllegalStatementNode(pos,
+                    "Undefined function \"" +
+                            formatNamespace(Tokens.UTIL_NAMESPACE,
                                     fID, true) + "\"");
         };
     }
@@ -275,6 +293,11 @@ public final class NodeDelegator {
             case GetLayerNode.GET -> new GetLayerNode(pos, scope, args);
             case GetLayerNode.HAS -> GetLayerNode.has(pos, scope, args);
             // layer
+            case GetChoiceNode.NAME -> new GetChoiceNode(pos, scope, args);
+            case GetChoiceAtNode.NAME ->
+                    new GetChoiceAtNode(pos, scope, args);
+            case GetChoiceIndexNode.NAME ->
+                    new GetChoiceIndexNode(pos, scope, args);
             case NaiveMaskLogicNode.NAME ->
                     new NaiveMaskLogicNode(pos, scope, args);
             case LayerComposeNode.NAME ->

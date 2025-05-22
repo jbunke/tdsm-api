@@ -9,6 +9,7 @@ The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_l
 * [Global namespace (`$TDSM`)](./global.md)
 * [`$ColorProc`](./color_proc.md)
 * [`$Init`](./init.md)
+* [`$Util`](./util.md)
 
 ### Types
 

@@ -100,11 +100,15 @@ public final class TDSMVisitor extends ScriptVisitor {
 
         final ExpressionNode[] args = unpackElements(ctx.args().elements());
 
-        // TODO - implement with switch if further namespaces added
-        return namespace.equals(Tokens.GLOBAL_NAMESPACE)
-                ? NodeDelegator.globalFStat(position, fID, args)
-                : new IllegalStatementNode(position, "Namespace \"" +
-                namespace + "\" does not exist or defines no void functions");
+        return switch (namespace) {
+            case Tokens.GLOBAL_NAMESPACE ->
+                    NodeDelegator.globalFStat(position, fID, args);
+            case Tokens.UTIL_NAMESPACE ->
+                    NodeDelegator.utilFStat(position, fID, args);
+            default -> new IllegalStatementNode(position,
+                    "Namespace \"" + namespace +
+                            "\" does not exist or defines no void functions");
+        };
     }
 
     @Override
