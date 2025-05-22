@@ -12,14 +12,20 @@ import com.jordanbunke.tdsm_api.ast.expr.*;
 import com.jordanbunke.tdsm_api.ast.expr.global.*;
 import com.jordanbunke.tdsm_api.ast.expr.anim.*;
 import com.jordanbunke.tdsm_api.ast.expr.col_sel.*;
+import com.jordanbunke.tdsm_api.ast.expr.color_proc.*;
+import com.jordanbunke.tdsm_api.ast.expr.ext.*;
+import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
+import com.jordanbunke.tdsm_api.ast.expr.replacement.*;
+import com.jordanbunke.tdsm_api.ast.expr.sheet.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.stat.layer.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
 import com.jordanbunke.tdsm_api.ast.stat.style.*;
+import com.jordanbunke.tdsm_api.ast.stat.util.*;
 import com.jordanbunke.tdsm_api.ast.type.*;
 
 public final class NodeDelegator {
@@ -28,10 +34,14 @@ public final class NodeDelegator {
     ) {
         final ExtTypeNode t = switch (typeID) {
             case AnimTypeNode.NAME -> new AnimTypeNode(pos);
+            case AssetChoiceTypeNode.NAME -> new AssetChoiceTypeNode(pos);
             case ColSelTypeNode.NAME -> new ColSelTypeNode(pos);
             case LayerTypeNode.NAME -> new LayerTypeNode(pos);
             case NoChoiceTypeNode.NAME -> new NoChoiceTypeNode(pos);
+            case ReplacementTypeNode.NAME -> new ReplacementTypeNode(pos);
+            case SheetTypeNode.NAME -> new SheetTypeNode(pos);
             case StyleTypeNode.NAME -> new StyleTypeNode(pos);
+            // extend here
             default -> null;
         };
 
@@ -53,7 +63,8 @@ public final class NodeDelegator {
             // layer type constants
             case LayerTypeConstNode.ACL, LayerTypeConstNode.COL_SEL_L,
                  LayerTypeConstNode.DECISION_L, LayerTypeConstNode.MATH_L,
-                 LayerTypeConstNode.CHOICE_L, LayerTypeConstNode.OTHER_L ->
+                 LayerTypeConstNode.CHOICE_L, LayerTypeConstNode.DEPENDENT_L,
+                 LayerTypeConstNode.OTHER_L ->
                     new LayerTypeConstNode(pos, constID);
             // direction constants
             case DirConstNode.N, DirConstNode.W, DirConstNode.S,
@@ -105,7 +116,110 @@ public final class NodeDelegator {
     private static String formatGlobal(
             final String subident, final boolean function
     ) {
-        return "$" + Tokens.GLOBAL_NAMESPACE + "." +
+        return formatNamespace(Tokens.GLOBAL_NAMESPACE, subident, function);
+    }
+
+    public static ExpressionNode initConstant(
+            final TextPosition pos, final String constID
+    ) {
+        return switch (constID) {
+            // layer scope constants
+            case LayerScopeConstNode.ASSEMBLY, LayerScopeConstNode.CUSTOM ->
+                    new LayerScopeConstNode(pos, constID);
+            // extend here
+            default -> new IllegalExpressionNode(pos,
+                    "No constant \"" + formatInit(constID, false) +
+                            "\" exists");
+        };
+    }
+
+    public static ExpressionNode initFExpr(
+            final TextPosition pos, final String fID,
+            final ExpressionNode... args
+    ) {
+        return switch (fID) {
+            case InitAnimNode.NAME -> new InitAnimNode(pos, args);
+            case InitAssetChoiceLayerNode.NAME ->
+                    new InitAssetChoiceLayerNode(pos, args);
+            case InitAssetChoiceNode.NAME ->
+                    new InitAssetChoiceNode(pos, args);
+            case InitAssetLayerNode.NAME -> new InitAssetLayerNode(pos, args);
+            case InitChoiceLayerNode.NAME ->
+                    new InitChoiceLayerNode(pos, args);
+            case InitColSelNode.NAME -> new InitColSelNode(pos, args);
+            case InitColSelLayerNode.NAME ->
+                    new InitColSelLayerNode(pos, args);
+            case InitComposedLayerNode.NAME ->
+                    new InitComposedLayerNode(pos, args);
+            case InitDecisionLayerNode.NAME ->
+                    new InitDecisionLayerNode(pos, args);
+            case DefaultComposerNode.NAME ->
+                    new DefaultComposerNode(pos, args);
+            case InitDependentLayerNode.NAME ->
+                    new InitDependentLayerNode(pos, args);
+            case InitGroupLayerNode.NAME ->
+                    new InitGroupLayerNode(pos, args);
+            case InitMaskLayerNode.NAME -> new InitMaskLayerNode(pos, args);
+            case InitMathLayerNode.NAME -> new InitMathLayerNode(pos, args);
+            case InitNoChoiceNoArgsNode.EQUAL,
+                 InitNoChoiceNoArgsNode.INVALID ->
+                    new InitNoChoiceNoArgsNode(pos, args, fID);
+            case InitNoChoiceProbNode.NAME ->
+                    new InitNoChoiceProbNode(pos, args);
+            case InitReplacementNode.NAME ->
+                    new InitReplacementNode(pos, args);
+            case InitSheetNode.NAME -> new InitSheetNode(pos, args);
+            case InitSimpleCoordFuncNode.NAME ->
+                    new InitSimpleCoordFuncNode(pos, args);
+            case InitStyleNode.NAME -> new InitStyleNode(pos, args);
+            default -> new IllegalExpressionNode(pos,
+                    "Undefined function \"" +
+                            formatInit(fID, true) + "\"");
+        };
+    }
+
+    private static String formatInit(
+            final String subident, final boolean function
+    ) {
+        return formatNamespace(Tokens.INIT_NAMESPACE, subident, function);
+    }
+
+    public static ExpressionNode colorProcFExpr(
+            final TextPosition pos, final String fID,
+            final ExpressionNode... args
+    ) {
+        return switch (fID) {
+            case AlphaMaskNode.NAME -> new AlphaMaskNode(pos, args);
+            case ColorProcHSVNode.NAME -> args.length == 4
+                    ? ColorProcHSVNode.withAlpha(pos, args)
+                    : ColorProcHSVNode.justHSV(pos, args);
+            case NormalizeHueNode.NAME -> new NormalizeHueNode(pos, args);
+            default -> new IllegalExpressionNode(pos,
+                    "Undefined function \"" +
+                            formatNamespace(Tokens.COLOR_PROC_NAMESPACE,
+                                    fID, true) + "\"");
+        };
+    }
+
+    public static StatementNode utilFStat(
+            final TextPosition pos, final String fID,
+            final ExpressionNode... args
+    ) {
+        return switch (fID) {
+            case ParallelMatchersNode.NAME ->
+                    new ParallelMatchersNode(pos, args);
+            // extend here
+            default -> new IllegalStatementNode(pos,
+                    "Undefined function \"" +
+                            formatNamespace(Tokens.UTIL_NAMESPACE,
+                                    fID, true) + "\"");
+        };
+    }
+
+    private static String formatNamespace(
+            final String namespace, final String subident, final boolean function
+    ) {
+        return "$" + namespace + "." +
                 subident + (function ? "()" : "");
     }
 
@@ -117,6 +231,10 @@ public final class NodeDelegator {
             // multi-type
             case IDPropertyNode.NAME -> new IDPropertyNode(pos, scope);
             case NamePropertyNode.NAME -> new NamePropertyNode(pos, scope);
+            // color
+            case ColorHSVPropNode.HUE, ColorHSVPropNode.SAT,
+                 ColorHSVPropNode.VAL ->
+                    new ColorHSVPropNode(pos, scope, propID);
             // layer
             case LayerTypePropNode.NAME -> new LayerTypePropNode(pos, scope);
             // col_sel
@@ -127,6 +245,18 @@ public final class NodeDelegator {
                     NoChoiceBoolPropNode.valid(pos, scope);
             case NoChoiceBoolPropNode.EQUAL ->
                     NoChoiceBoolPropNode.equal(pos, scope);
+            // replacement
+            case ReplacementFuncNode.NAME ->
+                    new ReplacementFuncNode(pos, scope);
+            case ReplacementIndexNode.NAME ->
+                    new ReplacementIndexNode(pos, scope);
+            // sheet
+            case SheetIntPropNode.SPRITES_X,
+                 SheetIntPropNode.SPRITES_Y,
+                 SheetIntPropNode.SPRITE_WIDTH,
+                 SheetIntPropNode.SPRITE_HEIGHT ->
+                    new SheetIntPropNode(pos, scope, propID);
+            case SheetSourceNode.NAME -> new SheetSourceNode(pos, scope);
             // extend here
             default -> new IllegalExpressionNode(pos,
                     "No property \"" + propID + "\" exists");
@@ -163,6 +293,15 @@ public final class NodeDelegator {
             case GetLayerNode.GET -> new GetLayerNode(pos, scope, args);
             case GetLayerNode.HAS -> GetLayerNode.has(pos, scope, args);
             // layer
+            case GetChoiceNode.NAME -> new GetChoiceNode(pos, scope, args);
+            case GetChoiceAtNode.NAME ->
+                    new GetChoiceAtNode(pos, scope, args);
+            case GetChoiceIndexNode.NAME ->
+                    new GetChoiceIndexNode(pos, scope, args);
+            case NaiveMaskLogicNode.NAME ->
+                    new NaiveMaskLogicNode(pos, scope, args);
+            case LayerComposeNode.NAME ->
+                    new LayerComposeNode(pos, scope, args);
             case GetColSelLayerNode.NAME ->
                     new GetColSelLayerNode(pos, scope, args);
             case GetNoChoiceNode.NAME -> new GetNoChoiceNode(pos, scope, args);
@@ -180,6 +319,9 @@ public final class NodeDelegator {
             // no_choice
             case NoChoiceProbNode.NAME ->
                     new NoChoiceProbNode(pos, scope, args);
+            // sheet
+            case SheetSpriteAtNode.NAME ->
+                    new SheetSpriteAtNode(pos, scope, args);
             // extend here
             default -> new IllegalExpressionNode(pos,
                     "No scoped function \"" + fID + "\" with " +
@@ -216,9 +358,14 @@ public final class NodeDelegator {
             case ChooseNoneNode.NAME -> new ChooseNoneNode(pos, scope, args);
             case SetValueMLNode.NAME -> new SetValueMLNode(pos, scope, args);
             case ChooseNode.NAME -> new ChooseNode(pos, scope, args);
+            case AddDependentNode.NAME ->
+                    new AddDependentNode(pos, scope, args);
+            case AddInfluencesNode.NAME ->
+                    new AddInfluencesNode(pos, scope, args);
             // col_sel
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
-            case SetFromSwatchNode.NAME -> new SetFromSwatchNode(pos, scope, args);
+            case SetFromSwatchNode.NAME ->
+                    new SetFromSwatchNode(pos, scope, args);
             // extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

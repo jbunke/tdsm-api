@@ -12,14 +12,15 @@ The global namespace is essentially a utility class containing constants and fun
 
 ### Layer types
 
-| Constant           | Type  | Value | Represents                                |
-|:-------------------|:-----:|:-----:|:------------------------------------------|
-| `$TDSM.ACL`        | `int` |  `0`  | [`AssetChoiceLayer`]()                    |
-| `$TDSM.COL_SEL_L`  | `int` |  `1`  | [`ColorSelectionLayer`]()                 |
-| `$TDSM.DECISION_L` | `int` |  `2`  | [`DecisionLayer`]()                       |
-| `$TDSM.MATH_L`     | `int` |  `3`  | [`MathLayer`]()                           |
-| `$TDSM.CHOICE_L`   | `int` |  `4`  | [`ChoiceLayer`]()                         |
-| `$TDSM.OTHER_L`    | `int` | `-1`  | Other [`CustomizationLayer`]() subclasses |
+| Constant            | Type  | Value | Represents                                |
+|:--------------------|:-----:|:-----:|:------------------------------------------|
+| `$TDSM.ACL`         | `int` |  `0`  | [`AssetChoiceLayer`]()                    |
+| `$TDSM.COL_SEL_L`   | `int` |  `1`  | [`ColorSelectionLayer`]()                 |
+| `$TDSM.DECISION_L`  | `int` |  `2`  | [`DecisionLayer`]()                       |
+| `$TDSM.MATH_L`      | `int` |  `3`  | [`MathLayer`]()                           |
+| `$TDSM.CHOICE_L`    | `int` |  `4`  | [`ChoiceLayer`]()                         |
+| `$TDSM.DEPENDENT_L` | `int` |  `5`  | [`DependentComponentLayer`]()             |
+| `$TDSM.OTHER_L`     | `int` | `-1`  | Other [`CustomizationLayer`]() subclasses |
 
 <!-- TODO - other layer types: group, mask, dependent component -->
 
@@ -51,8 +52,8 @@ The global namespace is essentially a utility class containing constants and fun
 
 | Constant     |  Type  |  Value  | Represents                           |
 |:-------------|:------:|:-------:|:-------------------------------------|
-| `$TDSM.HORZ` | `bool` | `false` | Horizontal (L to R) frame sequencing |
-| `$TDSM.VERT` | `bool` | `true`  | Vertical (T to B) frame sequencing   |
+| `$TDSM.HORZ` | `bool` | `true`  | Horizontal (L to R) frame sequencing |
+| `$TDSM.VERT` | `bool` | `false` | Vertical (T to B) frame sequencing   |
 
 ## Functions
 

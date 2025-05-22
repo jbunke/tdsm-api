@@ -30,6 +30,20 @@ L.type -> int
 
 <!-- TODO - more ACL-specific functionality -->
 
+### `add_dependent`
+
+<!-- TODO - precondition: dependent layer cannot be L -->
+
+```js 
+L.add_dependent(layer dependent);
+```
+
+### `add_influences`
+
+```js 
+L.add_influences(col_sel[] selections);
+```
+
 ### `choose`
 
 **Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
@@ -37,6 +51,36 @@ L.type -> int
 ```js
 L.choose(string asset_code);
 L.choose(int asset_index);
+```
+
+### `compose`
+
+```js 
+L.compose() -> (string -> image)
+```
+
+### `get_choice`
+
+**Precondition:** `(L.type == $TDSM.ACL && !L.is_none()) || L.type == $TDSM.CHOICE_L`
+
+```js 
+L.get_choice() -> string
+```
+
+### `get_choice_at`
+
+**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
+
+```js 
+L.get_choice_at(int index) -> string
+```
+
+### `get_choice_index`
+
+**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
+
+```js 
+L.get_choice_index() -> int
 ```
 
 ### `get_col_sels`
@@ -105,6 +149,14 @@ L.max_value() -> int
 
 ```js
 L.min_value() -> int
+```
+
+### `naive_mask_logic`
+
+**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.DEPENDENT_L`
+
+```js 
+L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 ```
 
 ### `none`

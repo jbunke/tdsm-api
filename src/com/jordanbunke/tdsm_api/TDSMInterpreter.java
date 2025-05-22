@@ -3,8 +3,10 @@ package com.jordanbunke.tdsm_api;
 import com.jordanbunke.clink.Clink;
 import com.jordanbunke.delta_time.scripting.Interpreter;
 import com.jordanbunke.delta_time.scripting.ast.nodes.function.HeadFuncNode;
+import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
+import com.jordanbunke.tdsm_api.util.MetaFuncHelper;
 
 import java.nio.file.Path;
 
@@ -31,20 +33,21 @@ public final class TDSMInterpreter extends Interpreter {
     }
 
     public void runScript(final String content, final Path filepath) {
-        final HeadFuncNode script = build(content);
+        runScript(build(content), filepath, null);
+    }
 
-        if (validateScript(script))
-            run(script, filepath);
+    public Object runScript(
+            final HeadFuncNode script, final Path filepath,
+            final TypeNode returnType, final TypeNode... paramSpec
+    ) {
+        if (MetaFuncHelper.validate(script, returnType, paramSpec))
+            return run(script, filepath);
         else if (script != null)
             println("Invalid script"); // TODO: move to CLI
         else
             println("Failed to compile script at \"" + filepath + "\""); // TODO: move to CLI
-    }
 
-    private boolean validateScript(final HeadFuncNode script) {
-        if (script == null) return false;
-
-        return script.paramsMatch() && script.getReturnType() == null;
+        return null;
     }
 
     @Override
