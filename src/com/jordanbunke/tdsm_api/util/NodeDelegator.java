@@ -20,6 +20,7 @@ import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.replacement.*;
 import com.jordanbunke.tdsm_api.ast.expr.sheet.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
+import com.jordanbunke.tdsm_api.ast.expr.util.*;
 import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.stat.layer.*;
@@ -201,6 +202,25 @@ public final class NodeDelegator {
         };
     }
 
+    public static ExpressionNode utilFExpr(
+            final TextPosition pos, final String fID,
+            final ExpressionNode... args
+    ) {
+        return switch (fID) {
+            case ExtractIDCompNode.EXTRACT_ANIM_ID ->
+                    ExtractIDCompNode.animID(pos, args);
+            case ExtractIDCompNode.EXTRACT_DIRECTION ->
+                    ExtractIDCompNode.direction(pos, args);
+            case ExtractIDCompNode.EXTRACT_FRAME ->
+                    ExtractIDCompNode.frame(pos, args);
+            // extend here
+            default -> new IllegalExpressionNode(pos,
+                    "Undefined function \"" +
+                            formatNamespace(Tokens.UTIL_NAMESPACE,
+                                    fID, true) + "\"");
+        };
+    }
+
     public static StatementNode utilFStat(
             final TextPosition pos, final String fID,
             final ExpressionNode... args
@@ -293,6 +313,7 @@ public final class NodeDelegator {
             case GetLayerNode.GET -> new GetLayerNode(pos, scope, args);
             case GetLayerNode.HAS -> GetLayerNode.has(pos, scope, args);
             // layer
+            case NumChoicesNode.NAME -> new NumChoicesNode(pos, scope, args);
             case GetChoiceNode.NAME -> new GetChoiceNode(pos, scope, args);
             case GetChoiceAtNode.NAME ->
                     new GetChoiceAtNode(pos, scope, args);

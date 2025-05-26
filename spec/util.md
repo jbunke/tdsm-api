@@ -8,6 +8,24 @@ The `$Util` namespace contains miscellaneous and utility functions.
 
 <!-- TODO - full documentation -->
 
+### `extract_anim_id`
+
+```js 
+$Util.extract_anim_id(string sprite_id) -> string
+```
+
+### `extract_direction`
+
+```js 
+$Util.extract_direction(string sprite_id) -> string
+```
+
+### `extract_frame`
+
+```js 
+$Util.extract_frame(string sprite_id) -> int
+```
+
 ### `parallel_matchers`
 
 ```js 

@@ -167,6 +167,14 @@ L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 L.none();
 ```
 
+### `num_choices`
+
+**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
+
+```js
+L.num_choices() -> int
+```
+
 ### `randomize`
 
 ```js
