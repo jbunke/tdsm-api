@@ -226,8 +226,12 @@ public final class NodeDelegator {
             final ExpressionNode... args
     ) {
         return switch (fID) {
-            case ParallelMatchersNode.NAME ->
-                    new ParallelMatchersNode(pos, args);
+            case SyncChoicesNode.NAME -> {
+                if (args.length == 2)
+                    yield SyncChoicesNode.pair(pos, args);
+
+                yield SyncChoicesNode.array(pos, args);
+            }
             // extend here
             default -> new IllegalStatementNode(pos,
                     "Undefined function \"" +

@@ -26,8 +26,9 @@ $Util.extract_direction(string sprite_id) -> string
 $Util.extract_frame(string sprite_id) -> int
 ```
 
-### `parallel_matchers`
+### `sync_choices`
 
 ```js 
-$Util.parallel_matchers(layer a, layer b);
+1. $Util.sync_choices(layer a, layer b);
+2. $Util.sync_choices(layer[] layers);
 ```
