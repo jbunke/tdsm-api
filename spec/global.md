@@ -153,3 +153,11 @@ $TDSM.set_stip(bool export_stip);
 ```
 
 Sets the value of the *Export as Stipple Effect project* flag.
+
+### `upload_style`
+
+```js 
+$TDSM.upload_style(string archive_path);
+```
+
+Attempts to upload a sprite style to the command-line interface.
