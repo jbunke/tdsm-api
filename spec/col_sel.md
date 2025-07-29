@@ -88,6 +88,6 @@ Assigns the color to this color selection at the position `index` in `C.swatches
 **Parameters**:
 * `index` - The index in `C.swatches` of the color to be assigned
 
-**Fail conditions**:
+**Fails if**:
 * `index < 0`
 * `index >= #| C.swatches`

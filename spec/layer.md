@@ -40,29 +40,32 @@ The type of layer represented by this object, as an integer matching one of the 
 
 ### `add_dependent`
 
-<!-- TODO - precondition: dependent layer cannot be L -->
-
 ```js 
 L.add_dependent(layer dependent);
 ```
 
 **Description**:
 
-<!-- TODO -->
+Adds `dependent` to the list of layers dependent on `L`. These layers will be updated whenever the value of `L` changes.
 
 **Parameters**:
+* `dependent` - The layer to be made dependent on `L`
 
-<!-- TODO -->
-
-**Fail conditions**:
-
-<!-- TODO -->
+**Fails if**:
+* `dependent == L`
 
 ### `add_influences`
 
 ```js 
 L.add_influences(col_sel[] selections);
 ```
+
+**Description**:
+
+Adds each element in `selections` as an influencing color selection to this layer `L`.
+
+**Parameters**:
+* `selections` - Array of color selections to be added as influencing selections to layer `L`. Should contain no duplicate elements. Selections are added in array order.
 
 ### `choose`
 
@@ -77,7 +80,7 @@ L.add_influences(col_sel[] selections);
     **Parameters**:
     * `asset_code` - The message or asset code of the choice layer or asset choice layer, respectively, that is being assigned
     
-    **Fail conditions**:
+    **Fails if**:
     * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
     
 2.  ```js 
@@ -90,7 +93,7 @@ L.add_influences(col_sel[] selections);
     **Parameters**:
     * `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices
     
-    **Fail conditions**:
+    **Fails if**:
     * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
     * `index < 0`
     * `index >= L.num_choices()`
@@ -119,57 +122,84 @@ L.get_choice() -> string
 
 ### `get_choice_at`
 
-**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
-
 ```js 
 L.get_choice_at(int index) -> string
 ```
 
-### `get_choice_index`
+**Returns** the choice message or asset code at `index` in layer `L`
 
-**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
+**Parameters**:
+* `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices
+
+**Throws error if**:
+* `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
+* `index < 0`
+* `index >= L.num_choices()`
+
+### `get_choice_index`
 
 ```js 
 L.get_choice_index() -> int
 ```
 
-### `get_col_sels`
+**Returns**:
+* The index of the currently selected choice in the (asset) choice layer
+* `-1`, if `L` is an asset choice layer and no choice is currently selected
 
-**Precondition:** `L.type == $TDSM.COL_SEL_L`
+**Throws error if**:
+* `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
+
+### `get_col_sels`
 
 ```js
 L.get_col_sels() -> col_sel[]
 ```
 
-### `get_decision`
+**Returns** the color selections comprising this color selection layer as an array
 
-**Precondition:** `L.type == $TDSM.DECISION_L`
+**Throws error if**:
+* `L.type != $TDSM.COL_SEL_L`
+
+### `get_decision`
 
 ```js
 L.get_decision() -> layer
 ```
 
-### `get_no_choice`
+**Returns** the layer outputted by the decision layer `L`'s logic function execution
 
-**Precondition:** `L.type == $TDSM.ACL`
+**Throws error if**:
+* `L.type != $TDSM.DECISION_L`
+
+### `get_no_choice`
 
 ```js
 L.get_no_choice() -> no_choice
 ```
 
-### `get_value`
+**Returns** the asset choice layer `L`'s no choice configuration
 
-**Precondition:** `L.type == $TDSM.MATH_L`
+**Throws error if**:
+* `L.type != $TDSM.ACL`
+
+### `get_value`
 
 ```js
 L.get_value() -> int
 ```
+
+**Returns** the current integer value of the math layer `L`
+
+**Throws error if**:
+* `L.type != $TDSM.MATH_L`
 
 ### `is_locked`
 
 ```js
 L.is_locked() -> bool
 ```
+
+**Returns** `true` if the layer `L` is locked, `false` otherwise
 
 ### `is_none`
 
@@ -179,11 +209,22 @@ L.is_locked() -> bool
 L.is_none() -> bool
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Throws error if**:
+<!-- TODO -->
+
 ### `lock`
 
 ```js
 L.lock();
 ```
+
+**Description**:
+
+<!-- TODO -->
 
 ### `max_value`
 
@@ -193,6 +234,13 @@ L.lock();
 L.max_value() -> int
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Throws error if**:
+<!-- TODO -->
+
 ### `min_value`
 
 **Precondition:** `L.type == $TDSM.MATH_L`
@@ -200,6 +248,13 @@ L.max_value() -> int
 ```js
 L.min_value() -> int
 ```
+
+**Description**:
+
+<!-- TODO -->
+
+**Throws error if**:
+<!-- TODO -->
 
 ### `naive_mask_logic`
 
@@ -209,6 +264,16 @@ L.min_value() -> int
 L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+<!-- TODO -->
+
+**Throws error if**:
+<!-- TODO -->
+
 ### `none`
 
 **Precondition:** `L.type == $TDSM.ACL && L.get_no_choice().valid`
@@ -216,6 +281,13 @@ L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 ```js
 L.none();
 ```
+
+**Description**:
+
+<!-- TODO -->
+
+**Throws error if**:
+<!-- TODO -->
 
 ### `num_choices`
 
@@ -225,11 +297,22 @@ L.none();
 L.num_choices() -> int
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Throws error if**:
+<!-- TODO -->
+
 ### `randomize`
 
 ```js
 L.randomize();
 ```
+
+**Description**:
+
+<!-- TODO -->
 
 ### `set_value`
 
@@ -239,10 +322,22 @@ L.randomize();
 L.set_value(int value);
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+<!-- TODO -->
+
+**Fails if**:
+<!-- TODO -->
+
 ### `unlock`
 
 ```js
 L.unlock();
 ```
+
+**Description**:
 
 <!-- TODO -->
