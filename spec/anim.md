@@ -20,7 +20,7 @@ A.id -> string
 
 **Description**:
 
-The identifier code of an animation. This code should be unique among all the animations of a [`style`](./style.md).
+The identification code of an animation. This code should be unique among all the animations of a [`style`](./style.md). Animation IDs mustn't contain hyphens (`-`), as this would break the parsing of sprite IDs.
 
 ## Functions
 

@@ -8,19 +8,19 @@ The global namespace is essentially a utility class containing constants and fun
 
 > **Note:**
 > 
-> Constants are bound to primitive values of type `bool`, `int`, or `string`. These mustn't necessarily be used and can be replaced where appropriate by the corresponding literal, but using the constants instead makes scripts more **readable** and especially **maintainable**, should constant values be reassigned in future updates.
+> Constants are bound to primitive values of type `bool`, `int`, or `string`. These mustn't necessarily be used and can be replaced where appropriate by the corresponding literal, but using the constants instead makes scripts more **readable** and **maintainable**, should constant values be reassigned in future updates.
 
 ### Layer types
 
-| Constant            | Type  | Value | Represents                                |
-|:--------------------|:-----:|:-----:|:------------------------------------------|
-| `$TDSM.ACL`         | `int` |  `0`  | [`AssetChoiceLayer`]()                    |
-| `$TDSM.COL_SEL_L`   | `int` |  `1`  | [`ColorSelectionLayer`]()                 |
-| `$TDSM.DECISION_L`  | `int` |  `2`  | [`DecisionLayer`]()                       |
-| `$TDSM.MATH_L`      | `int` |  `3`  | [`MathLayer`]()                           |
-| `$TDSM.CHOICE_L`    | `int` |  `4`  | [`ChoiceLayer`]()                         |
-| `$TDSM.DEPENDENT_L` | `int` |  `5`  | [`DependentComponentLayer`]()             |
-| `$TDSM.OTHER_L`     | `int` | `-1`  | Other [`CustomizationLayer`]() subclasses |
+| Constant            | Type  | Value | Represents                                                                                                                                           |
+|:--------------------|:-----:|:-----:|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `$TDSM.ACL`         | `int` |  `0`  | [`AssetChoiceLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/AssetChoiceLayer.java)                           |
+| `$TDSM.COL_SEL_L`   | `int` |  `1`  | [`ColorSelectionLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/ColorSelectionLayer.java)                     |
+| `$TDSM.DECISION_L`  | `int` |  `2`  | [`DecisionLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/DecisionLayer.java)                                 |
+| `$TDSM.MATH_L`      | `int` |  `3`  | [`MathLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/MathLayer.java)                                         |
+| `$TDSM.CHOICE_L`    | `int` |  `4`  | [`ChoiceLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/ChoiceLayer.java)                                     |
+| `$TDSM.DEPENDENT_L` | `int` |  `5`  | [`DependentComponentLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/DependentComponentLayer.java)             |
+| `$TDSM.OTHER_L`     | `int` | `-1`  | Other [`CustomizationLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/CustomizationLayer.java) subclasses      |
 
 <!-- TODO - other layer types: group, mask, dependent component -->
 

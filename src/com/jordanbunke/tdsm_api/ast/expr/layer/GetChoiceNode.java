@@ -27,6 +27,8 @@ public final class GetChoiceNode extends LayerExprNode {
     public String evaluate(final SymbolTable symbolTable) {
         final CustomizationLayer layer = getLayer(symbolTable);
 
+        // TODO: Error if ACL has no selection
+
         if (layer instanceof ChoosingLayer cl)
             return cl.getChoiceID();
 

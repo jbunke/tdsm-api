@@ -20,11 +20,19 @@
 L.id -> string
 ```
 
+**Description**:
+
+The identification code of a layer.
+
 ### `type`
 
 ```js
 L.type -> int
 ```
+
+**Description**:
+
+The type of layer represented by this object, as an integer matching one of the [layer type constants](./global.md/#layer-types).
 
 ## Functions
 
@@ -38,6 +46,18 @@ L.type -> int
 L.add_dependent(layer dependent);
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+
+<!-- TODO -->
+
+**Fail conditions**:
+
+<!-- TODO -->
+
 ### `add_influences`
 
 ```js 
@@ -46,12 +66,34 @@ L.add_influences(col_sel[] selections);
 
 ### `choose`
 
-**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.CHOICE_L`
-
-```js
-L.choose(string asset_code);
-L.choose(int asset_index);
-```
+1.  ```js 
+    L.choose(string asset_code);
+    ```
+    
+    **Description**:
+    * Assigns a choice layer to the choice matching the message `asset_code` (if it exists), or...
+    * Assigns an asset choice layer to the asset choice with the code `asset_code` (if it exists)
+    
+    **Parameters**:
+    * `asset_code` - The message or asset code of the choice layer or asset choice layer, respectively, that is being assigned
+    
+    **Fail conditions**:
+    * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
+    
+2.  ```js 
+    L.choose(int index);
+    ```
+    
+    **Description**:
+    * Assigns a choice layer or an asset choice layer to the (asset) choice at the index `index` among the layer's (asset) choices
+    
+    **Parameters**:
+    * `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices
+    
+    **Fail conditions**:
+    * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
+    * `index < 0`
+    * `index >= L.num_choices()`
 
 ### `compose`
 
@@ -59,13 +101,21 @@ L.choose(int asset_index);
 L.compose() -> (string -> image)
 ```
 
-### `get_choice`
+**Returns** a function that takes a sprite ID as input and returns this layer's corresponding image output.
 
-**Precondition:** `(L.type == $TDSM.ACL && !L.is_none()) || L.type == $TDSM.CHOICE_L`
+### `get_choice`
 
 ```js 
 L.get_choice() -> string
 ```
+
+**Returns**:
+* The currently selected choice message, if `L` is a choice layer
+* The currently selected asset code, if `L` is an asset choice layer
+
+**Throws error if**:
+* `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
+* `L.type == $TDSM.ACL && L.is_none()`
 
 ### `get_choice_at`
 
