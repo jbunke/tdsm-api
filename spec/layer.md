@@ -199,22 +199,18 @@ L.get_value() -> int
 L.is_locked() -> bool
 ```
 
-**Returns** `true` if the layer `L` is locked, `false` otherwise
+**Returns** `true` if the layer `L` is locked, `false` otherwise.
 
 ### `is_none`
-
-**Precondition:** `L.type == $TDSM.ACL`
 
 ```js
 L.is_none() -> bool
 ```
 
-**Description**:
-
-<!-- TODO -->
+**Returns** `true` if the asset choice layer `L` currently has no selected choice; `false` otherwise.
 
 **Throws error if**:
-<!-- TODO -->
+* `L.type != $TDSM.ACL`
 
 ### `lock`
 
@@ -224,41 +220,31 @@ L.lock();
 
 **Description**:
 
-<!-- TODO -->
+Locks the layer `L`. A locked layer is exempted from style-level randomization (see [`style::randomize`](./style.md#randomize)).
 
 ### `max_value`
-
-**Precondition:** `L.type == $TDSM.MATH_L`
 
 ```js
 L.max_value() -> int
 ```
 
-**Description**:
-
-<!-- TODO -->
+**Returns** the maximum integer value of the math layer `L`.
 
 **Throws error if**:
-<!-- TODO -->
+* `L.type != $TDSM.MATH_L`
 
 ### `min_value`
-
-**Precondition:** `L.type == $TDSM.MATH_L`
 
 ```js
 L.min_value() -> int
 ```
 
-**Description**:
-
-<!-- TODO -->
+**Returns** the minimum integer value of the math layer `L`.
 
 **Throws error if**:
-<!-- TODO -->
+* `L.type != $TDSM.MATH_L`
 
 ### `naive_mask_logic`
-
-**Precondition:** `L.type == $TDSM.ACL || L.type == $TDSM.DEPENDENT_L`
 
 ```js 
 L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
@@ -269,14 +255,12 @@ L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 <!-- TODO -->
 
 **Parameters**:
-<!-- TODO -->
+* `asset_fetcher_func` - <!-- TODO -->
 
 **Throws error if**:
-<!-- TODO -->
+* `L.type != $TDSM.ACL && L.type != $TDSM.DEPENDENT_L`
 
 ### `none`
-
-**Precondition:** `L.type == $TDSM.ACL && L.get_no_choice().valid`
 
 ```js
 L.none();
@@ -284,10 +268,10 @@ L.none();
 
 **Description**:
 
-<!-- TODO -->
+Sets the asset choice selection of the asset choice layer `L` to no selection.
 
-**Throws error if**:
-<!-- TODO -->
+**Fails if**:
+* `!(L.type == $TDSM.ACL && L.get_no_choice().valid)`
 
 ### `num_choices`
 
@@ -297,12 +281,10 @@ L.none();
 L.num_choices() -> int
 ```
 
-**Description**:
-
-<!-- TODO -->
+**Returns** the number of (asset) choices of this (asset) choice layer
 
 **Throws error if**:
-<!-- TODO -->
+* `L.type != $TDSM.ACL && L.type != $TDSM.CHOICE_L`
 
 ### `randomize`
 
@@ -312,11 +294,18 @@ L.randomize();
 
 **Description**:
 
-<!-- TODO -->
+Randomizes the value of `L`. The effect of randomization depends on the type of layer that `L` is:
+
+|      Layer type       |                                                             Effect                                                             |
+|:---------------------:|:------------------------------------------------------------------------------------------------------------------------------:|
+|  Asset choice layer   | Randomly sets the asset choice layer to one of its asset choice layers, or no choice, depending on its no choice configuration |
+|     Choice layer      |                                  Randomly sets the choice layer to one of its choice messages                                  |
+| Color selection layer |          Randomizes each color selection that comprises the CSL (see [`col_sel::randomize`](./col_sel.md/#randomize))          |
+|      Group layer      |                                        Randomizes each member layer of the group layer                                         |
+|      Math layer       |         Randomly assigns the math layer an integer value within the inclusive bounds of its minimum and maximum values         |
+|   Other layer types   |                                                           No effect                                                            |
 
 ### `set_value`
-
-**Precondition:** `L.type == $TDSM.MATH_L`
 
 ```js
 L.set_value(int value);
@@ -324,13 +313,13 @@ L.set_value(int value);
 
 **Description**:
 
-<!-- TODO -->
+Assigns the math layer `L` a value of `value`. `value` will be [clamped](https://en.wikipedia.org/wiki/Clamp_(function)) by `L`'s minimum and maximum if it is out of bounds.
 
 **Parameters**:
-<!-- TODO -->
+* `value` - The integer to be set as the value of `L`
 
 **Fails if**:
-<!-- TODO -->
+* `L.type != $TDSM.MATH_L`
 
 ### `unlock`
 
@@ -340,4 +329,4 @@ L.unlock();
 
 **Description**:
 
-<!-- TODO -->
+Unlocks the layer `L`. A locked layer is included in style-level randomization (see [`style::randomize`](./style.md#randomize)).
