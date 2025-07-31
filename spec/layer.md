@@ -330,3 +330,20 @@ L.unlock();
 **Description**:
 
 Unlocks the layer `L`. A locked layer is included in style-level randomization (see [`style::randomize`](./style.md#randomize)).
+
+<hr>
+
+###  See Also
+
+**`layer` constructors**:
+
+* [`$Init::asset_choice_layer`](./init.md/#asset_choice_layer)
+* [`$Init::asset_layer`](./init.md/#asset_layer)
+* [`$Init::choice_layer`](./init.md/#choice_layer)
+* [`$Init::col_sel_layer`](./init.md/#col_sel_layer)
+* [`$Init::composed_layer`](./init.md/#composed_layer)
+* [`$Init::decision_layer`](./init.md/#decision_layer)
+* [`$Init::dependent_layer`](./init.md/#dependent_layer)
+* [`$Init::group_layer`](./init.md/#group_layer)
+* [`$Init::mask_layer`](./init.md/#mask_layer)
+* [`$Init::math_layer`](./init.md/#math_layer)

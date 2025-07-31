@@ -55,3 +55,7 @@ NC.prob() -> float
 * [`$Init::no_choice_equal`](./init.md/#no_choice_equal)
 * [`$Init::no_choice_invalid`](./init.md/#no_choice_invalid)
 * [`$Init::no_choice_prob`](./init.md/#no_choice_prob)
+
+**Accessor**:
+
+* [`layer::get_no_choice`](./layer.md/#get_no_choice)

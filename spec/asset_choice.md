@@ -11,3 +11,11 @@
 <!-- TODO - properties -->
 
 <!-- TODO - functions -->
+
+<hr>
+
+###  See Also
+
+**`asset_choice` constructor**:
+
+* [`$Init::asset_choice`](./init.md/#asset_choice)

@@ -18,8 +18,28 @@
 R.index -> int
 ```
 
+**Description**:
+
+The index of the color to be fed into `R`'s replacement function, from among the asset choice or asset layer's influencing color selections.
+
 ### *`func`*
 
 ```js 
 R.func -> (color -> color)
 ```
+
+**Description**:
+
+The color replacement function associated with `R`.
+
+<hr>
+
+###  See Also
+
+**`replacement` constructor**:
+
+* [`$Init::replacement`](./init.md/#replacement)
+
+**Theory**:
+
+* [Color replacement]() <!-- TODO -->
