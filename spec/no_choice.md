@@ -10,8 +10,6 @@
 >
 > The specification uses `NC` to represent an arbitrary `no_choice` instance in property and function definitions.
 
-<!-- TODO - descriptions -->
-
 ## Properties
 
 ### *`valid`*
@@ -20,11 +18,19 @@
 NC.valid -> bool
 ```
 
+**Description**:
+
+Whether no choice is valid according to the configuration `NC`.
+
 ### `equal`
 
 ```js
 NC.equal -> bool
 ```
+
+**Description**:
+
+Whether the probability of no choice being assigned via randomization is equal to that of any asset choice being assigned, according to the configuration `NC`.
 
 ## Functions
 
@@ -36,4 +42,16 @@ NC.equal -> bool
 NC.prob() -> float
 ```
 
-<!-- TODO -->
+**Returns**:
+* The probability of no choice being assigned via randomization if `NC` was constructed with a custom probability (see [`$Init::no_choice_prob`](./init.md/#no_choice_prob))
+* `0.0` otherwise
+
+<hr>
+
+###  See Also
+
+**`no_choice` constructors**:
+
+* [`$Init::no_choice_equal`](./init.md/#no_choice_equal)
+* [`$Init::no_choice_invalid`](./init.md/#no_choice_invalid)
+* [`$Init::no_choice_prob`](./init.md/#no_choice_prob)
