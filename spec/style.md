@@ -20,6 +20,10 @@
 S.id -> string
 ```
 
+**Description**:
+
+The identification of the sprite style `S`. ID must be unique among sprite styles uploaded to *TDSM* at any given time. Uploading a sprite style with an ID matching another sprite style previously uploaded to the program will override the existing sprite style.
+
 ## Functions
 
 ### `all_anims`
@@ -28,11 +32,15 @@ S.id -> string
 S.all_anims() -> anim[]
 ```
 
+**Returns** <!-- TODO -->
+
 ### `all_dirs`
 
 ```js
 S.all_dirs() -> string[]
 ```
+
+**Returns** <!-- TODO -->
 
 ### `assembly`
 
@@ -40,11 +48,15 @@ S.all_dirs() -> string[]
 S.assembly() -> layer<>
 ```
 
+**Returns** <!-- TODO -->
+
 ### `custom`
 
 ```js
 S.custom() -> layer<>
 ```
+
+**Returns** <!-- TODO -->
 
 ### `def_sprite_dims`
 
@@ -52,11 +64,15 @@ S.custom() -> layer<>
 S.def_sprite_dims() -> int[]
 ```
 
+**Returns** <!-- TODO -->
+
 ### `get_anims`
 
 ```js
 S.get_anims() -> anim[]
 ```
+
+**Returns** <!-- TODO -->
 
 ### `get_dirs`
 
@@ -64,11 +80,21 @@ S.get_anims() -> anim[]
 S.get_dirs() -> string[]
 ```
 
+**Returns** <!-- TODO -->
+
 ### `get_edge`
 
 ```js
 S.get_edge(int edge) -> int
 ```
+
+**Returns** <!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
+**Throws error if**:
+* <!-- TODO -->
 
 ### `get_frames_per_dim`
 
@@ -76,13 +102,21 @@ S.get_edge(int edge) -> int
 S.get_frames_per_dim() -> int
 ```
 
-### `get_layer`
+**Returns** <!-- TODO -->
 
-**Precondition:** `S.has_layer(id)`
+### `get_layer`
 
 ```js
 S.get_layer(string id) -> layer
 ```
+
+**Returns** <!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
+**Throws error if**:
+* <!-- TODO -->
 
 ### `get_orientation`
 
@@ -90,11 +124,21 @@ S.get_layer(string id) -> layer
 S.get_orientation() -> bool
 ```
 
+**Returns** <!-- TODO -->
+
 ### `has_layer`
 
 ```js
 S.has_layer(string id) -> bool
 ```
+
+**Returns** <!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
+**Throws error if**:
+* <!-- TODO -->
 
 ### `has_output`
 
@@ -102,7 +146,7 @@ S.has_layer(string id) -> bool
 S.has_output() -> bool
 ```
 
-**Returns** `true` if the current animation and direction configuration is valid and yields at least one animation frame, `false` otherwise.
+**Returns** `true` if the current animation and direction configuration is valid and yields at least one animation frame; `false` otherwise.
 
 ### `is_all_anims_single_dim`
 
@@ -110,11 +154,15 @@ S.has_output() -> bool
 S.is_all_anims_single_dim() -> bool
 ```
 
+**Returns** <!-- TODO -->
+
 ### `is_multiple_anims_per_dim`
 
 ```js
 S.is_multiple_anims_per_dim() -> bool
 ```
+
+**Returns** <!-- TODO -->
 
 ### `is_wrap_anims_across_dims`
 
@@ -122,11 +170,17 @@ S.is_multiple_anims_per_dim() -> bool
 S.is_wrap_anims_across_dims() -> bool
 ```
 
+**Returns** <!-- TODO -->
+
 ### `randomize`
 
 ```js
 S.randomize();
 ```
+
+**Description**:
+
+<!-- TODO -->
 
 ### `render`
 
@@ -134,11 +188,20 @@ S.randomize();
 S.render() -> image
 ```
 
+**Returns** <!-- TODO -->
+
+**Throws error if**:
+* <!-- TODO -->
+
 ### `reset_layout`
 
 ```js
 S.reset_layout();
 ```
+
+**Description**:
+
+<!-- TODO -->
 
 ### `reset_padding`
 
@@ -146,11 +209,19 @@ S.reset_layout();
 S.reset_padding();
 ```
 
+**Description**:
+
+<!-- TODO -->
+
 ### `reset_sequencing`
 
 ```js
 S.reset_sequencing();
 ```
+
+**Description**:
+
+<!-- TODO -->
 
 ### `set_all_anims_single_dim`
 
@@ -158,19 +229,46 @@ S.reset_sequencing();
 S.set_all_anims_single_dim(bool single_dim);
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
 ### `set_anims`
 
-```js
+```js 
 S.set_anims(anim[] animations);
 S.set_anims(anim<> animations);
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* `animations` - The collection of animations to be set as active. The collection can be provided as an array or a list.
+
+**Fails if**:
+* <!-- TODO -->
+
 ### `set_dirs`
 
-```js
+```js 
 S.set_dirs(string[] directions);
 S.set_dirs(string<> directions);
 ```
+
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* `directions` - The collection of directions to be set as active. The collection can be provided as an array or a list.
+
+**Fails if**:
+* <!-- TODO -->
 
 ### `set_edge`
 
@@ -178,11 +276,31 @@ S.set_dirs(string<> directions);
 S.set_edge(int edge, int value);
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
+**Fails if**:
+* <!-- TODO -->
+
 ### `set_frames_per_dim`
 
 ```js
 S.set_frames_per_dim(int fpd);
 ```
+
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
+**Fails if**:
+* <!-- TODO -->
 
 ### `set_multiple_anims_per_dim`
 
@@ -190,11 +308,25 @@ S.set_frames_per_dim(int fpd);
 S.set_multiple_anims_per_dim(bool mapd);
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
 ### `set_orientation`
 
 ```js
 S.set_orientation(bool orientation);
 ```
+
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
 
 ### `set_padding`
 
@@ -202,11 +334,28 @@ S.set_orientation(bool orientation);
 S.set_padding(int left, int right, int top, int bottom);
 ```
 
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
+
+**Fails if**:
+* <!-- TODO -->
+
 ### `set_wrap_anims_across_dims`
 
 ```js
 S.set_wrap_anims_across_dims(bool wrap);
 ```
+
+**Description**:
+
+<!-- TODO -->
+
+**Parameters**:
+* <!-- TODO -->
 
 ### `sprite_dims`
 
@@ -214,4 +363,4 @@ S.set_wrap_anims_across_dims(bool wrap);
 S.sprite_dims() -> int[]
 ```
 
-<!-- TODO -->
+**Returns** <!-- TODO -->

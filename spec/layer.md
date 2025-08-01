@@ -199,7 +199,7 @@ L.get_value() -> int
 L.is_locked() -> bool
 ```
 
-**Returns** `true` if the layer `L` is locked, `false` otherwise.
+**Returns** `true` if the layer `L` is locked; `false` otherwise.
 
 ### `is_none`
 
