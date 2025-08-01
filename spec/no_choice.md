@@ -43,7 +43,7 @@ NC.prob() -> float
 ```
 
 **Returns**:
-* The probability of no choice being assigned via randomization if `NC` was constructed with a custom probability (see [`$Init::no_choice_prob`](./init.md/#no_choice_prob))
+* The probability of no choice being assigned via randomization if `NC` was constructed with a custom probability (see [`$Init::no_choice_prob`](./init.md#no_choice_prob))
 * `0.0` otherwise
 
 <hr>
@@ -52,10 +52,10 @@ NC.prob() -> float
 
 **`no_choice` constructors**:
 
-* [`$Init::no_choice_equal`](./init.md/#no_choice_equal)
-* [`$Init::no_choice_invalid`](./init.md/#no_choice_invalid)
-* [`$Init::no_choice_prob`](./init.md/#no_choice_prob)
+* [`$Init::no_choice_equal`](./init.md#no_choice_equal)
+* [`$Init::no_choice_invalid`](./init.md#no_choice_invalid)
+* [`$Init::no_choice_prob`](./init.md#no_choice_prob)
 
 **Accessor**:
 
-* [`layer::get_no_choice`](./layer.md/#get_no_choice)
+* [`layer::get_no_choice`](./layer.md#get_no_choice)

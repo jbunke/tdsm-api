@@ -18,4 +18,4 @@
 
 **`asset_choice` constructor**:
 
-* [`$Init::asset_choice`](./init.md/#asset_choice)
+* [`$Init::asset_choice`](./init.md#asset_choice)

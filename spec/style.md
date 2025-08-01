@@ -32,7 +32,7 @@ The identification of the sprite style `S`. ID must be unique among sprite style
 S.all_anims() -> anim[]
 ```
 
-**Returns** <!-- TODO -->
+**Returns** all the animations defined by the sprite style `S` as an array.
 
 ### `all_dirs`
 
@@ -40,7 +40,10 @@ S.all_anims() -> anim[]
 S.all_dirs() -> string[]
 ```
 
-**Returns** <!-- TODO -->
+**Returns** all the directions defined by the sprite style `S` as an array.
+
+> **Related material**:
+> * [Direction constants](./global.md#directions)
 
 ### `assembly`
 
@@ -48,7 +51,7 @@ S.all_dirs() -> string[]
 S.assembly() -> layer<>
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the [assembly layers](TODO) of the sprite style `S` as a list.
 
 ### `custom`
 
@@ -56,7 +59,7 @@ S.assembly() -> layer<>
 S.custom() -> layer<>
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the [customization layers](TODO) of the sprite style `S` as a list.
 
 ### `def_sprite_dims`
 
@@ -64,7 +67,10 @@ S.custom() -> layer<>
 S.def_sprite_dims() -> int[]
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the default dimensions of a single sprite/frame of the sprite style `S`. The dimensions are represented as a two-integer array, where indices `0` and `1` represents width and height in pixels, respectively.
+
+> **Related material**:
+> * [Coordinate constants](./global.md#coordinate)
 
 ### `get_anims`
 
@@ -72,7 +78,7 @@ S.def_sprite_dims() -> int[]
 S.get_anims() -> anim[]
 ```
 
-**Returns** <!-- TODO -->
+**Returns** an array of the animations of the sprite style `S` that are **currently enabled** for export, in the current sequencing order.
 
 ### `get_dirs`
 
@@ -80,7 +86,10 @@ S.get_anims() -> anim[]
 S.get_dirs() -> string[]
 ```
 
-**Returns** <!-- TODO -->
+**Returns** an array of the directions of the sprite sheet `S` that are **currently enabled** for export, in the current sequencing order.
+
+> **Related material**:
+> * [Direction constants](./global.md#directions)
 
 ### `get_edge`
 
@@ -88,13 +97,18 @@ S.get_dirs() -> string[]
 S.get_edge(int edge) -> int
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the amount of padding or cropping, in pixels, along a particular edge, relative to the default sprite dimensions (see [`style::def_sprite_dims`](#def_sprite_dims)) of the sprite style `S`, as currently configured.
 
 **Parameters**:
-* <!-- TODO -->
+* `edge` - The edge (left, right, top, or bottom) to be checked (see [Edge constants](./global.md#coordinate))
 
 **Throws error if**:
-* <!-- TODO -->
+* `edge < 0`
+* `edge >= 4`
+
+> **Related material**:
+> * [`style::reset_padding`](#reset_padding)
+> * [``]
 
 ### `get_frames_per_dim`
 

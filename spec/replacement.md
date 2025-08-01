@@ -38,7 +38,7 @@ The color replacement function associated with `R`.
 
 **`replacement` constructor**:
 
-* [`$Init::replacement`](./init.md/#replacement)
+* [`$Init::replacement`](./init.md#replacement)
 
 **Theory**:
 

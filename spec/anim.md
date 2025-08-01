@@ -42,4 +42,4 @@ A.get_frame_count() -> int
 
 **`anim` constructor**:
 
-* [`$Init::anim`](./init.md/#anim)
+* [`$Init::anim`](./init.md#anim)

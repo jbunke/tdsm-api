@@ -88,4 +88,4 @@ S.sprite_at(int x, int y) -> image
 
 **`sheet` constructor**:
 
-* [`$Init::sheet`](./init.md/#sheet)
+* [`$Init::sheet`](./init.md#sheet)

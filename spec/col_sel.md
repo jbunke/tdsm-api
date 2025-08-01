@@ -98,4 +98,4 @@ Assigns the color to this color selection at the position `index` in `C.swatches
 
 **`col_sel` constructor**:
 
-* [`$Init::col_sel`](./init.md/#col_sel)
+* [`$Init::col_sel`](./init.md#col_sel)

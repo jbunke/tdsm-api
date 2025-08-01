@@ -32,7 +32,7 @@ L.type -> int
 
 **Description**:
 
-The type of layer represented by this object, as an integer matching one of the [layer type constants](./global.md/#layer-types).
+The type of layer represented by this object, as an integer matching one of the [layer type constants](./global.md#layer-types).
 
 ## Functions
 
@@ -220,7 +220,7 @@ L.lock();
 
 **Description**:
 
-Locks the layer `L`. A locked layer is exempted from style-level randomization (see [`style::randomize`](./style.md#randomize)).
+Locks the layer `L`. A locked layer is **exempted** from style-level randomization (see [`style::randomize`](./style.md#randomize)).
 
 ### `max_value`
 
@@ -300,7 +300,7 @@ Randomizes the value of `L`. The effect of randomization depends on the type of 
 |:---------------------:|:------------------------------------------------------------------------------------------------------------------------------:|
 |  Asset choice layer   | Randomly sets the asset choice layer to one of its asset choice layers, or no choice, depending on its no choice configuration |
 |     Choice layer      |                                  Randomly sets the choice layer to one of its choice messages                                  |
-| Color selection layer |          Randomizes each color selection that comprises the CSL (see [`col_sel::randomize`](./col_sel.md/#randomize))          |
+| Color selection layer |          Randomizes each color selection that comprises the CSL (see [`col_sel::randomize`](./col_sel.md#randomize))          |
 |      Group layer      |                                        Randomizes each member layer of the group layer                                         |
 |      Math layer       |         Randomly assigns the math layer an integer value within the inclusive bounds of its minimum and maximum values         |
 |   Other layer types   |                                                           No effect                                                            |
@@ -329,7 +329,7 @@ L.unlock();
 
 **Description**:
 
-Unlocks the layer `L`. A locked layer is included in style-level randomization (see [`style::randomize`](./style.md#randomize)).
+Unlocks the layer `L`. A locked layer is **included** in style-level randomization (see [`style::randomize`](./style.md#randomize)).
 
 <hr>
 
@@ -337,13 +337,13 @@ Unlocks the layer `L`. A locked layer is included in style-level randomization (
 
 **`layer` constructors**:
 
-* [`$Init::asset_choice_layer`](./init.md/#asset_choice_layer)
-* [`$Init::asset_layer`](./init.md/#asset_layer)
-* [`$Init::choice_layer`](./init.md/#choice_layer)
-* [`$Init::col_sel_layer`](./init.md/#col_sel_layer)
-* [`$Init::composed_layer`](./init.md/#composed_layer)
-* [`$Init::decision_layer`](./init.md/#decision_layer)
-* [`$Init::dependent_layer`](./init.md/#dependent_layer)
-* [`$Init::group_layer`](./init.md/#group_layer)
-* [`$Init::mask_layer`](./init.md/#mask_layer)
-* [`$Init::math_layer`](./init.md/#math_layer)
+* [`$Init::asset_choice_layer`](./init.md#asset_choice_layer)
+* [`$Init::asset_layer`](./init.md#asset_layer)
+* [`$Init::choice_layer`](./init.md#choice_layer)
+* [`$Init::col_sel_layer`](./init.md#col_sel_layer)
+* [`$Init::composed_layer`](./init.md#composed_layer)
+* [`$Init::decision_layer`](./init.md#decision_layer)
+* [`$Init::dependent_layer`](./init.md#dependent_layer)
+* [`$Init::group_layer`](./init.md#group_layer)
+* [`$Init::mask_layer`](./init.md#mask_layer)
+* [`$Init::math_layer`](./init.md#math_layer)
