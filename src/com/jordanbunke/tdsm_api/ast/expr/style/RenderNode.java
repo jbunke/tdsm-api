@@ -26,6 +26,8 @@ public final class RenderNode extends StyleExprNode {
     public Object evaluate(final SymbolTable symbolTable) {
         final Style style = getStyle(symbolTable);
 
+        // TODO - throw update if style has no valid output
+
         UpdateChecker.get().check(style);
         return style.renderSpriteSheet();
     }

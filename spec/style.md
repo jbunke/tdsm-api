@@ -108,7 +108,7 @@ S.get_edge(int edge) -> int
 
 > **Related material**:
 > * [`style::reset_padding`](#reset_padding)
-> * [``]
+> * [`style::sprite_dims`](#sprite_dims)
 
 ### `get_frames_per_dim`
 
@@ -116,7 +116,19 @@ S.get_edge(int edge) -> int
 S.get_frames_per_dim() -> int
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the number of animation frames per row or column of an exported sprite sheet of sprite style `S`, according to its current layout configuration.
+
+> **Related material**:
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `get_layer`
 
@@ -124,13 +136,18 @@ S.get_frames_per_dim() -> int
 S.get_layer(string id) -> layer
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the first matching *top-level* constituent layer of the sprite sheet `S` with the ID `id`; first searches customization layers, then assembly layers.
+
+> For example, a member layer of a [**group layer**](TODO) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
 
 **Parameters**:
-* <!-- TODO -->
+* `id` - The layer ID to match against
 
 **Throws error if**:
-* <!-- TODO -->
+* `!S.has_layer(id)`
+
+> **Related material**:
+> * [`style::has_layer`](#has_layer)
 
 ### `get_orientation`
 
@@ -138,7 +155,19 @@ S.get_layer(string id) -> layer
 S.get_orientation() -> bool
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the `bool` value corresponding with the animation sequencing orientation (see [Orientation constants](./global.md#orientation)) of the sprite style `S`'s current layout configuration.
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `has_layer`
 
@@ -146,13 +175,12 @@ S.get_orientation() -> bool
 S.has_layer(string id) -> bool
 ```
 
-**Returns** <!-- TODO -->
+**Returns** `true` if the sprite style `S` contains a layer with the ID `id` among its *top-level* customization or assembly layers.
+
+> For example, a member layer of a [**group layer**](TODO) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
 
 **Parameters**:
-* <!-- TODO -->
-
-**Throws error if**:
-* <!-- TODO -->
+* `id` - The layer ID to match against
 
 ### `has_output`
 
@@ -168,7 +196,23 @@ S.has_output() -> bool
 S.is_all_anims_single_dim() -> bool
 ```
 
-**Returns** <!-- TODO -->
+**Returns** `true` if the sprite style `S` is currently configured to render sprite sheets with all included animations sequenced end-to-end on the same row or column; `false` otherwise.
+
+> **Note**:
+> 
+> `S.is_multiple_anims_per_dim()` must be `true` in order for the value of this function to affect sprite sheet layout.
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `is_multiple_anims_per_dim`
 
@@ -176,7 +220,19 @@ S.is_all_anims_single_dim() -> bool
 S.is_multiple_anims_per_dim() -> bool
 ```
 
-**Returns** <!-- TODO -->
+**Returns** `true` if the sprite style `S` is currently configured to render sprite sheets with multiple animations sequenced end-to-end on a single row or column; `false` otherwise.
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `is_wrap_anims_across_dims`
 
@@ -184,7 +240,25 @@ S.is_multiple_anims_per_dim() -> bool
 S.is_wrap_anims_across_dims() -> bool
 ```
 
-**Returns** <!-- TODO -->
+**Returns** `true` if the sprite style `S` is currently configured to render sprite sheets with multiple animations sequenced end-to-end on a single row or column, while allowing for animations to begin (frame 1) on a given row or column and end on a subsequent row or column; `false` otherwise.
+
+> **Note**:
+>
+> In order for the value of this function to affect sprite sheet layout...
+> * `S.is_multiple_anims_per_dim()` must be `true`
+> * `S.is_all_anims_single_dim()` must be `false`
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `randomize`
 
@@ -194,7 +268,7 @@ S.randomize();
 
 **Description**:
 
-<!-- TODO -->
+Randomizes the current sprite customization of the sprite style `S`. All [**unlocked**](TODO) customization layers of `S` are sequentially randomized (see [`layer::randomize`](./layer.md#randomize)).
 
 ### `render`
 
@@ -202,10 +276,14 @@ S.randomize();
 S.render() -> image
 ```
 
-**Returns** <!-- TODO -->
+**Returns** a render of the current sprite sheet of the sprite style `S`, based on the current...
+* Sprite customization
+* Padding configuration
+* Sequencing configuration
+* Layout configuration
 
 **Throws error if**:
-* <!-- TODO -->
+* `!S.has_output()` <!-- TODO - implementation -->
 
 ### `reset_layout`
 
@@ -216,6 +294,18 @@ S.reset_layout();
 **Description**:
 
 <!-- TODO -->
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
 
 ### `reset_padding`
 
@@ -249,6 +339,18 @@ S.set_all_anims_single_dim(bool single_dim);
 
 **Parameters**:
 * <!-- TODO -->
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `set_anims`
 
@@ -316,6 +418,18 @@ S.set_frames_per_dim(int fpd);
 **Fails if**:
 * <!-- TODO -->
 
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
+
 ### `set_multiple_anims_per_dim`
 
 ```js
@@ -329,6 +443,18 @@ S.set_multiple_anims_per_dim(bool mapd);
 **Parameters**:
 * <!-- TODO -->
 
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
+
 ### `set_orientation`
 
 ```js
@@ -340,7 +466,19 @@ S.set_orientation(bool orientation);
 <!-- TODO -->
 
 **Parameters**:
-* <!-- TODO -->
+* `orientation` - The `bool` value corresponding with the desired animation sequencing orientation (see [Orientation constants](./global.md#orientation))
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `set_padding`
 
@@ -370,6 +508,18 @@ S.set_wrap_anims_across_dims(bool wrap);
 
 **Parameters**:
 * <!-- TODO -->
+
+> **Related material**:
+> * [`style::get_frames_per_dim`](#get_frames_per_dim)
+> * [`style::set_frames_per_dim`](#set_frames_per_dim)
+> * [`style::get_orientation`](#get_orientation)
+> * [`style::set_orientation`](#set_orientation)
+> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
+> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
+> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
+> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
+> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
+> * [`style::reset_layout`](#reset_layout)
 
 ### `sprite_dims`
 
