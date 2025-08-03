@@ -2,7 +2,7 @@
 
 ## Contents
 
-The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_language) extension** of the [*DeltaScript* programming language](https://github.com/jbunke/deltascript), which introduces the following **namespace** and **new types**:
+The *Top Down Sprite Maker* scripting API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_language) extension** of the [*DeltaScript* programming language](https://github.com/jbunke/deltascript), which introduces the following **namespaces** and **new types**:
 
 ### Namespaces
 
@@ -24,4 +24,10 @@ The API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_l
 
 ---
 
-For the behaviour of the *DeltaScript* base language, please consult its [language specification](https://github.com/jbunke/deltascript/blob/master/docs/lang-spec.md) and [standard library](https://github.com/jbunke/deltascript/blob/master/docs/std-lib.md).
+### See Also
+
+There is a series of [theory](./theory/README.md) pages, each of which explains a *TDSM* program concept in a way that should help to elucidate the API specification.
+
+For an explanation of this specification's format and conventions, consult the [Help](./theory/help.md) page.
+
+For documentation covering the syntax and semantics of the *DeltaScript* base language, please consult its [language specification](https://github.com/jbunke/deltascript/blob/master/docs/lang-spec.md) and [standard library](https://github.com/jbunke/deltascript/blob/master/docs/std-lib.md).

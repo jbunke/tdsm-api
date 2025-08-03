@@ -2,7 +2,7 @@
 
 # `$ColorProc`
 
-`$ColorProc` is a utility namespace for color processing.
+`$ColorProc` is a utility namespace for color and image processing.
 
 ## Functions
 

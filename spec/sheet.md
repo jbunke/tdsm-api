@@ -82,7 +82,7 @@ S.sprite_at(int x, int y) -> image
 * `x >= S.sprites_x`
 * `y >= S.sprites_y`
 
-<hr>
+---
 
 ### See Also
 

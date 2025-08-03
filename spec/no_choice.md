@@ -46,7 +46,7 @@ NC.prob() -> float
 * The probability of no choice being assigned via randomization if `NC` was constructed with a custom probability (see [`$Init::no_choice_prob`](./init.md#no_choice_prob))
 * `0.0` otherwise
 
-<hr>
+---
 
 ###  See Also
 

@@ -92,7 +92,7 @@ Assigns the color to this color selection at the position `index` in `C.swatches
 * `index < 0`
 * `index >= #| C.swatches`
 
-<hr>
+---
 
 ###  See Also
 

@@ -293,19 +293,15 @@ S.reset_layout();
 
 **Description**:
 
-<!-- TODO -->
+Resets all the sprite style `S`'s layout settings to their default values.
 
-> **Related material**:
-> * [`style::get_frames_per_dim`](#get_frames_per_dim)
-> * [`style::set_frames_per_dim`](#set_frames_per_dim)
-> * [`style::get_orientation`](#get_orientation)
-> * [`style::set_orientation`](#set_orientation)
-> * [`style::is_all_anims_single_dim`](#is_all_anims_single_dim)
-> * [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)
-> * [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim)
-> * [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim)
-> * [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims)
-> * [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims)
+|                     Setting                     |              Default value              |                                                        Accessor and mutator                                                         |
+|:-----------------------------------------------:|:---------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------:|
+|              Animation orientation              | [`$TDSM.HORZ`](./global.md#orientation) |                      [`style::get_orientation`](#get_orientation) [`style::set_orientation`](#set_orientation)                      |
+|      Multiple animations per row or column      |                 `false`                 | [`style::is_multiple_anims_per_dim`](#is_multiple_anims_per_dim) [`style::set_multiple_anims_per_dim`](#set_multiple_anims_per_dim) |
+|    All animations on a single row or column     |                 `true`                  |     [`style::is_all_anims_single_dim`](#is_all_anims_single_dim) [`style::set_all_anims_single_dim`](#set_all_anims_single_dim)     |
+|            Frames per row or column             |                   `8`                   |                [`style::get_frames_per_dim`](#get_frames_per_dim) [`style::set_frames_per_dim`](#set_frames_per_dim)                |
+| Wrap animations across multiple rows or columns |                 `false`                 | [`style::is_wrap_anims_across_dims`](#is_wrap_anims_across_dims) [`style::set_wrap_anims_across_dims`](#set_wrap_anims_across_dims) |
 
 ### `reset_padding`
 
@@ -315,7 +311,7 @@ S.reset_padding();
 
 **Description**:
 
-<!-- TODO -->
+Resets the padding configuration of the sprite style `S`; all edges are reset to `0`.
 
 ### `reset_sequencing`
 
@@ -325,7 +321,7 @@ S.reset_sequencing();
 
 **Description**:
 
-<!-- TODO -->
+Resets the sequencing configuration of the sprite style `S`. All animations and directions defined by `S` are included for export, in their initial defined order.
 
 ### `set_all_anims_single_dim`
 
@@ -335,10 +331,10 @@ S.set_all_anims_single_dim(bool single_dim);
 
 **Description**:
 
-<!-- TODO -->
+Modifies the setting of the sprite style `S` that determines whether sprite sheets are rendered with all included animations sequenced end-to-end on the same row or column.
 
 **Parameters**:
-* <!-- TODO -->
+* `single_dim` - Desired setting value
 
 > **Related material**:
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
@@ -361,13 +357,13 @@ S.set_anims(anim<> animations);
 
 **Description**:
 
-<!-- TODO -->
+Sets `animations` as the current sequence of included animations for export for the sprite style `S`.
 
 **Parameters**:
-* `animations` - The collection of animations to be set as active. The collection can be provided as an array or a list.
+* `animations` - The collection of animations to be set as included for export. The collection can be provided as an array or a list.
 
 **Fails if**:
-* <!-- TODO -->
+* For *any* `anim a` in `animations`... `!S.all_anims().has(a)` <!-- TODO - implementation -->
 
 ### `set_dirs`
 
@@ -378,29 +374,38 @@ S.set_dirs(string<> directions);
 
 **Description**:
 
-<!-- TODO -->
+Sets `directions` as the current sequence of included directions for export for the sprite style `S`.
 
 **Parameters**:
-* `directions` - The collection of directions to be set as active. The collection can be provided as an array or a list.
+* `directions` - The collection of directions to be set as included for export. The collection can be provided as an array or a list.
 
-**Fails if**:
-* <!-- TODO -->
+**Fails if**: <!-- TODO - implementation -->
+* For any `string dir` in `directions`... `dir` is not a valid direction code (see [Direction constants](./global.md#directions))
+* For any `int a, b` where `a != b`... `directions[a] == directions[b]`
 
 ### `set_edge`
 
 ```js
-S.set_edge(int edge, int value);
+S.set_edge(int edge, int px);
 ```
 
 **Description**:
 
-<!-- TODO -->
+Sets the amount of padding or cropping, in pixels, along a particular edge, relative to the default sprite dimensions (see [`style::def_sprite_dims`](#def_sprite_dims)) of a sprite/frame of a sprite sheet of the sprite style `S`.
 
 **Parameters**:
-* <!-- TODO -->
+* `edge` - The edge (left, right, top, or bottom) whose value to override (see [Edge constants](./global.md#coordinate))
+* `px` - The number of pixels by which to augment sprite/frame size along `edge`; positive `px` represents **padding**, while negative `px` represents **cropping**
 
 **Fails if**:
-* <!-- TODO -->
+* `edge < 0`
+* `edge >= 4`
+* `(edge == $TDSM.LEFT || edge == $TDSM.RIGHT) && `...
+  * ...`S.def_sprite_dims()[$TDSM.X] + px > 128`
+  * ...`S.def_sprite_dims()[$TDSM.X] + px < 1`
+* `(edge == $TDSM.TOP || edge == $TDSM.BOTTOM) && `...
+  * ...`S.def_sprite_dims()[$TDSM.Y] + px > 128`
+  * ...`S.def_sprite_dims()[$TDSM.Y] + px < 1`
 
 ### `set_frames_per_dim`
 
@@ -410,13 +415,13 @@ S.set_frames_per_dim(int fpd);
 
 **Description**:
 
-<!-- TODO -->
+Modifies the setting of the sprite style `S` that determines how many animation frames to render on a single row or column if rendering multiple animations per row or column is enabled.
 
 **Parameters**:
-* <!-- TODO -->
+* `fpd` - Desired value of the setting
 
 **Fails if**:
-* <!-- TODO -->
+* For any `anim a` in [`S.get_anims()`](#get_anims)... `fpd < a.get_frame_count()`
 
 > **Related material**:
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)

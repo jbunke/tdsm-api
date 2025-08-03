@@ -34,6 +34,9 @@ public final class SetDirsNode extends StyleStatNode {
 
         final ScriptCollection arg =
                 (ScriptCollection) arguments.evaluate(symbolTable)[0];
+        // TODO - fail if:
+        //  - arg contains repeat elements
+        //  - arg contains an element that isn't a valid dir
         final Directions.Dir[] dirs = arg.stream()
                 .map(d -> (String) d).map(DirConversion::to)
                 .toArray(Directions.Dir[]::new);

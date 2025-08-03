@@ -36,7 +36,7 @@ A.get_frame_count() -> int
 > 
 > An animation with a four-frame cycle, but only three visually unique frames (e.g. walk: step 1, middle, step 2) will return 3 instead of 4 if it is defined as an oscillating (ping-pong) animation rather than a looping animation.
 
-<hr>
+---
 
 ###  See Also
 

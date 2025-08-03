@@ -37,6 +37,8 @@ public final class SetAnimsNode extends StyleStatNode {
         final Animation[] anims = arg.stream()
                 .map(a -> (Animation) a).toArray(Animation[]::new);
 
+        // TODO - fail if anims includes animations foreign to style
+
         style.setExportAnimations(anims);
 
         return FuncControlFlow.cont();

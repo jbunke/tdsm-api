@@ -12,7 +12,7 @@
 
 <!-- TODO - functions -->
 
-<hr>
+---
 
 ###  See Also
 

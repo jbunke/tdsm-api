@@ -32,7 +32,7 @@ R.func -> (color -> color)
 
 The color replacement function associated with `R`.
 
-<hr>
+---
 
 ###  See Also
 

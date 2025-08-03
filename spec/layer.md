@@ -331,7 +331,7 @@ L.unlock();
 
 Unlocks the layer `L`. A locked layer is **included** in style-level randomization (see [`style::randomize`](./style.md#randomize)).
 
-<hr>
+---
 
 ###  See Also
 
