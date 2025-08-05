@@ -14,11 +14,27 @@ The `$Util` namespace contains miscellaneous and utility functions.
 $Util.extract_anim_id(string sprite_id) -> string
 ```
 
+**Returns** <!-- TODO -->
+
+**Parameters**:
+* `sprite_id` - A string consisting of a direction, animation ID, and animation frame number, separated by hyphens (e.g. `"nw-walk-2"`).
+
+**Terminates with error if**:
+*
+
 ### `extract_direction`
 
 ```js 
 $Util.extract_direction(string sprite_id) -> string
 ```
+
+**Returns** <!-- TODO -->
+
+**Parameters**:
+* `sprite_id` - A string consisting of a direction, animation ID, and animation frame number, separated by hyphens (e.g. `"nw-walk-2"`).
+
+**Terminates with error if**:
+*
 
 ### `extract_frame`
 
@@ -26,9 +42,37 @@ $Util.extract_direction(string sprite_id) -> string
 $Util.extract_frame(string sprite_id) -> int
 ```
 
+**Returns** <!-- TODO -->
+
+**Parameters**:
+* `sprite_id` - A string consisting of a direction, animation ID, and animation frame number, separated by hyphens (e.g. `"nw-walk-2"`).
+
+**Terminates with error if**:
+*
+
 ### `sync_choices`
 
-```js 
-1. $Util.sync_choices(layer a, layer b);
-2. $Util.sync_choices(layer[] layers);
-```
+1.  ```js 
+    $Util.sync_choices(layer a, layer b);
+    ```
+    
+    **Returns** <!-- TODO -->
+
+    **Parameters**:
+    * `a` -
+    * `b` -
+    
+    **Fails if**:
+    * 
+
+2.  ```js 
+    $Util.sync_choices(layer[] layers);
+    ```
+
+    **Returns** <!-- TODO -->
+
+    **Parameters**:
+    * `layers` -
+
+    **Fails if**:
+    * 

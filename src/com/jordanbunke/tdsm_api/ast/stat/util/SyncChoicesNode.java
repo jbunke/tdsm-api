@@ -65,7 +65,7 @@ public final class SyncChoicesNode extends UtilStatNode {
             return;
 
         for (int i = 0; i < members.length; i++) {
-            for (int j = 1; j < members.length; j++) {
+            for (int j = 1; j < members.length; j++) { // TODO - should this be int j = i + 1?
                 if (i == j)
                     continue;
 
