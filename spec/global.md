@@ -2,27 +2,27 @@
 
 # Global namespace (`$TDSM`)
 
-The global namespace is essentially a utility class containing constants and functions not bound to an object.
+The global namespace is essentially a utility class containing **constants** and **functions not bound to an object**.
 
 ## Constants
 
 > **Note:**
 > 
-> Constants are bound to primitive values of type `bool`, `int`, or `string`. These mustn't necessarily be used and can be replaced where appropriate by the corresponding literal, but using the constants instead makes scripts more **readable** and **maintainable**, should constant values be reassigned in future updates.
+> Constants are bound to primitive values of type `bool`, `int`, or `string`. These **can** be avoided and replaced where appropriate by the corresponding literal, but **should** be used to make scripts more **readable** and **maintainable**, in case constant values are reassigned in future updates.
 
 ### Layer types
 
-| Constant            | Type  | Value | Represents                                                                                                                                           |
-|:--------------------|:-----:|:-----:|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `$TDSM.ACL`         | `int` |  `0`  | [`AssetChoiceLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/AssetChoiceLayer.java)                           |
-| `$TDSM.COL_SEL_L`   | `int` |  `1`  | [`ColorSelectionLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/ColorSelectionLayer.java)                     |
-| `$TDSM.DECISION_L`  | `int` |  `2`  | [`DecisionLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/DecisionLayer.java)                                 |
-| `$TDSM.MATH_L`      | `int` |  `3`  | [`MathLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/MathLayer.java)                                         |
-| `$TDSM.CHOICE_L`    | `int` |  `4`  | [`ChoiceLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/ChoiceLayer.java)                                     |
-| `$TDSM.DEPENDENT_L` | `int` |  `5`  | [`DependentComponentLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/DependentComponentLayer.java)             |
-| `$TDSM.OTHER_L`     | `int` | `-1`  | Other [`CustomizationLayer`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/CustomizationLayer.java) subclasses      |
+| Constant            | Type  | Value | Represents            |
+|:--------------------|:-----:|:-----:|:----------------------|
+| `$TDSM.ACL`         | `int` |  `0`  | Asset choice layer    |
+| `$TDSM.COL_SEL_L`   | `int` |  `1`  | Color selection layer |
+| `$TDSM.DECISION_L`  | `int` |  `2`  | Decision layer        |
+| `$TDSM.MATH_L`      | `int` |  `3`  | Math layer            |
+| `$TDSM.CHOICE_L`    | `int` |  `4`  | Choice layer          |
+| `$TDSM.DEPENDENT_L` | `int` |  `5`  | Dependent layer       |
+| `$TDSM.OTHER_L`     | `int` | `-1`  | Other types of layers |
 
-<!-- TODO - other layer types: group, mask, dependent component -->
+<!-- TODO - other layer types: group, mask -->
 
 ### Directions
 
@@ -39,14 +39,14 @@ The global namespace is essentially a utility class containing constants and fun
 
 ### Coordinate
 
-| Constant       | Type  | Value | Represents                                  |
-|:---------------|:-----:|:-----:|:--------------------------------------------|
-| `$TDSM.X`      | `int` |  `0`  | The X coordinate of an X,Y coordinate pair  |
-| `$TDSM.Y`      | `int` |  `1`  | The Y coordinate of an X,Y coordinate pair  |
-| `$TDSM.LEFT`   | `int` |  `0`  | The left edge of a sprite/image             |
-| `$TDSM.RIGHT`  | `int` |  `1`  | The right edge of a sprite/image            |
-| `$TDSM.TOP`    | `int` |  `2`  | The top edge of a sprite/image              |
-| `$TDSM.BOTTOM` | `int` |  `3`  | The bottom edge of a sprite/image           |
+| Constant       | Type  | Value | Represents                                                |
+|:---------------|:-----:|:-----:|:----------------------------------------------------------|
+| `$TDSM.X`      | `int` |  `0`  | The X coordinate of an X,Y coordinate pair, and/or width  |
+| `$TDSM.Y`      | `int` |  `1`  | The Y coordinate of an X,Y coordinate pair, and/or height |
+| `$TDSM.LEFT`   | `int` |  `0`  | The left edge of a sprite/image                           |
+| `$TDSM.RIGHT`  | `int` |  `1`  | The right edge of a sprite/image                          |
+| `$TDSM.TOP`    | `int` |  `2`  | The top edge of a sprite/image                            |
+| `$TDSM.BOTTOM` | `int` |  `3`  | The bottom edge of a sprite/image                         |
 
 ### Orientation
 
@@ -63,22 +63,25 @@ The global namespace is essentially a utility class containing constants and fun
 $TDSM.export(style s, string folder, string base_name);
 ```
 
+**Description**:
+
 Exports the current sprite sheet customized and configured for the sprite style `s`. The exported contents are saved to the directory `folder`.
 
 For some valid `base_name`, this function exports:
 * `base_name.png` - Sprite sheet as PNG image
-* `base_name.json` - Sprite sheet metadata (if `$TDSM.is_json()`)
-* `base_name.stip` - Layer-separated sprite sheet (if `$TDSM.is_stip()`)
+* `base_name.json` - Sprite sheet metadata (if [`$TDSM.is_json()`](#is_json))
+* `base_name.stip` - Layer-separated sprite sheet (if [`$TDSM.is_stip()`](#is_stip))
 
 **Parameters:**
-* [`style`](./style.md) `s` - Sprite style whose current customized and configured sprite is to be exported
-* `string` `folder` - The directory where the export contents are to be saved
-* `string` `base_name` - The file name of the exported contents, barring file extensions
+* `s` - Sprite style whose current customized and configured sprite is to be exported
+* `folder` - The directory where the export contents are to be saved
+* `base_name` - The file name of the exported contents, excluding file extensions
 
-**Fails** if any of these conditions are not satisfied:
-* [`s.has_output()`](./style.md#has_output)
-* `folder` is a valid path to an existing and accessible directory in the file system
-* `base_name` is a valid file name
+**Fails if**:
+* [`!s.has_output()`](./style.md#has_output)
+* `folder` is an invalid file path
+* `folder` does not exist, is not a directory, or is inaccessible
+* `base_name` is not a valid file name
 
 ### `get_style`
 
@@ -89,9 +92,10 @@ $TDSM.get_style(string id) -> style
 **Returns** the [`style`](./style.md) matching `id`.
 
 **Parameters:**
-* `string` `id` - A unique identifier code associated with a particular sprite style
+* `id` - A unique identifier code associated with a particular sprite style
 
-<!-- TODO - list of supported sprite identifier codes -->
+**Terminates with error if**:
+* Program instance contains no sprite style with the ID `id`
 
 ### `is_json`
 
@@ -99,7 +103,7 @@ $TDSM.get_style(string id) -> style
 $TDSM.is_json() -> bool
 ```
 
-**Returns** `true` if the *Export sprite sheet metadata as JSON* flag is turned on; `false` otherwise.
+**Returns** `true` if the *Export sprite sheet metadata as JSON* flag is turned on; `false` otherwise. When turned on, exporting (see [`$TDSM::export`](#export)) will save the sprite sheet metadata as a JSON file in addition to the PNG sprite sheet.
 
 ### `is_stip`
 
@@ -107,7 +111,7 @@ $TDSM.is_json() -> bool
 $TDSM.is_stip() -> bool
 ```
 
-**Returns** `true` if the *Export as Stipple Effect project* flag is turned on; `false` otherwise.
+**Returns** `true` if the *Export as Stipple Effect project* flag is turned on; `false` otherwise. When turned on, exporting (see [`$TDSM::export`](#export)) will save a version of the sprite sheet with each assembly layer separated as a [*Stipple Effect*](https://stipple-effect.github.io) project file (`.stip`), in addition to the PNG sprite sheet.
 
 ### `load_from_json`
 
@@ -115,10 +119,12 @@ $TDSM.is_stip() -> bool
 $TDSM.load_from_json(string json);
 ```
 
+**Description**:
+
 Attempts to set the customization and configuration data of a particular sprite style based on `json`.
 
 **Parameters:**
-* `string` `json` - The JSON-formatted text contents corresponding to a previous export operation.
+* `json` - The JSON-formatted text contents corresponding to a previous export operation.
 
 > **Note:**
 > 
@@ -137,6 +143,16 @@ Attempts to set the customization and configuration data of a particular sprite 
 >       "frames": [ /* ... */ ]
 >   }
 >   ```
+> 
+> `json` will typically be derived by reading the contents of a file with the `read_file(string path) -> string`<!-- TODO - 1) update language specification, 2) rewrite with qualified name ::read_file and 3) link --> function from the *DeltaScript* standard library.
+
+**Fails if**:
+* `json` cannot be parsed as a JSON file
+* Program instance contains no sprite style with the ID specified by `json`
+
+> **Note**:
+> 
+> Individual load operations may fail due to discrepancies between `json` and the actual definition of the sprite style it is targeting (e.g. attempting to set the selection of an asset choice layer to the code `"tunic"` when the only choice codes are `["shirt", "vest", "sweater"]`).
 
 ### `set_json`
 
@@ -144,7 +160,12 @@ Attempts to set the customization and configuration data of a particular sprite 
 $TDSM.set_json(bool export_json);
 ```
 
+**Description**:
+
 Sets the value of the *Export sprite sheet metadata as JSON* flag.
+
+**Parameters**:
+* `export_json` - Whether to export JSON metadata along with the sprite sheet
 
 ### `set_stip`
 
@@ -152,7 +173,12 @@ Sets the value of the *Export sprite sheet metadata as JSON* flag.
 $TDSM.set_stip(bool export_stip);
 ```
 
+**Description**:
+
 Sets the value of the *Export as Stipple Effect project* flag.
+
+**Parameters**:
+* `export_stip` - Whether to export a layer-separated *Stipple Effect* project version of the sprite sheet along with the PNG version
 
 ### `upload_style`
 
@@ -160,4 +186,20 @@ Sets the value of the *Export as Stipple Effect project* flag.
 $TDSM.upload_style(string archive_path);
 ```
 
-Attempts to upload a sprite style to the command-line interface.
+**Description**:
+
+Upload the sprite style archive specified by the file path `archive_path` to the program instance.
+
+> **Note**:
+>
+> This function should **only** be invoked when running the *TDSM* **command-line interface**, not while running the program with its graphical user interface (via `manifest.tds` in a sprite style archive).
+
+**Parameters**:
+* `archive_path` - The file path of the sprite style archive to be uploaded. This should correspond to a ZIP archive (though its extension needn't be `.zip`) that contains a file `manifest.tds` in its **root** (outermost scope, not within a subdirectory inside the archive).
+
+**Fails if**:
+* `archive_path` doesn't exist, isn't a file, or isn't accessible
+* Archive doesn't contain the file `manifest.tds` in its root
+* `manifest.tds` contains a syntax error and cannot be interpreted as valid *DeltaScript* code
+* Execution of `manifest.tds` does not return a [`style`](./style.md)
+* Execution of `manifest.tds` terminates prematurely with an error

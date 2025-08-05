@@ -76,7 +76,7 @@ S.sprite_at(int x, int y) -> image
 * `x` - The 0-based X coordinate
 * `y` - The 0-based Y coordinate
 
-**Throws error if**:
+**Terminates with error if**:
 * `x < 0`
 * `y < 0`
 * `x >= S.sprites_x`

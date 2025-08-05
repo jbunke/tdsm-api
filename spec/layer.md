@@ -116,7 +116,7 @@ L.get_choice() -> string
 * The currently selected choice message, if `L` is a choice layer
 * The currently selected asset code, if `L` is an asset choice layer
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
 * `L.type == $TDSM.ACL && L.is_none()`
 
@@ -131,7 +131,7 @@ L.get_choice_at(int index) -> string
 **Parameters**:
 * `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
 * `index < 0`
 * `index >= L.num_choices()`
@@ -146,7 +146,7 @@ L.get_choice_index() -> int
 * The index of the currently selected choice in the (asset) choice layer
 * `-1`, if `L` is an asset choice layer and no choice is currently selected
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
 
 ### `get_col_sels`
@@ -157,7 +157,7 @@ L.get_col_sels() -> col_sel[]
 
 **Returns** the color selections comprising this color selection layer as an array
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.COL_SEL_L`
 
 ### `get_decision`
@@ -168,7 +168,7 @@ L.get_decision() -> layer
 
 **Returns** the layer outputted by the decision layer `L`'s logic function execution
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.DECISION_L`
 
 ### `get_no_choice`
@@ -179,7 +179,7 @@ L.get_no_choice() -> no_choice
 
 **Returns** the asset choice layer `L`'s no choice configuration
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.ACL`
 
 ### `get_value`
@@ -190,7 +190,7 @@ L.get_value() -> int
 
 **Returns** the current integer value of the math layer `L`
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.MATH_L`
 
 ### `is_locked`
@@ -209,7 +209,7 @@ L.is_none() -> bool
 
 **Returns** `true` if the asset choice layer `L` currently has no selected choice; `false` otherwise.
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.ACL`
 
 ### `lock`
@@ -230,7 +230,7 @@ L.max_value() -> int
 
 **Returns** the maximum integer value of the math layer `L`.
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.MATH_L`
 
 ### `min_value`
@@ -241,7 +241,7 @@ L.min_value() -> int
 
 **Returns** the minimum integer value of the math layer `L`.
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.MATH_L`
 
 ### `naive_mask_logic`
@@ -257,7 +257,7 @@ L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 **Parameters**:
 * `asset_fetcher_func` - <!-- TODO -->
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.ACL && L.type != $TDSM.DEPENDENT_L`
 
 ### `none`
@@ -283,7 +283,7 @@ L.num_choices() -> int
 
 **Returns** the number of (asset) choices of this (asset) choice layer
 
-**Throws error if**:
+**Terminates with error if**:
 * `L.type != $TDSM.ACL && L.type != $TDSM.CHOICE_L`
 
 ### `randomize`

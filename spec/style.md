@@ -100,7 +100,7 @@ S.get_edge(int edge) -> int
 **Parameters**:
 * `edge` - The edge (left, right, top, or bottom) to be checked (see [Edge constants](./global.md#coordinate))
 
-**Throws error if**:
+**Terminates with error if**:
 * `edge < 0`
 * `edge >= 4`
 
@@ -141,7 +141,7 @@ S.get_layer(string id) -> layer
 **Parameters**:
 * `id` - The layer ID to match against
 
-**Throws error if**:
+**Terminates with error if**:
 * `!S.has_layer(id)`
 
 > **Related material**:
@@ -280,7 +280,7 @@ S.render() -> image
 * Sequencing configuration
 * Layout configuration
 
-**Throws error if**:
+**Terminates with error if**:
 * `!S.has_output()` <!-- TODO - implementation -->
 
 ### `reset_layout`
