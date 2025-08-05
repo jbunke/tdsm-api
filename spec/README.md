@@ -26,6 +26,8 @@ The *Top Down Sprite Maker* scripting API is a **[domain-specific](https://en.wi
 
 ### See Also
 
+To see API changes from one *Top Down Sprite Maker** release version to another, please read the [Changelog](./changelog.md).
+
 There is a series of [theory](./theory/README.md) pages, each of which explains a *TDSM* program concept in a way that should help to elucidate the API specification.
 
 For an explanation of this specification's format and conventions, consult the [Help](./theory/help.md) page.

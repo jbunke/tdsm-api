@@ -10,8 +10,6 @@
 >
 > The specification uses `S` to represent an arbitrary `style` instance in property and function definitions.
 
-<!-- TODO - descriptions -->
-
 ## Properties
 
 ### *`id`*
@@ -407,6 +405,9 @@ Sets the amount of padding or cropping, in pixels, along a particular edge, rela
   * ...`S.def_sprite_dims()[$TDSM.Y] + px > 128`
   * ...`S.def_sprite_dims()[$TDSM.Y] + px < 1`
 
+> **Related material**:
+> * [`style::set_padding`](#set_padding)
+
 ### `set_frames_per_dim`
 
 ```js
@@ -418,7 +419,7 @@ S.set_frames_per_dim(int fpd);
 Modifies the setting of the sprite style `S` that determines how many animation frames to render on a single row or column if rendering multiple animations per row or column is enabled.
 
 **Parameters**:
-* `fpd` - Desired value of the setting
+* `fpd` - Desired setting value
 
 **Fails if**:
 * For any `anim a` in [`S.get_anims()`](#get_anims)... `fpd < a.get_frame_count()`
@@ -443,10 +444,10 @@ S.set_multiple_anims_per_dim(bool mapd);
 
 **Description**:
 
-<!-- TODO -->
+Modifies the setting of the sprite style `S` that determines whether multiple animations can be rendered end-to-end on a single row or column of a sprite sheet.
 
 **Parameters**:
-* <!-- TODO -->
+* `mapd` - Desired setting value
 
 > **Related material**:
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
@@ -468,7 +469,7 @@ S.set_orientation(bool orientation);
 
 **Description**:
 
-<!-- TODO -->
+Modifies the setting of the sprite style `S` that determines whether animations are sequenced horizontally or vertically in sprite sheets. Directions are sequenced in the complementary orientation.
 
 **Parameters**:
 * `orientation` - The `bool` value corresponding with the desired animation sequencing orientation (see [Orientation constants](./global.md#orientation))
@@ -493,13 +494,22 @@ S.set_padding(int left, int right, int top, int bottom);
 
 **Description**:
 
-<!-- TODO -->
+Sets the amount of padding or cropping, in pixels, along **every** edge, relative to the default sprite dimensions (see [`style::def_sprite_dims`](#def_sprite_dims)) of a sprite/frame of a sprite sheet of the sprite style `S`.
 
 **Parameters**:
-* <!-- TODO -->
+* `left` - The number of pixels by which to augment sprite/frame size along the left edge
+* `right` - The number of pixels by which to augment sprite/frame size along the right edge
+* `top` - The number of pixels by which to augment sprite/frame size along the top edge
+* `bottom` - The number of pixels by which to augment sprite/frame size along the bottom edge
 
 **Fails if**:
-* <!-- TODO -->
+* `left + S.def_sprite_dims()[$TDSM.X] + right > 128`
+* `left + S.def_sprite_dims()[$TDSM.X] + right < 1`
+* `top + S.def_sprite_dims()[$TDSM.Y] + bottom > 128`
+* `top + S.def_sprite_dims()[$TDSM.Y] + bottom < 1`
+
+> **Related material**:
+> * [`style::set_edge`](#set_edge)
 
 ### `set_wrap_anims_across_dims`
 
@@ -509,10 +519,10 @@ S.set_wrap_anims_across_dims(bool wrap);
 
 **Description**:
 
-<!-- TODO -->
+Modifies the setting of the sprite style `S` that determines whether to render sprite sheets with multiple animations sequenced end-to-end on a single row or column, while allowing for animations to begin (frame 1) on a given row or column and end on a subsequent row or column.
 
 **Parameters**:
-* <!-- TODO -->
+* `wrap` - Desired setting value
 
 > **Related material**:
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
@@ -532,4 +542,16 @@ S.set_wrap_anims_across_dims(bool wrap);
 S.sprite_dims() -> int[]
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the current dimensions of a single sprite/frame of the sprite style `S`. Current dimensions are defined as the default sprite dimensions (see [`style::def_sprite_dims`](#def_sprite_dims)) augmented by the current padding configuration. The dimensions are represented as a two-integer array, where indices `0` and `1` represents width and height in pixels, respectively.
+
+---
+
+###  See Also
+
+**`style` constructor**:
+
+* [`$Init::style`](./init.md#style)
+
+**Global style accessor**:
+
+* [`$TDSM::get_style`](./global.md#get_style)
