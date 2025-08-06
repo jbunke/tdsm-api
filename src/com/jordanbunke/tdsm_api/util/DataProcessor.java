@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.Set;
 
 public final class DataProcessor {
+    public static final int DIRECTION = 0, ANIM = 1, FRAME = 2;
+
     public static final FuncTypeNode ASSET_FETCHER_TYPE =
             new FuncTypeNode(new TypeNode[] { TypeNode.getString() },
                     TypeNode.getImage()),
@@ -35,11 +37,11 @@ public final class DataProcessor {
 
         return sheet -> new InterpretedSpriteSheet<>(sheet, id -> {
             final Directions.Dir dir = Directions.get(
-                    SpriteStates.extractContributor(Style.DIRECTION, id));
+                    SpriteStates.extractContributor(DIRECTION, id));
             final String animID =
-                    SpriteStates.extractContributor(Style.ANIM, id);
+                    SpriteStates.extractContributor(ANIM, id);
             final int frame = Integer.parseInt(
-                    SpriteStates.extractContributor(Style.FRAME, id));
+                    SpriteStates.extractContributor(FRAME, id));
 
             final int dirIndex = indexOfDir(directions, dir);
             final Animation anim = animFromID(anims, animID);

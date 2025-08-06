@@ -9,7 +9,7 @@ import com.jordanbunke.delta_time.sprite.SpriteStates;
 import com.jordanbunke.tdsm.data.Directions;
 import com.jordanbunke.tdsm_api.util.DirConversion;
 
-import static com.jordanbunke.tdsm.data.style.Style.*;
+import static com.jordanbunke.tdsm_api.util.DataProcessor.*;
 
 public final class ExtractIDCompNode extends UtilExprNode {
     public static final String EXTRACT_ANIM_ID = "extract_anim_id",

@@ -6,21 +6,16 @@ The `$Util` namespace contains miscellaneous and utility functions.
 
 ## Functions
 
-<!-- TODO - full documentation -->
-
 ### `extract_anim_id`
 
 ```js 
 $Util.extract_anim_id(string sprite_id) -> string
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the animation ID component of `sprite_id`, or an empty string if `sprite_id` is improperly formatted.
 
 **Parameters**:
 * `sprite_id` - A string consisting of a direction, animation ID, and animation frame number, separated by hyphens (e.g. `"nw-walk-2"`).
-
-**Terminates with error if**:
-*
 
 ### `extract_direction`
 
@@ -28,13 +23,10 @@ $Util.extract_anim_id(string sprite_id) -> string
 $Util.extract_direction(string sprite_id) -> string
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the direction component of `sprite_id`, or `"invalid"` if `sprite_id` is improperly formatted.
 
 **Parameters**:
 * `sprite_id` - A string consisting of a direction, animation ID, and animation frame number, separated by hyphens (e.g. `"nw-walk-2"`).
-
-**Terminates with error if**:
-*
 
 ### `extract_frame`
 
@@ -42,13 +34,13 @@ $Util.extract_direction(string sprite_id) -> string
 $Util.extract_frame(string sprite_id) -> int
 ```
 
-**Returns** <!-- TODO -->
+**Returns** the 0-based frame number component of `sprite-id`.
 
 **Parameters**:
 * `sprite_id` - A string consisting of a direction, animation ID, and animation frame number, separated by hyphens (e.g. `"nw-walk-2"`).
 
 **Terminates with error if**:
-*
+* Frame number `sprite_id` component cannot be parsed as an integer
 
 ### `sync_choices`
 
@@ -56,23 +48,28 @@ $Util.extract_frame(string sprite_id) -> int
     $Util.sync_choices(layer a, layer b);
     ```
     
-    **Returns** <!-- TODO -->
+    **Description**:
+
+    Syncs the asset choices of two asset choice layers `a` and `b`. That way, when the asset choice of either layer is updated, the remaining layer is updated automatically to match the choice ID.
 
     **Parameters**:
-    * `a` -
-    * `b` -
+    * `a` - First of two asset choice layers to be synced
+    * `b` - Second of two asset choice layers to be synced
     
     **Fails if**:
-    * 
+    * `a == b`
+    * `a.type != $TDSM.ACL || b.type != $TDSM.ACL`
 
 2.  ```js 
     $Util.sync_choices(layer[] layers);
     ```
 
-    **Returns** <!-- TODO -->
+    **Description**:
+
+    Syncs the asset choices for all the asset choice layers in `layers`. That way, when a selection is made in any asset choice layer, the remaining synced layers are automatically updated to match the choice ID.
 
     **Parameters**:
-    * `layers` -
+    * `layers` - Array of asset choice layers to sync
 
-    **Fails if**:
-    * 
+    > **Related material**:
+    > * [`layer::choose`](./layer.md#choose)

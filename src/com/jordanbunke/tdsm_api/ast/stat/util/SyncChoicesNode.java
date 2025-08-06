@@ -65,10 +65,7 @@ public final class SyncChoicesNode extends UtilStatNode {
             return;
 
         for (int i = 0; i < members.length; i++) {
-            for (int j = 1; j < members.length; j++) { // TODO - should this be int j = i + 1?
-                if (i == j)
-                    continue;
-
+            for (int j = i + 1; j < members.length; j++) {
                 final CustomizationLayer a = members[i], b = members[j];
 
                 if (!a.equals(b))
@@ -82,7 +79,14 @@ public final class SyncChoicesNode extends UtilStatNode {
 
         final CustomizationLayer a = (CustomizationLayer) vs[0],
                 b = (CustomizationLayer) vs[1];
-        syncACLs(a, b);
+
+        if (a.equals(b))
+            TDSMInterpreter.failure(
+                    "Couldn't sync asset choice layers",
+                    "because layer arguments \"a\" and \"b\" reference the same layer",
+                    getPosition());
+        else
+            syncACLs(a, b);
     }
 
     private void syncACLs(
