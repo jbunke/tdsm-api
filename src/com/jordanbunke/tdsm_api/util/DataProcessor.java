@@ -10,7 +10,6 @@ import com.jordanbunke.delta_time.utility.math.Coord2D;
 import com.jordanbunke.tdsm.data.Animation;
 import com.jordanbunke.tdsm.data.Directions;
 import com.jordanbunke.tdsm.data.func.Composer;
-import com.jordanbunke.tdsm.data.style.Style;
 import com.jordanbunke.tdsm_api.ast.type.ReplacementTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.SheetTypeNode;
 

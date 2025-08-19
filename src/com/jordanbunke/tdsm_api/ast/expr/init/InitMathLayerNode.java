@@ -5,6 +5,7 @@ import com.jordanbunke.delta_time.scripting.ast.nodes.function.ChildFuncNode;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.FuncTypeNode;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
+import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm.data.layer.CustomizationLayer;
 import com.jordanbunke.tdsm.data.layer.MathLayer;
@@ -37,6 +38,14 @@ public final class InitMathLayerNode extends InitExprNode {
         final String id = (String) vs[0];
         final int min = (int) vs[1], max = (int) vs[2], def = (int) vs[3];
         final ChildFuncNode formatSource = (ChildFuncNode) vs[4];
+
+        if (id.isEmpty()) {
+            ScriptErrorLog.fireError(
+                    ScriptErrorLog.Message.CUSTOM_RT,
+                    arguments.get(0).getPosition(),
+                    "Layer ID must be non-empty");
+            return null;
+        }
 
         final Function<Integer, String> formatFunc = i ->
                 MetaFuncHelper.evaluate(formatSource, symbolTable,
