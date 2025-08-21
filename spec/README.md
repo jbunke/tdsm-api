@@ -2,7 +2,9 @@
 
 ## Contents
 
-The *Top Down Sprite Maker* scripting API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_language) extension** of the [*DeltaScript* programming language](https://github.com/jbunke/deltascript), which introduces the following **namespaces** and **new types**:
+The *Top Down Sprite Maker* scripting API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_language) extension** of the [*DeltaScript* programming language](https://github.com/jbunke/deltascript). It is primarily used to write `manifest.tds` scripts that define [sprite styles](TODO), or in conjunction with the [command-line interface](TODO).
+
+The API extends the *DeltaScript* base language by introducing the following **namespaces** and **types**:
 
 ### Namespaces
 
@@ -26,9 +28,9 @@ The *Top Down Sprite Maker* scripting API is a **[domain-specific](https://en.wi
 
 ### See Also
 
-To see API changes from one *Top Down Sprite Maker** release version to another, please read the [Changelog](./changelog.md).
+To see API changes from one *Top Down Sprite Maker* release version to another, please read the [Changelog](./changelog.md).
 
-There is a series of [theory](./theory/README.md) pages, each of which explains a *TDSM* program concept in a way that should help to elucidate the API specification.
+There is a series of [theory](./theory/README.md) pages, each of which explains a *TDSM* program concept in a way that should understand functions defined by the API specification.
 
 For an explanation of this specification's format and conventions, consult the [Help](./theory/help.md) page.
 
