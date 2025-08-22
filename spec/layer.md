@@ -248,7 +248,7 @@ L.min_value() -> int
 L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 ```
 
-**Returns** a mask layer logic function that uses `L` as the basis for the mask logic. `L` being the basis for the mask logic means that the mask logic inherits the current asset code, dimensions, and composer from `L`. The resulting function takes as input the [sprite ID](TODO) and returns the mask data as an image, where every non-transparent pixel is marked to be erased. The result of this function can be passed as the argument to the `logic` parameter in [`$Init::mask_layer`](./init.md#mask_layer).
+**Returns** a mask layer logic function that uses `L` as the basis for the mask logic. `L` being the basis for the mask logic means that the mask logic inherits the current asset code, dimensions, and composer from `L`. The resulting function takes as input the [sprite ID](./theory/t_sprite_id.md) and returns the mask data as an image, where every non-transparent pixel is marked to be erased. The result of this function can be passed as the argument to the `logic` parameter in [`$Init::mask_layer`](./init.md#mask_layer).
 
 **Parameters**:
 * `asset_fetcher_func` - A function that takes as input an asset code and returns the source image for that asset code for the mask logic. Images should be the same dimensions and sprite layout as those returned by `L`'s asset fetcher function (see [`$Init::asset_choice_layer`](./init.md#asset_choice_layer) and [`$Init::dependent_layer`](./init.md#dependent_layer)).

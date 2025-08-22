@@ -49,7 +49,7 @@ S.all_dirs() -> string[]
 S.assembly() -> layer<>
 ```
 
-**Returns** the [assembly layers](TODO) of the sprite style `S` as a list.
+**Returns** the [assembly layers](./theory/t_layer.md#assembly-layers) of the sprite style `S` as a list.
 
 ### `custom`
 
@@ -57,7 +57,7 @@ S.assembly() -> layer<>
 S.custom() -> layer<>
 ```
 
-**Returns** the [customization layers](TODO) of the sprite style `S` as a list.
+**Returns** the [customization layers](./theory/t_layer.md#customization-layers) of the sprite style `S` as a list.
 
 ### `def_sprite_dims`
 
@@ -136,7 +136,7 @@ S.get_layer(string id) -> layer
 
 **Returns** the first matching *top-level* constituent layer of the sprite sheet `S` with the ID `id`; first searches customization layers, then assembly layers.
 
-> For example, a member layer of a [**group layer**](TODO) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
+> For example, a member layer of a [**group layer**](./theory/t_layer.md#group-layer) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
 
 **Parameters**:
 * `id` - The layer ID to match against
@@ -175,7 +175,7 @@ S.has_layer(string id) -> bool
 
 **Returns** `true` if the sprite style `S` contains a layer with the ID `id` among its *top-level* customization or assembly layers.
 
-> For example, a member layer of a [**group layer**](TODO) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
+> For example, a member layer of a [**group layer**](./theory/t_layer.md#group-layer) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
 
 **Parameters**:
 * `id` - The layer ID to match against
@@ -266,7 +266,7 @@ S.randomize();
 
 **Description**:
 
-Randomizes the current sprite customization of the sprite style `S`. All [**unlocked**](TODO) customization layers of `S` are sequentially randomized (see [`layer::randomize`](./layer.md#randomize)).
+Randomizes the current sprite customization of the sprite style `S`. All [**unlocked**](./theory/t_rand_lock.md#locking) customization layers of `S` are sequentially randomized (see [`layer::randomize`](./layer.md#randomize)).
 
 ### `render`
 

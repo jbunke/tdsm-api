@@ -2,4 +2,8 @@
 
 # Randomization and locking
 
+## Randomization
+
+## Locking
+
 <!-- TODO -->

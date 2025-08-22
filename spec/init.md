@@ -12,10 +12,10 @@ The `$Init` namespace contains constructor functions for initializing objects of
 
 ### Layer scope constants
 
-| Constant            |  Type  |  Value  | Represents                                    |
-|:--------------------|:------:|:-------:|:----------------------------------------------|
-| `$Init.CUSTOM`      | `bool` | `true`  | A sprite style's [customization layers](TODO) |
-| `$Init.ASSEMBLY`    | `bool` | `false` | A sprite style's [assembly layers](TODO)      |
+| Constant            |  Type  |  Value  | Represents                                                                        |
+|:--------------------|:------:|:-------:|:----------------------------------------------------------------------------------|
+| `$Init.CUSTOM`      | `bool` | `true`  | A sprite style's [customization layers](./theory/t_layer.md#customization-layers) |
+| `$Init.ASSEMBLY`    | `bool` | `false` | A sprite style's [assembly layers](./theory/t_layer.md#assembly-layers)           |
 
 > **Note**:
 > 
@@ -72,7 +72,7 @@ $Init.asset_choice_layer(string id, int[] dims, (string -> image) asset_fetcher_
 * `asset_fetcher_func` - A function that takes as input the asset choice ID and returns the asset as an image. This function should define a process that successfully fetches every asset of the asset choice layer given the choice ID.
 * `choices` - An array of asset choices comprising this asset choice layer.
 * `nc` - The [no choice configuration (`no_choice`)](./no_choice.md) for this asset choice layer.
-* `composer` - A function that takes as input a [sprite sheet (`sheet`)](./sheet.md) of this asset choice layer's contents and returns a function mapping a [sprite ID](TODO) to an image representing the layer contents for that particular sprite/frame. In many cases, the function [`$Init::default_composer`](#default_composer) can be used here.
+* `composer` - A function that takes as input a [sprite sheet (`sheet`)](./sheet.md) of this asset choice layer's contents and returns a function mapping a [sprite ID](./theory/t_sprite_id.md) to an image representing the layer contents for that particular sprite/frame. In many cases, the function [`$Init::default_composer`](#default_composer) can be used here.
 * `preview_coord` - A two-integer array representing the (X, Y) coordinate pair to use as the top-left pixel anchor for preview pictures displayed by the program UI for each asset choice.
 
 **Terminates with error if**:
@@ -93,7 +93,7 @@ $Init.asset_layer(string id, int[] dims, image asset, (sheet -> (string -> image
 * `id` - The layer ID.
 * `dims` - A two-integer array representing the width and height, in pixels, of a single sprite/frame of the asset layer. The dimensions of some asset layer of a sprite style don't necessarily have to be the same as the dimensions of the sprite style itself (see [`$Init::style`](#style)).
 * `asset` - The source asset for this layer as an image.
-* `composer` - A function that takes as input a [sprite sheet (`sheet`)](./sheet.md) of this asset layer's contents and returns a function mapping a [sprite ID](TODO) to an image representing the layer contents for that particular sprite/frame. In many cases, the function [`$Init::default_composer`](#default_composer) can be used here.
+* `composer` - A function that takes as input a [sprite sheet (`sheet`)](./sheet.md) of this asset layer's contents and returns a function mapping a [sprite ID](./theory/t_sprite_id.md) to an image representing the layer contents for that particular sprite/frame. In many cases, the function [`$Init::default_composer`](#default_composer) can be used here.
 * `replace_func` - The color replacement function for the asset layer. This function takes as input the color at some arbitrary pixel of the asset source file and returns the color replacement ([`replacement`](./replacement.md)) instructions.
 
 **Terminates with error if**:
@@ -126,9 +126,9 @@ $Init.col_sel(string name, bool any_color, color[] swatches) -> col_sel
 **Returns** a newly defined [color selection (`col_sel`)](./col_sel.md).
 
 **Parameters**:
-* `name` - The name of the color selection. This acts as a label shown in the UI if the color selection is part of a [color selection layer](TODO) consisting of multiple color selections.
+* `name` - The name of the color selection. This acts as a label shown in the UI if the color selection is part of a [color selection layer](./theory/t_layer.md#color-selection-layer) consisting of multiple color selections.
 * `any_color` - Whether this color selection can be set to the value of any RGB color. If `false`, color assignment via the GUI is limited to the color selection's swatches. However, any color can still be assigned to the color selection programmatically (see [`col_sel::set_color`](./col_sel.md#set_color)).
-* `swatches` - An array representing the preset color options associated with this color selection. If an empty array is provided, the color selection will be defined with the program's [default swatches](TODO). Randomizing (see [`col_sel::randomize`](./col_sel.md#randomize)) this color selection will randomly assign a swatch color.
+* `swatches` - An array representing the preset color options associated with this color selection. If an empty array is provided, the color selection will be defined with the program's [default swatches](./theory/t_col_sel.md#default-swatches). Randomizing (see [`col_sel::randomize`](./col_sel.md#randomize)) this color selection will randomly assign a swatch color.
 
 **Terminates with error if**:
 * `name == ""`
@@ -159,7 +159,7 @@ $Init.composed_layer(string id, (string -> image) logic) -> layer
 
 **Parameters**:
 * `id` - The layer ID.
-* `logic` - A function that takes as input a [sprite ID](TODO) and returns the contents of this layer for that sprite ID as an image.
+* `logic` - A function that takes as input a [sprite ID](./theory/t_sprite_id.md) and returns the contents of this layer for that sprite ID as an image.
 
 **Terminates with error if**:
 * `id == ""`
@@ -236,7 +236,7 @@ $Init.group_layer(string id, layer[] members) -> layer
 
 > **Note**:
 > 
-> Group layers should only be used when multiple layers need to be treated as a single layer, usually as the output of a [decision layer](TODO).
+> Group layers should only be used when multiple layers need to be treated as a single layer, usually as the output of a [decision layer](./theory/t_layer.md#decision-layer).
 
 **Parameters**:
 * `id` - The layer ID.
@@ -256,7 +256,7 @@ $Init.mask_layer(string id, layer[] targets, (string -> image) logic) -> layer
 **Parameters**:
 * `id` - The layer ID.
 * `targets` - An array of layers to which the mask will be applied.
-* `logic` - A function that takes as input the [sprite ID](TODO) and returns an image of mask data, where every non-transparent pixel in the mask will be erased from the render output of the layers in `targets`.
+* `logic` - A function that takes as input the [sprite ID](./theory/t_sprite_id.md) and returns an image of mask data, where every non-transparent pixel in the mask will be erased from the render output of the layers in `targets`.
 
 > **Note**:
 > 
@@ -328,8 +328,8 @@ $Init.replacement(int index, (color -> color) func) -> replacement
 > 
 > *TDSM* performs color replacements internally on asset layers and asset choices:
 > 
-> * When performed on [***asset layers***](TODO), the influencing color selections constitute the color selections added to the asset layer via [`layer::add_influences`](./layer.md#add_influences), in the order they were added.
-> * When performed on [***asset choices***](TODO), the influencing color selections constitute the color selections defined as part of the asset choice (see [`$Init::asset_choice`](#asset_choice)), followed by the color selections added to the asset choice's parent asset choice layer via [`layer::add_influences`](./layer.md#add_influences).
+> * When performed on [***asset layers***](./theory/t_layer.md#asset-layer), the influencing color selections constitute the color selections added to the asset layer via [`layer::add_influences`](./layer.md#add_influences), in the order they were added.
+> * When performed on [***asset choices***](./theory/t_asset_choice.md), the influencing color selections constitute the color selections defined as part of the asset choice (see [`$Init::asset_choice`](#asset_choice)), followed by the color selections added to the asset choice's parent asset choice layer via [`layer::add_influences`](./layer.md#add_influences).
 
 ### `sheet`
 
@@ -377,7 +377,7 @@ $Init.style(string id, int[] dims, string[] directions, bool orientation, anim[]
 * `directions` - An array of direction codes representing the valid directions defined by this sprite style.
 * `orientation` - The `bool` value corresponding with the sprite sheet's animation sequencing orientation (see [Orientation constants](./global.md#orientation))
 * `anims` - An array of all the animations defined by this sprite style.
-* `layers` - A map with key-value pairs for the sprite style's [customization](TODO) and [assembly](TODO) layers. Map values are defined as lists -- for assembly layers, the order is the bottom to top rendering order, while for customization layers, it is the order in which customization dropdowns are presented in the program interface.
+* `layers` - A map with key-value pairs for the sprite style's [customization](./theory/t_layer.md#customization-layers) and [assembly](./theory/t_layer.md#assembly-layers) layers. Map values are defined as lists -- for assembly layers, the order is the bottom to top rendering order, while for customization layers, it is the order in which customization dropdowns are presented in the program interface.
 
 **Terminates with error if**:
 * `id == ""` <!-- TODO - implementation -->

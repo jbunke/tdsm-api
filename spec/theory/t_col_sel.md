@@ -2,4 +2,8 @@
 
 # Color selections
 
+## Swatches
+
+### Default swatches
+
 <!-- TODO -->
