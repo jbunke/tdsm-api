@@ -8,7 +8,7 @@ This is the specification of the **command-line interface** (CLI) of *Top Down S
 
 Chevrons `<>` surrounding a keyword in a command definition indicate a placeholder that must be substituted. Once substituted, concrete commands should not include chevrons.
 
-**Example:**
+**Example**:
 
 ```shell
 # Definition
@@ -21,7 +21,7 @@ set ansi true
 
 To extend a command to the next line, terminate the line with an underscore (`_`).
 
-**Example:**
+**Example**:
 
 ```shell
 def random_color(-> color) {_

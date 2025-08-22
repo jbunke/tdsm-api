@@ -4,6 +4,24 @@
 
 This page explains the format, conventions, and terminology used throughout the API specification.
 
+
+<details open>
+    <summary><b>Contents</b></summary>
+
+* [Constants, properties and functions](#constants-properties-and-functions)
+  * [Constants](#constants)
+  * [Properties](#properties)
+  * [Functions](#functions)
+* [Namespaces and types](#namespaces-and-types)
+  * [Namespaces](#namespaces)
+  * [Types](#types)
+* [Definition syntax and conventions](#definition-syntax-and-conventions)
+  * [Definition syntax](#definition-syntax)
+  * [Failure and termination conditions](#failure-and-termination-conditions)
+  * [Function links](#function-links)
+</details>
+
+
 ## Constants, properties and functions
 
 Namespace and type documentation pages will include the subheadings ***Constants***, ***Properties*** and/or ***Functions***.
