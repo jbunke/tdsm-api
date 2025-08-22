@@ -1,4 +1,4 @@
-[***< Contents***](./README.md)
+[***< Theory***](./README.md)
 
 # Help
 
@@ -174,8 +174,12 @@ layer_value_range(layer ml -> int) {
 }
 ```
 
+### Function links
+
+Links to function definitions can be found throughout the API specification. These are usually rendered `in a monospace font` and follow the pattern `$<namespace-name>::<function-name>` or `<type>::<function-name>`. The scope resolution operator `::` is used as a convention to disambiguate functions in distinct scopes with the same name, such as [`layer::randomize`](../layer.md#randomize), [`col_sel::randomize`](../col_sel.md#randomize) and [`style::randomize`](../style.md#randomize).
+
 ---
 
 ###  See Also
 
-* [*DeltaScript* overview](./deltascript.md)
+* [Scripting overview](./t_scripting.md)
