@@ -2,7 +2,7 @@
 
 # *Top Down Sprite Maker* | API Changelog
 
-> **Note**:
+> **Note:**
 > 
 > Release versions refer to the version of *Top Down Sprite Maker* where the listed API changes were introduced. The API **does not** have a separate versioning system.
 

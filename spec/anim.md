@@ -18,7 +18,7 @@
 A.id -> string
 ```
 
-**Description**:
+**Description:**
 
 The identification code of an animation. This code should be unique among all the animations of a [`style`](./style.md). Animation IDs mustn't contain hyphens (`-`), as this would break the parsing of sprite IDs.
 
@@ -40,6 +40,6 @@ A.get_frame_count() -> int
 
 ###  See Also
 
-**`anim` constructor**:
+**`anim` constructor:**
 
 * [`$Init::anim`](./init.md#anim)

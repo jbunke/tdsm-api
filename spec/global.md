@@ -63,7 +63,7 @@ The global namespace is essentially a utility class containing **constants** and
 $TDSM.export(style s, string folder, string base_name);
 ```
 
-**Description**:
+**Description:**
 
 Exports the current sprite sheet customized and configured for the sprite style `s`. The exported contents are saved to the directory `folder`.
 
@@ -77,7 +77,7 @@ For some valid `base_name`, this function exports:
 * `folder` - The directory where the export contents are to be saved
 * `base_name` - The file name of the exported contents, excluding file extensions
 
-**Fails if**:
+**Fails if:**
 * [`!s.has_output()`](./style.md#has_output)
 * `folder` is an invalid file path
 * `folder` does not exist, is not a directory, or is inaccessible
@@ -94,7 +94,7 @@ $TDSM.get_style(string id) -> style
 **Parameters:**
 * `id` - A unique identifier code associated with a particular sprite style
 
-**Terminates with error if**:
+**Terminates with error if:**
 * Program instance contains no sprite style with the ID `id`
 
 ### `is_json`
@@ -119,7 +119,7 @@ $TDSM.is_stip() -> bool
 $TDSM.load_from_json(string json);
 ```
 
-**Description**:
+**Description:**
 
 Attempts to set the customization and configuration data of a particular sprite style based on `json`.
 
@@ -146,11 +146,11 @@ Attempts to set the customization and configuration data of a particular sprite 
 > 
 > `json` will typically be derived by reading the contents of a file with the `read_file(string path) -> string`<!-- TODO - 1) update language specification, 2) rewrite with qualified name ::read_file and 3) link --> function from the *DeltaScript* standard library.
 
-**Fails if**:
+**Fails if:**
 * `json` cannot be parsed as a JSON file
 * Program instance contains no sprite style with the ID specified by `json`
 
-> **Note**:
+> **Note:**
 > 
 > Individual load operations may fail due to discrepancies between `json` and the actual definition of the sprite style it is targeting (e.g. attempting to set the selection of an asset choice layer to the code `"tunic"` when the only choice codes are `["shirt", "vest", "sweater"]`).
 
@@ -160,11 +160,11 @@ Attempts to set the customization and configuration data of a particular sprite 
 $TDSM.set_json(bool export_json);
 ```
 
-**Description**:
+**Description:**
 
 Sets the value of the *Export sprite sheet metadata as JSON* flag.
 
-**Parameters**:
+**Parameters:**
 * `export_json` - Whether to export JSON metadata along with the sprite sheet
 
 ### `set_stip`
@@ -173,11 +173,11 @@ Sets the value of the *Export sprite sheet metadata as JSON* flag.
 $TDSM.set_stip(bool export_stip);
 ```
 
-**Description**:
+**Description:**
 
 Sets the value of the *Export as Stipple Effect project* flag.
 
-**Parameters**:
+**Parameters:**
 * `export_stip` - Whether to export a layer-separated *Stipple Effect* project version of the sprite sheet along with the PNG version
 
 ### `upload_style`
@@ -186,18 +186,18 @@ Sets the value of the *Export as Stipple Effect project* flag.
 $TDSM.upload_style(string archive_path);
 ```
 
-**Description**:
+**Description:**
 
 Upload the sprite style archive specified by the file path `archive_path` to the program instance.
 
-> **Note**:
+> **Note:**
 >
 > This function should **only** be invoked when running the *TDSM* **command-line interface**, not while running the program with its graphical user interface (via `manifest.tds` in a sprite style archive).
 
-**Parameters**:
+**Parameters:**
 * `archive_path` - The file path of the sprite style archive to be uploaded. This should correspond to a ZIP archive (though its extension needn't be `.zip`) that contains a file `manifest.tds` in its **root** (outermost scope, not within a subdirectory inside the archive).
 
-**Fails if**:
+**Fails if:**
 * `archive_path` doesn't exist, isn't a file, or isn't accessible
 * Archive doesn't contain the file `manifest.tds` in its root
 * `manifest.tds` contains a syntax error and cannot be interpreted as valid *DeltaScript* code

@@ -18,7 +18,7 @@
 S.id -> string
 ```
 
-**Description**:
+**Description:**
 
 The identification of the sprite style `S`. ID must be unique among sprite styles uploaded to *TDSM* at any given time. Uploading a sprite style with an ID matching another sprite style previously uploaded to the program will override the existing sprite style.
 
@@ -40,7 +40,7 @@ S.all_dirs() -> string[]
 
 **Returns** all the directions defined by the sprite style `S` as an array.
 
-> **Related material**:
+> **Related material:**
 > * [Direction constants](./global.md#directions)
 
 ### `assembly`
@@ -67,7 +67,7 @@ S.def_sprite_dims() -> int[]
 
 **Returns** the default dimensions of a single sprite/frame of the sprite style `S`. The dimensions are represented as a two-integer array, where indices `0` and `1` represents width and height in pixels, respectively.
 
-> **Related material**:
+> **Related material:**
 > * [Coordinate constants](./global.md#coordinate)
 
 ### `get_anims`
@@ -86,7 +86,7 @@ S.get_dirs() -> string[]
 
 **Returns** an array of the directions of the sprite sheet `S` that are **currently enabled** for export, in the current sequencing order.
 
-> **Related material**:
+> **Related material:**
 > * [Direction constants](./global.md#directions)
 
 ### `get_edge`
@@ -97,14 +97,14 @@ S.get_edge(int edge) -> int
 
 **Returns** the amount of padding or cropping, in pixels, along a particular edge, relative to the default sprite dimensions (see [`style::def_sprite_dims`](#def_sprite_dims)) of the sprite style `S`, as currently configured.
 
-**Parameters**:
+**Parameters:**
 * `edge` - The edge (left, right, top, or bottom) to be checked (see [Edge constants](./global.md#coordinate))
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `edge < 0`
 * `edge >= 4`
 
-> **Related material**:
+> **Related material:**
 > * [`style::reset_padding`](#reset_padding)
 > * [`style::sprite_dims`](#sprite_dims)
 
@@ -116,7 +116,7 @@ S.get_frames_per_dim() -> int
 
 **Returns** the number of animation frames per row or column of an exported sprite sheet of sprite style `S`, according to its current layout configuration.
 
-> **Related material**:
+> **Related material:**
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
 > * [`style::set_orientation`](#set_orientation)
@@ -138,13 +138,13 @@ S.get_layer(string id) -> layer
 
 > For example, a member layer of a [**group layer**](./theory/t_layer.md#group-layer) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
 
-**Parameters**:
+**Parameters:**
 * `id` - The layer ID to match against
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `!S.has_layer(id)`
 
-> **Related material**:
+> **Related material:**
 > * [`style::has_layer`](#has_layer)
 
 ### `get_orientation`
@@ -155,7 +155,7 @@ S.get_orientation() -> bool
 
 **Returns** the `bool` value corresponding with the animation sequencing orientation (see [Orientation constants](./global.md#orientation)) of the sprite style `S`'s current layout configuration.
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::set_orientation`](#set_orientation)
@@ -177,7 +177,7 @@ S.has_layer(string id) -> bool
 
 > For example, a member layer of a [**group layer**](./theory/t_layer.md#group-layer) that is not separately defined as a top-level customization or assembly layer of `S` cannot be identified by this function.
 
-**Parameters**:
+**Parameters:**
 * `id` - The layer ID to match against
 
 ### `has_output`
@@ -196,11 +196,11 @@ S.is_all_anims_single_dim() -> bool
 
 **Returns** `true` if the sprite style `S` is currently configured to render sprite sheets with all included animations sequenced end-to-end on the same row or column; `false` otherwise.
 
-> **Note**:
+> **Note:**
 > 
 > `S.is_multiple_anims_per_dim()` must be `true` in order for the value of this function to affect sprite sheet layout.
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
@@ -220,7 +220,7 @@ S.is_multiple_anims_per_dim() -> bool
 
 **Returns** `true` if the sprite style `S` is currently configured to render sprite sheets with multiple animations sequenced end-to-end on a single row or column; `false` otherwise.
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
@@ -240,13 +240,13 @@ S.is_wrap_anims_across_dims() -> bool
 
 **Returns** `true` if the sprite style `S` is currently configured to render sprite sheets with multiple animations sequenced end-to-end on a single row or column, while allowing for animations to begin (frame 1) on a given row or column and end on a subsequent row or column; `false` otherwise.
 
-> **Note**:
+> **Note:**
 >
 > In order for the value of this function to affect sprite sheet layout...
 > * `S.is_multiple_anims_per_dim()` must be `true`
 > * `S.is_all_anims_single_dim()` must be `false`
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
@@ -264,7 +264,7 @@ S.is_wrap_anims_across_dims() -> bool
 S.randomize();
 ```
 
-**Description**:
+**Description:**
 
 Randomizes the current sprite customization of the sprite style `S`. All [**unlocked**](./theory/t_rand_lock.md#locking) customization layers of `S` are sequentially randomized (see [`layer::randomize`](./layer.md#randomize)).
 
@@ -280,7 +280,7 @@ S.render() -> image
 * Sequencing configuration
 * Layout configuration
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `!S.has_output()` <!-- TODO - implementation -->
 
 ### `reset_layout`
@@ -289,7 +289,7 @@ S.render() -> image
 S.reset_layout();
 ```
 
-**Description**:
+**Description:**
 
 Resets all the sprite style `S`'s layout settings to their default values.
 
@@ -307,7 +307,7 @@ Resets all the sprite style `S`'s layout settings to their default values.
 S.reset_padding();
 ```
 
-**Description**:
+**Description:**
 
 Resets the padding configuration of the sprite style `S`; all edges are reset to `0`.
 
@@ -317,7 +317,7 @@ Resets the padding configuration of the sprite style `S`; all edges are reset to
 S.reset_sequencing();
 ```
 
-**Description**:
+**Description:**
 
 Resets the sequencing configuration of the sprite style `S`. All animations and directions defined by `S` are included for export, in their initial defined order.
 
@@ -327,14 +327,14 @@ Resets the sequencing configuration of the sprite style `S`. All animations and 
 S.set_all_anims_single_dim(bool single_dim);
 ```
 
-**Description**:
+**Description:**
 
 Modifies the setting of the sprite style `S` that determines whether sprite sheets are rendered with all included animations sequenced end-to-end on the same row or column.
 
-**Parameters**:
+**Parameters:**
 * `single_dim` - Desired setting value
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
@@ -353,14 +353,14 @@ S.set_anims(anim[] animations);
 S.set_anims(anim<> animations);
 ```
 
-**Description**:
+**Description:**
 
 Sets `animations` as the current sequence of included animations for export for the sprite style `S`.
 
-**Parameters**:
+**Parameters:**
 * `animations` - The collection of animations to be set as included for export. The collection can be provided as an array or a list.
 
-**Fails if**:
+**Fails if:**
 * For *any* `anim a` in `animations`... `!S.all_anims().has(a)` <!-- TODO - implementation -->
 
 ### `set_dirs`
@@ -370,14 +370,14 @@ S.set_dirs(string[] directions);
 S.set_dirs(string<> directions);
 ```
 
-**Description**:
+**Description:**
 
 Sets `directions` as the current sequence of included directions for export for the sprite style `S`.
 
-**Parameters**:
+**Parameters:**
 * `directions` - The collection of directions to be set as included for export. The collection can be provided as an array or a list.
 
-**Fails if**: <!-- TODO - implementation -->
+**Fails if:** <!-- TODO - implementation -->
 * For any `string dir` in `directions`... `dir` is not a valid direction code (see [Direction constants](./global.md#directions))
 * For any `int a, b` where `a != b`... `directions[a] == directions[b]`
 
@@ -387,15 +387,15 @@ Sets `directions` as the current sequence of included directions for export for 
 S.set_edge(int edge, int px);
 ```
 
-**Description**:
+**Description:**
 
 Sets the amount of padding or cropping, in pixels, along a particular edge, relative to the default sprite dimensions (see [`style::def_sprite_dims`](#def_sprite_dims)) of a sprite/frame of a sprite sheet of the sprite style `S`.
 
-**Parameters**:
+**Parameters:**
 * `edge` - The edge (left, right, top, or bottom) whose value to override (see [Edge constants](./global.md#coordinate))
 * `px` - The number of pixels by which to augment sprite/frame size along `edge`; positive `px` represents **padding**, while negative `px` represents **cropping**
 
-**Fails if**:
+**Fails if:**
 * `edge < 0`
 * `edge >= 4`
 * `(edge == $TDSM.LEFT || edge == $TDSM.RIGHT) && `...
@@ -405,7 +405,7 @@ Sets the amount of padding or cropping, in pixels, along a particular edge, rela
   * ...`S.def_sprite_dims()[$TDSM.Y] + px > 128`
   * ...`S.def_sprite_dims()[$TDSM.Y] + px < 1`
 
-> **Related material**:
+> **Related material:**
 > * [`style::set_padding`](#set_padding)
 
 ### `set_frames_per_dim`
@@ -414,17 +414,17 @@ Sets the amount of padding or cropping, in pixels, along a particular edge, rela
 S.set_frames_per_dim(int fpd);
 ```
 
-**Description**:
+**Description:**
 
 Modifies the setting of the sprite style `S` that determines how many animation frames to render on a single row or column if rendering multiple animations per row or column is enabled.
 
-**Parameters**:
+**Parameters:**
 * `fpd` - Desired setting value
 
-**Fails if**:
+**Fails if:**
 * For any `anim a` in [`S.get_anims()`](#get_anims)... `fpd < a.get_frame_count()`
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
 > * [`style::set_orientation`](#set_orientation)
@@ -442,14 +442,14 @@ Modifies the setting of the sprite style `S` that determines how many animation 
 S.set_multiple_anims_per_dim(bool mapd);
 ```
 
-**Description**:
+**Description:**
 
 Modifies the setting of the sprite style `S` that determines whether multiple animations can be rendered end-to-end on a single row or column of a sprite sheet.
 
-**Parameters**:
+**Parameters:**
 * `mapd` - Desired setting value
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
@@ -467,14 +467,14 @@ Modifies the setting of the sprite style `S` that determines whether multiple an
 S.set_orientation(bool orientation);
 ```
 
-**Description**:
+**Description:**
 
 Modifies the setting of the sprite style `S` that determines whether animations are sequenced horizontally or vertically in sprite sheets. Directions are sequenced in the complementary orientation.
 
-**Parameters**:
+**Parameters:**
 * `orientation` - The `bool` value corresponding with the desired animation sequencing orientation (see [Orientation constants](./global.md#orientation))
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
@@ -492,23 +492,23 @@ Modifies the setting of the sprite style `S` that determines whether animations 
 S.set_padding(int left, int right, int top, int bottom);
 ```
 
-**Description**:
+**Description:**
 
 Sets the amount of padding or cropping, in pixels, along **every** edge, relative to the default sprite dimensions (see [`style::def_sprite_dims`](#def_sprite_dims)) of a sprite/frame of a sprite sheet of the sprite style `S`.
 
-**Parameters**:
+**Parameters:**
 * `left` - The number of pixels by which to augment sprite/frame size along the left edge
 * `right` - The number of pixels by which to augment sprite/frame size along the right edge
 * `top` - The number of pixels by which to augment sprite/frame size along the top edge
 * `bottom` - The number of pixels by which to augment sprite/frame size along the bottom edge
 
-**Fails if**:
+**Fails if:**
 * `left + S.def_sprite_dims()[$TDSM.X] + right > 128`
 * `left + S.def_sprite_dims()[$TDSM.X] + right < 1`
 * `top + S.def_sprite_dims()[$TDSM.Y] + bottom > 128`
 * `top + S.def_sprite_dims()[$TDSM.Y] + bottom < 1`
 
-> **Related material**:
+> **Related material:**
 > * [`style::set_edge`](#set_edge)
 
 ### `set_wrap_anims_across_dims`
@@ -517,14 +517,14 @@ Sets the amount of padding or cropping, in pixels, along **every** edge, relativ
 S.set_wrap_anims_across_dims(bool wrap);
 ```
 
-**Description**:
+**Description:**
 
 Modifies the setting of the sprite style `S` that determines whether to render sprite sheets with multiple animations sequenced end-to-end on a single row or column, while allowing for animations to begin (frame 1) on a given row or column and end on a subsequent row or column.
 
-**Parameters**:
+**Parameters:**
 * `wrap` - Desired setting value
 
-> **Related material**:
+> **Related material:**
 > * [`style::get_frames_per_dim`](#get_frames_per_dim)
 > * [`style::set_frames_per_dim`](#set_frames_per_dim)
 > * [`style::get_orientation`](#get_orientation)
@@ -548,10 +548,10 @@ S.sprite_dims() -> int[]
 
 ###  See Also
 
-**`style` constructor**:
+**`style` constructor:**
 
 * [`$Init::style`](./init.md#style)
 
-**Global style accessor**:
+**Global style accessor:**
 
 * [`$TDSM::get_style`](./global.md#get_style)

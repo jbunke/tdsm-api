@@ -18,7 +18,7 @@
 S.sprite_width -> int
 ```
 
-**Description**:
+**Description:**
 
 The width of a single sprite/frame of the sprite sheet `S`, in pixels
 
@@ -28,7 +28,7 @@ The width of a single sprite/frame of the sprite sheet `S`, in pixels
 S.sprite_height -> int
 ```
 
-**Description**:
+**Description:**
 
 The height of a single sprite/frame of the sprite sheet `S`, in pixels
 
@@ -38,7 +38,7 @@ The height of a single sprite/frame of the sprite sheet `S`, in pixels
 S.sprites_x -> int
 ```
 
-**Description**:
+**Description:**
 
 The number of columns of sprites/frames the sprite sheet `S` contains
 
@@ -48,7 +48,7 @@ The number of columns of sprites/frames the sprite sheet `S` contains
 S.sprites_y -> int
 ```
 
-**Description**:
+**Description:**
 
 The number of rows of sprites/frames the sprite sheet `S` contains
 
@@ -58,7 +58,7 @@ The number of rows of sprites/frames the sprite sheet `S` contains
 S.source -> image
 ```
 
-**Description**:
+**Description:**
 
 The entire sprite sheet `S` as an image
 
@@ -72,11 +72,11 @@ S.sprite_at(int x, int y) -> image
 
 **Returns** the sprite at the coordinates (`x`, `y`) of the sprite sheet `S`.
 
-**Parameters**:
+**Parameters:**
 * `x` - The 0-based X coordinate
 * `y` - The 0-based Y coordinate
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `x < 0`
 * `y < 0`
 * `x >= S.sprites_x`
@@ -86,6 +86,6 @@ S.sprite_at(int x, int y) -> image
 
 ### See Also
 
-**`sheet` constructor**:
+**`sheet` constructor:**
 
 * [`$Init::sheet`](./init.md#sheet)

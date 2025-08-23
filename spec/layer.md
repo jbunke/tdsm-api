@@ -18,7 +18,7 @@
 L.id -> string
 ```
 
-**Description**:
+**Description:**
 
 The identification code of a layer.
 
@@ -28,7 +28,7 @@ The identification code of a layer.
 L.type -> int
 ```
 
-**Description**:
+**Description:**
 
 The type of layer represented by this object, as an integer matching one of the [layer type constants](./global.md#layer-types).
 
@@ -42,14 +42,14 @@ The type of layer represented by this object, as an integer matching one of the 
 L.add_dependent(layer dependent);
 ```
 
-**Description**:
+**Description:**
 
 Adds `dependent` to the list of layers dependent on `L`. These layers will be updated whenever the value of `L` changes.
 
-**Parameters**:
+**Parameters:**
 * `dependent` - The layer to be made dependent on `L`
 
-**Fails if**:
+**Fails if:**
 * `dependent == L`
 
 ### `add_influences`
@@ -58,11 +58,11 @@ Adds `dependent` to the list of layers dependent on `L`. These layers will be up
 L.add_influences(col_sel[] selections);
 ```
 
-**Description**:
+**Description:**
 
 Adds each element in `selections` as an influencing color selection to this layer `L`.
 
-**Parameters**:
+**Parameters:**
 * `selections` - Array of color selections to be added as influencing selections to layer `L`. Should contain no duplicate elements. Selections are added in array order.
 
 ### `choose`
@@ -71,27 +71,27 @@ Adds each element in `selections` as an influencing color selection to this laye
     L.choose(string asset_code);
     ```
     
-    **Description**:
+    **Description:**
     * Assigns a choice layer to the choice matching the message `asset_code` (if it exists), or...
     * Assigns an asset choice layer to the asset choice with the code `asset_code` (if it exists)
     
-    **Parameters**:
+    **Parameters:**
     * `asset_code` - The message or asset code of the choice layer or asset choice layer, respectively, that is being assigned
     
-    **Fails if**:
+    **Fails if:**
     * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
     
 2.  ```js 
     L.choose(int index);
     ```
     
-    **Description**:
+    **Description:**
     * Assigns a choice layer or an asset choice layer to the (asset) choice at the index `index` among the layer's (asset) choices
     
-    **Parameters**:
+    **Parameters:**
     * `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices
     
-    **Fails if**:
+    **Fails if:**
     * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
     * `index < 0`
     * `index >= L.num_choices()`
@@ -110,11 +110,11 @@ L.compose() -> (string -> image)
 L.get_choice() -> string
 ```
 
-**Returns**:
+**Returns:**
 * The currently selected choice message, if `L` is a choice layer
 * The currently selected asset code, if `L` is an asset choice layer
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
 * `L.type == $TDSM.ACL && L.is_none()`
 
@@ -126,10 +126,10 @@ L.get_choice_at(int index) -> string
 
 **Returns** the choice message or asset code at `index` in layer `L`
 
-**Parameters**:
+**Parameters:**
 * `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
 * `index < 0`
 * `index >= L.num_choices()`
@@ -140,11 +140,11 @@ L.get_choice_at(int index) -> string
 L.get_choice_index() -> int
 ```
 
-**Returns**:
+**Returns:**
 * The index of the currently selected choice in the (asset) choice layer
 * `-1`, if `L` is an asset choice layer and no choice is currently selected
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.CHOICE_L && L.type != $TDSM.ACL`
 
 ### `get_col_sels`
@@ -155,7 +155,7 @@ L.get_col_sels() -> col_sel[]
 
 **Returns** the color selections comprising this color selection layer as an array
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.COL_SEL_L`
 
 ### `get_decision`
@@ -166,7 +166,7 @@ L.get_decision() -> layer
 
 **Returns** the layer outputted by the decision layer `L`'s logic function execution
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.DECISION_L`
 
 ### `get_no_choice`
@@ -177,7 +177,7 @@ L.get_no_choice() -> no_choice
 
 **Returns** the asset choice layer `L`'s no choice configuration
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.ACL`
 
 ### `get_value`
@@ -188,7 +188,7 @@ L.get_value() -> int
 
 **Returns** the current integer value of the math layer `L`
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.MATH_L`
 
 ### `is_locked`
@@ -207,7 +207,7 @@ L.is_none() -> bool
 
 **Returns** `true` if the asset choice layer `L` currently has no selected choice; `false` otherwise.
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.ACL`
 
 ### `lock`
@@ -216,7 +216,7 @@ L.is_none() -> bool
 L.lock();
 ```
 
-**Description**:
+**Description:**
 
 Locks the layer `L`. A locked layer is **exempted** from style-level randomization (see [`style::randomize`](./style.md#randomize)).
 
@@ -228,7 +228,7 @@ L.max_value() -> int
 
 **Returns** the maximum integer value of the math layer `L`.
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.MATH_L`
 
 ### `min_value`
@@ -239,7 +239,7 @@ L.min_value() -> int
 
 **Returns** the minimum integer value of the math layer `L`.
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.MATH_L`
 
 ### `naive_mask_logic`
@@ -250,10 +250,10 @@ L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 
 **Returns** a mask layer logic function that uses `L` as the basis for the mask logic. `L` being the basis for the mask logic means that the mask logic inherits the current asset code, dimensions, and composer from `L`. The resulting function takes as input the [sprite ID](./theory/t_sprite_id.md) and returns the mask data as an image, where every non-transparent pixel is marked to be erased. The result of this function can be passed as the argument to the `logic` parameter in [`$Init::mask_layer`](./init.md#mask_layer).
 
-**Parameters**:
+**Parameters:**
 * `asset_fetcher_func` - A function that takes as input an asset code and returns the source image for that asset code for the mask logic. Images should be the same dimensions and sprite layout as those returned by `L`'s asset fetcher function (see [`$Init::asset_choice_layer`](./init.md#asset_choice_layer) and [`$Init::dependent_layer`](./init.md#dependent_layer)).
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.ACL && L.type != $TDSM.DEPENDENT_L`
 
 ### `none`
@@ -262,11 +262,11 @@ L.naive_mask_logic((string -> image) asset_fetcher_func) -> (string -> image)
 L.none();
 ```
 
-**Description**:
+**Description:**
 
 Sets the asset choice selection of the asset choice layer `L` to no selection.
 
-**Fails if**:
+**Fails if:**
 * `!(L.type == $TDSM.ACL && L.get_no_choice().valid)`
 
 ### `num_choices`
@@ -279,7 +279,7 @@ L.num_choices() -> int
 
 **Returns** the number of (asset) choices of this (asset) choice layer
 
-**Terminates with error if**:
+**Terminates with error if:**
 * `L.type != $TDSM.ACL && L.type != $TDSM.CHOICE_L`
 
 ### `randomize`
@@ -288,7 +288,7 @@ L.num_choices() -> int
 L.randomize();
 ```
 
-**Description**:
+**Description:**
 
 Randomizes the value of `L`. The effect of randomization depends on the type of layer that `L` is:
 
@@ -307,14 +307,14 @@ Randomizes the value of `L`. The effect of randomization depends on the type of 
 L.set_value(int value);
 ```
 
-**Description**:
+**Description:**
 
 Assigns the math layer `L` a value of `value`. `value` will be [clamped](https://en.wikipedia.org/wiki/Clamp_(function)) by `L`'s minimum and maximum if it is out of bounds.
 
-**Parameters**:
+**Parameters:**
 * `value` - The integer to be set as the value of `L`
 
-**Fails if**:
+**Fails if:**
 * `L.type != $TDSM.MATH_L`
 
 ### `unlock`
@@ -323,7 +323,7 @@ Assigns the math layer `L` a value of `value`. `value` will be [clamped](https:/
 L.unlock();
 ```
 
-**Description**:
+**Description:**
 
 Unlocks the layer `L`. A locked layer is **included** in style-level randomization (see [`style::randomize`](./style.md#randomize)).
 
@@ -331,7 +331,7 @@ Unlocks the layer `L`. A locked layer is **included** in style-level randomizati
 
 ###  See Also
 
-**`layer` constructors**:
+**`layer` constructors:**
 
 * [`$Init::asset_choice_layer`](./init.md#asset_choice_layer)
 * [`$Init::asset_layer`](./init.md#asset_layer)

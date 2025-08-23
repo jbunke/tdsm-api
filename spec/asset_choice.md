@@ -16,6 +16,6 @@
 
 ###  See Also
 
-**`asset_choice` constructor**:
+**`asset_choice` constructor:**
 
 * [`$Init::asset_choice`](./init.md#asset_choice)

@@ -37,7 +37,7 @@ If you want a deeper dive into the language or more practical examples of *Delta
 
 The [*DeltaScript* language specification](https://github.com/jbunke/deltascript/blob/master/docs/lang-spec.md) is a formal document describing the syntax and semantics of the *DeltaScript* base language.
 
-> **Note**: <!-- TODO -->
+> **Note:** <!-- TODO -->
 >
 > As of *Top Down Sprite Maker* v1.2.0, the language specification is outdated. Certain sections do not reflect the [current language implementation](https://github.com/jbunke/delta-time/tree/dev/script), while other implementation changes and additions have not yet been documented.
 > 
@@ -85,13 +85,13 @@ random_color(-> color) {
 }
 ```
 
-**Description**:
+**Description:**
 
 Chooses a random RGB color, determines its lightness as a percentage -- where black is 0% and white is 100% -- and prints the color and lightness to the console.
 
-**Header function signature**: no parameters, returns nothing
+**Header function signature:** no parameters, returns nothing
 
-**Helper functions**:
+**Helper functions:**
 * `percent`
 * `lightness`
 * `random_color`
@@ -107,15 +107,15 @@ Chooses a random RGB color, determines its lightness as a percentage -- where bl
 }
 ```
 
-**Description**:
+**Description:**
 
 Returns `true` if and only if the class has perfect attendance, i.e. every student is present; `false` otherwise.
 
-**Header function signature**:
-* **Parameters**: `class_attendance`
-* **Returns**: `bool`
+**Header function signature:**
+* **Parameters:** `class_attendance`
+* **Returns:** `bool`
 
-**Helper functions**: none
+**Helper functions:** none
 
 ## `manifest.tds`
 
@@ -149,7 +149,7 @@ The [header function](#script-layout) of `manifest.tds` must:
 
 ## Global variables
 
-> **Note**: <!-- TODO -->
+> **Note:** <!-- TODO -->
 >
 > Global variables have been implemented since the language specification was last updated; thus, their semantics are not yet formally described.
 
@@ -194,7 +194,7 @@ Though *DeltaScript*'s syntax and conventions were designed to be familiar to pr
 |       Set       |   `{}`   |     `col_sel{}`      |        Set of color selections        |
 |       Map       |  `{:}`   |   `{int : int[]}`    | Map of integers to arrays of integers |
 
-> **Note**:
+> **Note:**
 > 
 > For the differences between collection types and their semantics, please consult [the *DeltaScript* language specification](https://github.com/jbunke/deltascript/blob/master/docs/ls-2-types.md#23--collection-types).
 
@@ -262,14 +262,14 @@ process_colors(color[] cs, (color -> color) f -> color[]) {
 }
 ```
 
-**Description**:
+**Description:**
 
 The second parameter of `::process_colors` expects a functional type with the signature `(color -> color)`, i.e. a color to color function. The script also contains the helper functions `::r_only`,`::g_only`,`::b_only` and `::complement`, all of which are of type `(color -> color)`. These functions are populated into an array in the header function and then iterated over to produce a list of output, where an initial array of colors is transformed by each `(color -> color)` function.
 </details>
 
 ### Function references (`::`)
 
-> **Note**: <!-- TODO -->
+> **Note:** <!-- TODO -->
 > 
 > As of *Top Down Sprite Maker* v1.2.0, function references are only supported for value-returning helper functions. API functions, *DeltaScript* global functions and type member functions cannot be referenced, though this will likely change in a future language version and then be implemented in the interpreter with a *TDSM* update to follow.
 

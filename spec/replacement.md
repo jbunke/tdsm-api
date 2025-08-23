@@ -18,7 +18,7 @@
 R.index -> int
 ```
 
-**Description**:
+**Description:**
 
 The index of the color to be fed into `R`'s replacement function, from among the asset choice or asset layer's influencing color selections.
 
@@ -28,7 +28,7 @@ The index of the color to be fed into `R`'s replacement function, from among the
 R.func -> (color -> color)
 ```
 
-**Description**:
+**Description:**
 
 The color replacement function associated with `R`.
 
@@ -36,10 +36,10 @@ The color replacement function associated with `R`.
 
 ###  See Also
 
-**`replacement` constructor**:
+**`replacement` constructor:**
 
 * [`$Init::replacement`](./init.md#replacement)
 
-**Theory**:
+**Theory:**
 
 * [Color replacement]() <!-- TODO -->

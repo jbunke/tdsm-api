@@ -4,7 +4,7 @@
 
 The *Top Down Sprite Maker* scripting API is a **[domain-specific](https://en.wikipedia.org/wiki/Domain-specific_language) extension** of the [*DeltaScript* programming language](https://github.com/jbunke/deltascript). It is primarily used to write `manifest.tds` scripts that define [sprite styles](./theory/t_style.md), or in conjunction with the [command-line interface](TODO).
 
-The API extends the *DeltaScript* base language by introducing the following **namespaces** and **types**:
+The API extends the *DeltaScript* base language by introducing the following **namespaces** and **types:**
 
 ### Namespaces
 

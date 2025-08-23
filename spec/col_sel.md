@@ -18,7 +18,7 @@
 C.any -> bool
 ```
 
-**Description**:
+**Description:**
 
 `true` if the color selection can be set to any color, not just one of its swatches; `false` otherwise.
 
@@ -28,7 +28,7 @@ C.any -> bool
 C.name -> string
 ```
 
-**Description**:
+**Description:**
 
 A name label associated with this color selection, which is displayed in the user interface if the color selection is part of a color selection layer comprised of multiple color selections.
 
@@ -38,7 +38,7 @@ A name label associated with this color selection, which is displayed in the use
 C.swatches -> color[]
 ```
 
-**Description**:
+**Description:**
 
 The array of colors defined as swatches (presets) for this color selection.
 
@@ -58,7 +58,7 @@ C.get_color() -> color
 C.randomize();
 ```
 
-**Description**:
+**Description:**
 
 Randomly assigns this color selection's color value to one of its swatch colors.
 
@@ -68,11 +68,11 @@ Randomly assigns this color selection's color value to one of its swatch colors.
 C.set_color(color c);
 ```
 
-**Description**:
+**Description:**
 
 Assigns the color `c` to this color selection. [`C.any`](#any) is ignored; `c` is assigned whether it matches a swatch color or not, even if `C.any` is `false`.
 
-**Parameters**:
+**Parameters:**
 * `c` - The color to be assigned
 
 ### `set_from_swatch`
@@ -81,14 +81,14 @@ Assigns the color `c` to this color selection. [`C.any`](#any) is ignored; `c` i
 C.set_from_swatch(int index);
 ```
 
-**Description**:
+**Description:**
 
 Assigns the color to this color selection at the position `index` in `C.swatches`.
 
-**Parameters**:
+**Parameters:**
 * `index` - The index in `C.swatches` of the color to be assigned
 
-**Fails if**:
+**Fails if:**
 * `index < 0`
 * `index >= #| C.swatches`
 
@@ -96,6 +96,6 @@ Assigns the color to this color selection at the position `index` in `C.swatches
 
 ###  See Also
 
-**`col_sel` constructor**:
+**`col_sel` constructor:**
 
 * [`$Init::col_sel`](./init.md#col_sel)

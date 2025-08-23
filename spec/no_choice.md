@@ -18,7 +18,7 @@
 NC.valid -> bool
 ```
 
-**Description**:
+**Description:**
 
 Whether no choice is valid according to the configuration `NC`.
 
@@ -28,7 +28,7 @@ Whether no choice is valid according to the configuration `NC`.
 NC.equal -> bool
 ```
 
-**Description**:
+**Description:**
 
 Whether the probability of no choice being assigned via randomization is equal to that of any asset choice being assigned, according to the configuration `NC`.
 
@@ -42,7 +42,7 @@ Whether the probability of no choice being assigned via randomization is equal t
 NC.prob() -> float
 ```
 
-**Returns**:
+**Returns:**
 * The probability of no choice being assigned via randomization if `NC` was constructed with a custom probability (see [`$Init::no_choice_prob`](./init.md#no_choice_prob))
 * `0.0` otherwise
 
@@ -50,12 +50,12 @@ NC.prob() -> float
 
 ###  See Also
 
-**`no_choice` constructors**:
+**`no_choice` constructors:**
 
 * [`$Init::no_choice_equal`](./init.md#no_choice_equal)
 * [`$Init::no_choice_invalid`](./init.md#no_choice_invalid)
 * [`$Init::no_choice_prob`](./init.md#no_choice_prob)
 
-**Accessor**:
+**Accessor:**
 
 * [`layer::get_no_choice`](./layer.md#get_no_choice)

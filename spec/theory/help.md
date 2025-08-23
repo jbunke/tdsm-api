@@ -4,7 +4,6 @@
 
 This page explains the format, conventions, and terminology used throughout the API specification.
 
-
 <details open>
     <summary><b>Contents</b></summary>
 
@@ -20,7 +19,6 @@ This page explains the format, conventions, and terminology used throughout the 
   * [Failure and termination conditions](#failure-and-termination-conditions)
   * [Function links](#function-links)
 </details>
-
 
 ## Constants, properties and functions
 
@@ -62,13 +60,13 @@ Property and function definitions include a code block that is meant to act as a
 
 For properties and member functions of a particular type, definitions use an ***object placeholder*** to act as a stand-in for an arbitrary object/instance of that type that the property or function being defined is invoked upon. The object placeholder is specified in a note near the top of each type page. It is usually the capitalized first letter of the name of the type.
 
-**Property definition format**:
+**Property definition format:**
 
 ```js 
 <object-placeholder>.<property-name> -> <property-type>
 ```
 
-**Property definition example**:
+**Property definition example:**
 
 ```js 
 L.id -> string
@@ -87,7 +85,7 @@ The syntax of function definitions varies whether functions belong to a namespac
 > 
 > Conversely, value-returning functions in *DeltaScript* are declared with the return arrow and return type inside the same set of parenthesis as the function's parameters.
 > 
-> **Declaration examples**:
+> **Declaration examples:**
 > ```js 
 > // Two parameters: a, b
 > sum(int a, int b -> int) {
@@ -105,13 +103,13 @@ The syntax of function definitions varies whether functions belong to a namespac
 > ```
 </details>
 
-**Void type member function format**:
+**Void type member function format:**
 
 ```js 
 <object-placeholder>.<function-name>(<params>?);
 ```
 
-**Void type member function example**:
+**Void type member function example:**
 
 ```js 
 L.add_dependent(layer dependent);
@@ -119,13 +117,13 @@ L.add_dependent(layer dependent);
 
 [*[ Source ]*](../layer.md#add_dependent)
 
-**Value-returning type member function format**:
+**Value-returning type member function format:**
 
 ```js 
 <object-placeholder>.<function-name>(<params>?) -> <return-type>
 ```
 
-**Value-returning type member function example**:
+**Value-returning type member function example:**
 
 ```js
 S.has_layer(string id) -> bool
@@ -133,13 +131,13 @@ S.has_layer(string id) -> bool
 
 [*[ Source ]*](../style.md#has_layer)
 
-**Void namespace member function format**:
+**Void namespace member function format:**
 
 ```js 
 $<namespace-name>.<function-name>(<params>?);
 ```
 
-**Void namespace member function example**:
+**Void namespace member function example:**
 
 ```js
 $TDSM.load_from_json(string json);
@@ -147,13 +145,13 @@ $TDSM.load_from_json(string json);
 
 [*[ Source ]*](../global.md#load_from_json)
 
-**Value-returning namespace member function format**:
+**Value-returning namespace member function format:**
 
 ```js 
 $<namespace-name>.<function-name>(<params>?) -> <return-type>
 ```
 
-**Value-returning namespace member function example**:
+**Value-returning namespace member function example:**
 
 ```js 
 $Init.col_sel_layer(string id, col_sel[] selections) -> layer
@@ -164,14 +162,14 @@ $Init.col_sel_layer(string id, col_sel[] selections) -> layer
 ### Failure and termination conditions
 
 *DeltaScript* does not support error handling; execution that encounters an error will invariably be suspended. Many function definitions include a section with one of the following headings:
-* **Fails if**:
-* **Terminates with error if**:
+* **Fails if:**
+* **Terminates with error if:**
 
 These headings apply to functions that whose parameters and/or receiver have to avoid specified conditions to produce a result or behave as intended. Rather than throwing an error, *void API functions* will simply ***fail***, and it will be as though the program execution simply skipped over the statement. On the other hand, *value-returning API functions* whose conditions are met will ***throw an error and execution will be suspended***.
 
 A function will fail or terminate if **any** of its failure/termination conditions is met. Where possible, these are formulated as boolean expressions, and can usually be reformulated to ensure correct behaviour.
 
-**Example**:
+**Example:**
 
 ```js
 L.min_value() -> int
@@ -179,9 +177,9 @@ L.min_value() -> int
 
 [*[ Source ]*](../layer.md#min_value)
 
-**Termination with error if**: `L.type != $TDSM.MATH_L`
+**Termination with error if:** `L.type != $TDSM.MATH_L`
 
-**Safe access**:
+**Safe access:**
 
 ```js 
 layer_value_range(layer ml -> int) {
