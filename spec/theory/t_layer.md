@@ -24,8 +24,6 @@
   * [Customization layers](#customization-layers)
 </details>
 
-<!-- TODO -->
-
 ## Types of layers
 
 There are several **types of layers**. Each type is distinct in its functionality and uses.
@@ -42,6 +40,8 @@ Similarly, a layer type is either *rendered* or *non-rendered*. Rendered layers 
 
 **Constructor:** [`$Init::asset_choice_layer`](../init.md#asset_choice_layer)
 
+**Asset choice layers** have the user choose from multiple [asset choices](./t_asset_choice.md). It may be possible for users to choose to assign *no selection*. Asset choice layers can be combined with dependent layers that match their choice to facilitate asset selections that span multiple layers (e.g. defining hairstyle as an asset choice layer with a dependent layer to represent the back of the head, rendered below the base head).
+
 ![](./assets/asset-choice-layer.png)
 
 ### Asset layer
@@ -52,6 +52,8 @@ Similarly, a layer type is either *rendered* or *non-rendered*. Rendered layers 
 
 **Constructor:** [`$Init::asset_layer`](../init.md#asset_layer)
 
+**Asset layers** retrieve a specific image asset and slice it into a sprite sheet.
+
 ### Choice layer
 
 | Assembly eligibility | Customization eligibility |
@@ -59,6 +61,9 @@ Similarly, a layer type is either *rendered* or *non-rendered*. Rendered layers 
 |  No (non-rendered)   |     Yes (non-trivial)     |
 
 **Constructor:** [`$Init::choice_layer`](../init.md#choice_layer)
+
+**Choice layers** have the user choose from multiple text prompts.
+The currently selected choice is usually queried by other logic-based layers like [decision layers](#decision-layer) or [composed layers](#composed-layer).
 
 ![](./assets/choice-layer.png)
 
@@ -70,7 +75,13 @@ Similarly, a layer type is either *rendered* or *non-rendered*. Rendered layers 
 
 **Constructor:** [`$Init::col_sel_layer`](../init.md#col_sel_layer)
 
+**Color selection layers** are containers for one or more [color selections](./t_col_sel.md).
+
 ![](./assets/col-sel-layer.png)
+
+> **Note:**
+> 
+> Perhaps counterintuitively, color selection layers are ***not*** rendered layers. Although changing the color assigned to a color selection is usually reflected as a change in the assembled sprite sheet, color selections are not an assembled visual component themselves.
 
 ### Composed layer
 
@@ -79,6 +90,8 @@ Similarly, a layer type is either *rendered* or *non-rendered*. Rendered layers 
 |    Yes (rendered)    |       No (trivial)        |
 
 **Constructor:** [`$Init::composed_layer`](../init.md#composed_layer)
+
+<!-- TODO -->
 
 ### Decision layer
 
@@ -124,10 +137,20 @@ Similarly, a layer type is either *rendered* or *non-rendered*. Rendered layers 
 
 ## Assembly layers vs. customization layers
 
-Layers in *TDSM* have two purposes: [***assembly***](#assembly-layers) and [***customization***](#customization-layers). Layers that have a visual component and constitute a part of the sprite composition are known as *assembly layers*, while layers that have a choice for users to make are known as *customization layers*. These categories are not mutually exclusive. Certain layer types, such as [*asset choice layers*](#asset-choice-layer), for example, can be both assembly and customization layers.
+Layers in *TDSM* have two purposes: ***assembly*** and ***customization***. Layers that have a visual component and constitute a part of the sprite composition are known as *assembly layers*, while layers that have a choice for users to make are known as *customization layers*. These categories are not mutually exclusive. Certain layer types, such as [*asset choice layers*](#asset-choice-layer), for example, can be both assembly and customization layers.
 
 ### Assembly layers
 
+**Assembly layers** are the layers of a sprite sheet that are composed on top of one another to produce the assembled sprite sheet. In order for a [type of layer](#types-of-layers) to be eligible as an assembly layer, it must be *rendered*.
+
+> **Note:**
+> 
+> Just because a layer that is part of a sprite style is rendered does not mean it has to be defined as an assembly layer. You may opt to pre-compose multiple rendered layers as part of a [composed layer](#composed-layer) and define the composed layer as one of the sprite styles assembly layers instead.
+
 ### Customization layers
+
+**Customization layers** are the layers of a sprite style where the user has a decision to make. In order for a [type of layer](#types-of-layers) to be eligible as a customization layer, it must be *non-trivial*.
+
+A sprite style's customization layers are listed on the right side of the customization page:
 
 ![](./assets/customization-layers.png)
