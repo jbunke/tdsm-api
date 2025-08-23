@@ -91,7 +91,7 @@ The currently selected choice is usually queried by other logic-based layers lik
 
 **Constructor:** [`$Init::composed_layer`](../init.md#composed_layer)
 
-<!-- TODO -->
+**Composed layers** consist of a function that takes a sprite ID (e.g. "left-walk-1") as input and returns an image representing the layer's contents for that sprite ID. They often compose the results of multiple rendered layers together.
 
 ### Decision layer
 
@@ -101,6 +101,10 @@ The currently selected choice is usually queried by other logic-based layers lik
 
 **Constructor:** [`$Init::decision_layer`](../init.md#decision_layer)
 
+**Decision layers** are made up of a function that dynamically produces an output layer every time the user makes a choice (or [randomization](./t_rand_lock.md#randomization) occurs).
+
+A decision layer can be used to dynamically allocate assembly or customization layers. However, a given decision layer that is defined as an assembly or customization layer in a sprite style should only return layers eligible for assembly or customization, respectively.
+
 ### Dependent layer
 
 | Assembly eligibility | Customization eligibility |
@@ -108,6 +112,10 @@ The currently selected choice is usually queried by other logic-based layers lik
 |    Yes (rendered)    |       No (trivial)        |
 
 **Constructor:** [`$Init::dependent_layer`](../init.md#dependent_layer)
+
+**Dependent layers** complement a specific [asset choice layer](#asset-choice-layer), known as their *reference layer*. A dependent layer will dynamically match the asset code of its reference layer. Thus, a dependent layer must be able to produce valid image output for all the possible selections of its reference layer.
+
+As the dependent layer's choice is tied to its reference layer, unlike asset choice layers, dependent layers are *trivial* and cannot be customization layers.
 
 ### Group layer
 
@@ -117,6 +125,10 @@ The currently selected choice is usually queried by other logic-based layers lik
 
 **Constructor:** [`$Init::group_layer`](../init.md#group_layer)
 
+**Group layers** consist of an array of layers, which are known as *member layers*. Group layers should only be used when multiple layers need to be treated as a single layer. The only use case for this that users are likely to encounter is as one of the parallel output options of a [decision layer](#decision-layer). 
+
+<!-- TODO - visual aid -->
+
 ### Mask layer
 
 | Assembly eligibility | Customization eligibility |
@@ -125,6 +137,10 @@ The currently selected choice is usually queried by other logic-based layers lik
 
 **Constructor:** [`$Init::mask_layer`](../init.md#mask_layer)
 
+**Math layers** are auxiliary layers that use logic to define an alpha mask. An alpha mask is an image where every non-transparent pixel is marked as "to be erased". Mask layers can affect one or multiple layers, erasing pixels of their target layers that are captured by their alpha mask.
+
+<!-- TODO - visual aid -->
+
 ### Math layer
 
 | Assembly eligibility | Customization eligibility |
@@ -132,6 +148,8 @@ The currently selected choice is usually queried by other logic-based layers lik
 |  No (non-rendered)   |     Yes (non-trivial)     |
 
 **Constructor:** [`$Init::math_layer`](../init.md#math_layer)
+
+<!-- TODO -->
 
 ![](./assets/math-layer.png)
 
