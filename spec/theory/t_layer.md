@@ -137,7 +137,7 @@ As the dependent layer's choice is tied to its reference layer, unlike asset cho
 
 **Constructor:** [`$Init::mask_layer`](../init.md#mask_layer)
 
-**Math layers** are auxiliary layers that use logic to define an alpha mask. An alpha mask is an image where every non-transparent pixel is marked as "to be erased". Mask layers can affect one or multiple layers, erasing pixels of their target layers that are captured by their alpha mask.
+**Mask layers** are auxiliary layers that use logic to define an alpha mask. An alpha mask is an image where every non-transparent pixel is marked as "to be erased". Mask layers can affect one or multiple layers, erasing pixels of their target layers that are captured by their alpha mask.
 
 <!-- TODO - visual aid -->
 
@@ -149,7 +149,7 @@ As the dependent layer's choice is tied to its reference layer, unlike asset cho
 
 **Constructor:** [`$Init::math_layer`](../init.md#math_layer)
 
-<!-- TODO -->
+**Math layers** allow the user to assign a value from within a range of integers. The layer's current value is usually queried and operated on by other layers.
 
 ![](./assets/math-layer.png)
 
