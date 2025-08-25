@@ -4,7 +4,7 @@
 
 > For the API type page, see [`layer`](../layer.md).
 
-**Layers**, along with [animations](./t_anim.md) and [directions](./t_dir.md), are the fundamental building blocks of a sprite style in *Top Down Sprite Maker*. Sprite styles are designed to compose layers in a paper doll system to generate sprites.
+**Layers**, along with [animations](./t_anim.md) and [directions](./t_dir.md), are the fundamental building blocks of a [sprite style](./t_style.md) in *Top Down Sprite Maker*. Sprite styles are designed to compose layers in a paper doll system to generate sprites.
 
 <details open>
     <summary><b>Contents</b></summary>
