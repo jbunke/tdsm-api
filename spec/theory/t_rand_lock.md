@@ -1,64 +1,57 @@
 [***< Theory***](./README.md)
 
-# Randomization and locking
+# Randomization
 
-Randomization in *Top Down Sprite Maker* is represented by the ![](./assets/random.png) icon.
+**Randomization** in *Top Down Sprite Maker* is represented by the ![](./assets/random.png) icon.
 
-Randomization can occur at multiple levels: color selection, layer, or the sprite
-style itself.
+Randomization can occur at three levels: [color selection](#randomizing-a-color-selection), [layer](#randomizing-a-layer), or the [sprite
+style](#randomizing-a-sprite-style) itself.
 
-Randomizing a color selection
+## Randomizing a color selection
 
-    Randomizing the value of a color selection is quite trivial. The color is
-    assigned to one of the color selection's swatches at random.
+When a [color selection](./t_col_sel.md) is randomized, its color value is assigned to one of its [swatches](./t_col_sel.md#swatches) at random.
 
-Randomizing a layer
+![](./assets/col-sel-randomization.gif)
 
-    All layers can be randomized. Layers of different types process randomization
-    differently. Please read the dedicated page about layers to learn more about
-    layer types.
+## Randomizing a layer
 
-    Choice layers
+All non-trivial layers can be randomized. [Layers of different types](./t_layer.md#types-of-layers) process randomization differently. Please read the dedicated page about layers to learn more about layer types.
 
-        Chooses one of the choice texts at random
+### Choice layers
 
-    Math layers
+The program chooses one of the choice texts at random.
 
-        Chooses a random value from within the layer's minimum and maximum bounds
+### Math layers
 
-    Color selection layers
+The program chooses a random value from within the layer's minimum and maximum bounds.
 
-        Each color selection in the layer is randomized
+### Color selection layers
 
-    Asset choice layers
+Each color selection in the layer is randomized.
 
-        An asset choice layer consists of one or more assets (images) to choose
-        from. A hairstyle layer is an obvious example. Asset choice layers may
-        include a "no choice" option, where not choosing any asset is a valid
-        choice. As per our example, this might be the way a sprite style represents
-        baldness as a choice.
+![](./assets/col-sel-layer-randomization.gif)
 
-        Asset choice layers that support a "no choice" option must define logic
-        that determines the randomization behaviour of no choice. Such layers can
-        either assign an explicit percentage chance of randomization coming up
-        with no choice, or can treat "no choice" as any other choice and give them
-        equal odds of being assigned by randomization.
+### Asset choice layers
 
-Randomizing a sprite style
+The program chooses one of the asset choices, or no choice, if valid, at random.
 
-    An entire character can be randomized at once by clicking the die in the top-
-    right corner of the customization screen. Clicking this die will sequentially
-    randomize every one of a sprite style's customization layers that isn't locked.
+<details>
+    <summary><b>No choice randomization behaviour:</b></summary>
 
-    Layers that are locked are exempted from randomization.
+> An asset choice layer consists of one or more assets (images) to choose from. A hairstyle layer is an obvious example. Asset choice layers may include a "no choice" option (see [`no_choice`](../no_choice.md)), where not choosing any asset is a valid choice. As per the hairstyle layer example, this might be the way a sprite style represents baldness as a choice.
+> 
+> ![](./assets/no-choice-hairstyle.gif)
+> 
+> Asset choice layers that support a "no choice" option must define logic that determines the randomization behaviour of no choice. Such layers can either assign an explicit percentage chance of randomization coming up with no choice (see [`$Init::no_choice_prob`](../init.md#no_choice_prob)), or can treat "no choice" as any other choice and give them equal odds of being assigned by randomization (see [`$Init::no_choice_equal`](../init.md#no_choice_equal)).
+</details>
 
+## Randomizing a sprite style
 
-## Randomization
+An entire character can be randomized at once by clicking the die in the top-right corner of the customization screen. This will sequentially randomize every one of a [sprite style](./t_style.md)'s customization layers that isn't locked.
 
-## Locking
+### Locking
 
-Locking a layer excludes it from style-level randomization. This is an effective strategy for
-constraining randomization.
+Locking a layer excludes it from style-level randomization. This is an effective strategy for constraining randomization.
 
 Constraining randomization means to control certain variables and characteristics
 of a customization. When such layers are locked, their value will persist when
@@ -68,4 +61,4 @@ simply lock those layers and click the die in the top-right corner. The result
 will be a newly randomized set of traits, but those defined by locked layers will
 remain the same.
 
-<!-- TODO -->
+![](./assets/style-randomization.gif)

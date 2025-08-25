@@ -31,7 +31,8 @@ For example, if a sprite style is 8-directional (N, NW, NE, W, E, SW, SE, S) and
 
 **Layout** deals with how frames/sprites are arranged in the exported sprite sheet. Users can determine whether animations should be sequenced vertically or horizontally. Directions will be sequenced along the complementary axis. Additionally, users may determine whether multiple animations should be sequenced in a single row/column and more.
 
-**Example:**
+<details>
+    <summary><b>Example:</b></summary>
 
 | Animation orientation | Multiple animations per row/column? | All animations on a single row/column? | Frames per row/column | Wrap animations across rows/columns? |               Result                |
 |:---------------------:|:-----------------------------------:|:--------------------------------------:|:---------------------:|:------------------------------------:|:-----------------------------------:|
@@ -40,3 +41,4 @@ For example, if a sprite style is 8-directional (N, NW, NE, W, E, SW, SE, S) and
 |      Horizontal       |                 Yes                 |                  Yes                   |          N/A          |                 N/A                  | ![](./assets/trailer-example-3.png) |
 |       Vertical        |                 No                  |                  N/A                   |          N/A          |                 N/A                  | ![](./assets/trailer-example-4.png) |
 |       Vertical        |                 Yes                 |                   No                   |           5           |                 Yes                  | ![](./assets/trailer-example-5.png) |
+</details>

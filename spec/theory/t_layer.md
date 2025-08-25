@@ -101,7 +101,7 @@ The currently selected choice is usually queried by other logic-based layers lik
 
 **Constructor:** [`$Init::decision_layer`](../init.md#decision_layer)
 
-**Decision layers** are made up of a function that dynamically produces an output layer every time the user makes a choice (or [randomization](./t_rand_lock.md#randomization) occurs).
+**Decision layers** are made up of a function that dynamically produces an output layer every time the user makes a choice (or [randomization](./t_rand_lock.md) occurs).
 
 A decision layer can be used to dynamically allocate assembly or customization layers. However, a given decision layer that is defined as an assembly or customization layer in a sprite style should only return layers eligible for assembly or customization, respectively.
 

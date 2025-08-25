@@ -17,7 +17,7 @@ The following theory pages are each dedicated to explaining a *Top Down Sprite M
 * [Directions](./t_dir.md)
 * [Export](./t_export.md)
 * [Layers](./t_layer.md)
-* [Randomization and locking](./t_rand_lock.md)
+* [Randomization](./t_rand_lock.md)
 * [Sprite ID](./t_sprite_id.md)
 * [Sprite styles](./t_style.md)
 

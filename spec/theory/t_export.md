@@ -18,9 +18,11 @@ The JSON can be passed to a game engine to automatically split and tag the sprit
 
 It can also be re-uploaded to *Top Down Sprite Maker* to load that character back into the program, provided the same sprite style (or a sprite style with the same ID and all the same layer IDs and customization choices as outlined in the JSON) has been uploaded to the *TDSM* program instance.
 
-**JSON metadata example:**
+<details>
+    <summary><b>JSON metadata example:</b></summary>
 
 ![](./assets/json-example.png)
+</details>
 
 ## *Stipple Effect* project
 

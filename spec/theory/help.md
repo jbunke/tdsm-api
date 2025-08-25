@@ -77,7 +77,7 @@ L.id -> string
 The syntax of function definitions varies whether functions belong to a namespace or type, and whether they are void or value-returning.
 
 <details>
-    <summary><b>Important</b>: API specification vs. <em>DeltaScript</em> declaration</summary>
+    <summary><b>Important:</b> API specification vs. <em>DeltaScript</em> declaration</summary>
 
 > Function definition syntax in this API specification differs from actual *DeltaScript* function declaration syntax:
 > 

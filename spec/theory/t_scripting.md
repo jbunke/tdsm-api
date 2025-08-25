@@ -147,6 +147,8 @@ The [header function](#script-layout) of `manifest.tds` must:
 // optional helper functions
 ```
 
+The returned `style` should always be created by the `style` constructor: [`$Init::style`](../init.md#style).
+
 ## Global variables
 
 > **Note:** <!-- TODO -->
@@ -156,7 +158,7 @@ The [header function](#script-layout) of `manifest.tds` must:
 Variables declared in the outermost scope of the header function are global and can be referenced in helper functions.
 
 <details>
-  <summary><b>Example</b>:</summary>
+  <summary><b>Example:</b></summary>
 
 ```js 
 () {
@@ -210,7 +212,7 @@ It can be used on expressions of the following types:
 * map (`{K:V}`)
 
 <details>
-  <summary><b>Example</b>:</summary>
+  <summary><b>Example:</b></summary>
 
 ```js 
 print(#|"some string");                           // Prints "11"
@@ -225,7 +227,7 @@ print(#| [ 6, 7, 8, 9, 9, 9, 8, 2, 1, 2 ]);       // Prints "10"
 Functional types are simply a function's type signature. Note that only value-returning functions are valid functional types.
 
 <details>
-  <summary><b>Example</b>:</summary>
+  <summary><b>Example:</b></summary>
 
 ```js
 (color[] cs -> color[]<>) {
@@ -276,7 +278,7 @@ The second parameter of `::process_colors` expects a functional type with the si
 Value-returning helper functions can be referenced by prepending the scope resolution operator (`::`) to their function name. The resulting expression will be of a functional type corresponding to the helper function's signature. Note that, partially for this reason, helper functions should all have unique names.
 
 <details>
-  <summary><b>Example</b>:</summary>
+  <summary><b>Example:</b></summary>
 
 Take the following helper function:
 

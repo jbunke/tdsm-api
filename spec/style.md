@@ -2,9 +2,9 @@
 
 # `style`
 
-| Represents                                                                                                                                                    | Class in *TDSM* source code                                                                                                          |
-|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
-| A particular sprite style, which defines its own set of animations ([`anim`](./anim.md)), customization layers ([`layer`](./layer.md)), and composition rules | [`com.jordanbunke.tdsm.data.style.Style`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/style/Style.java) |
+| Represents                                                                                                                                                                           | Class in *TDSM* source code                                                                                                          |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| A particular [sprite style](./theory/t_style.md), which defines its own set of animations ([`anim`](./anim.md)), customization layers ([`layer`](./layer.md)), and composition rules | [`com.jordanbunke.tdsm.data.style.Style`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/style/Style.java) |
 
 > **Note:**
 >
