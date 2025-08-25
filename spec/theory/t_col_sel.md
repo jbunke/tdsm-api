@@ -22,17 +22,15 @@ Providing no swatches will automatically populate a color selection with *TDSM*'
 
 These are:
 
-* `#000000`
-* `#FFFFFF`
-* `#808080`
-* `#E02020`
-* `#20E020`
-* `#2020E0`
-* `#C06000`
-* `#603010`
-* `#E0C000`
-* `#B000B0`
-* `#FF80C0`
-* `#00B0B0`
-
-<!-- TODO -->
+* [Black (`#000000`)](https://www.colorhexa.com/000000)
+* [White (`#ffffff`)](https://www.colorhexa.com/ffffff)
+* [Grey (`#808080`)](https://www.colorhexa.com/808080)
+* [Red (`#e02020`)](https://www.colorhexa.com/e02020)
+* [Green (`#20e020`)](https://www.colorhexa.com/20e020)
+* [Blue (`#2020e0`)](https://www.colorhexa.com/2020e0)
+* [Orange (`#c06000`)](https://www.colorhexa.com/c06000)
+* [Brown (`#603010`)](https://www.colorhexa.com/603010)
+* [Yellow (`#e0c000`)](https://www.colorhexa.com/e0c000)
+* [Purple (`#b000b0`)](https://www.colorhexa.com/b000b0)
+* [Pink (`#ff80c0`)](https://www.colorhexa.com/ff80c0)
+* [Cyan (`#00b0b0`)](https://www.colorhexa.com/00b0b0)

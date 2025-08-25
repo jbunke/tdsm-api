@@ -17,4 +17,6 @@ They may also determine which directions to include in the export (and in which 
 
 ![](./assets/dir-sequence.gif)
 
-Directions are represented as strings in the API; rather than hard-coding raw strings in your scripts, it is recommended to use the [direction constants](../global.md#directions).
+> **Note:**
+> 
+> Directions are represented as strings in the API. Rather than hard-coding raw strings in your scripts, it is recommended to use the [direction constants](../global.md#directions).

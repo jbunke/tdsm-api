@@ -42,4 +42,4 @@ The color replacement function associated with `R`.
 
 **Theory:**
 
-* [Color replacement]() <!-- TODO -->
+* [Color replacement](./theory/t_replacement.md)

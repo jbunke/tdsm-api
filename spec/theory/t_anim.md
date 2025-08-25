@@ -14,6 +14,7 @@ They may also determine which animations to include in the export (and in which 
 
 ![](./assets/anim-sequence.gif)
 
-Note that:
-* Animations may be static and only consist of a single frame
-* An animation's frame count and frame timings must be the same for all directions
+> **Note:**
+> 
+> * Animations may be static and only consist of a single frame
+> * An animation's frame count and frame timings must be the same for all directions
