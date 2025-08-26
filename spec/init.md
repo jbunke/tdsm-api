@@ -48,7 +48,7 @@ $Init.anim(string id, int[] ticks_per_frame, (int -> int[]) frame_coord_func, bo
 $Init.asset_choice(string id, (color -> replacement) replace_func, col_sel[] selections) -> asset_choice
 ```
 
-**Returns** a newly defined asset choice.
+**Returns** a newly defined [asset choice template](./theory/t_asset_choice.md#asset-choice-templates).
 
 **Parameters:**
 * `id` - The asset choice ID. IDs should be unique among asset choices of an asset choice layer.
@@ -318,7 +318,7 @@ $Init.no_choice_prob(float prob) -> no_choice
 $Init.replacement(int index, (color -> color) func) -> replacement
 ```
 
-**Returns** newly defined color replacement logic.
+**Returns** newly defined [color replacement](./theory/t_replacement.md) logic.
 
 **Parameters:**
 * `index` - The 0-based index of the layer's influencing color selections to fetch as input for `func`. Negative indices or indices otherwise out of range are not processed; such pixels retain their input color.
