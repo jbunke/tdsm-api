@@ -21,6 +21,7 @@ The API extends the *DeltaScript* base language by introducing the following **n
 * [`layer`](./layer.md)
 * [`no_choice`](./no_choice.md)
 * [`replacement`](./replacement.md)
+* [`script`](./script.md)
 * [`sheet`](./sheet.md)
 * [`style`](./style.md)
 

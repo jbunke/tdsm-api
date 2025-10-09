@@ -6,6 +6,14 @@
 > 
 > Release versions refer to the version of *Top Down Sprite Maker* where the listed API changes were introduced. The API **does not** have a separate versioning system.
 
+## v1.3.0
+
+*Released 2025-10-??* <!-- TODO -->
+
+### Added:
+
+* `script` type
+
 ## v1.2.0
 
 *Released 2025-07-16*

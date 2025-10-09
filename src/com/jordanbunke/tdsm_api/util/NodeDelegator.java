@@ -18,6 +18,7 @@ import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.replacement.*;
+import com.jordanbunke.tdsm_api.ast.expr.script.*;
 import com.jordanbunke.tdsm_api.ast.expr.sheet.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.expr.util.*;
@@ -25,6 +26,7 @@ import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.stat.layer.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
+import com.jordanbunke.tdsm_api.ast.stat.script.*;
 import com.jordanbunke.tdsm_api.ast.stat.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.util.*;
 import com.jordanbunke.tdsm_api.ast.type.*;
@@ -40,6 +42,7 @@ public final class NodeDelegator {
             case LayerTypeNode.NAME -> new LayerTypeNode(pos);
             case NoChoiceTypeNode.NAME -> new NoChoiceTypeNode(pos);
             case ReplacementTypeNode.NAME -> new ReplacementTypeNode(pos);
+            case ScriptTypeNode.NAME -> new ScriptTypeNode(pos);
             case SheetTypeNode.NAME -> new SheetTypeNode(pos);
             case StyleTypeNode.NAME -> new StyleTypeNode(pos);
             // extend here
@@ -170,6 +173,7 @@ public final class NodeDelegator {
                     new InitNoChoiceProbNode(pos, args);
             case InitReplacementNode.NAME ->
                     new InitReplacementNode(pos, args);
+            case InitScriptNode.NAME -> new InitScriptNode(pos, args);
             case InitSheetNode.NAME -> new InitSheetNode(pos, args);
             case InitSimpleCoordFuncNode.NAME ->
                     new InitSimpleCoordFuncNode(pos, args);
@@ -345,6 +349,8 @@ public final class NodeDelegator {
             // no_choice
             case NoChoiceProbNode.NAME ->
                     new NoChoiceProbNode(pos, scope, args);
+            // script
+            case RunExprNode.NAME -> new RunExprNode(pos, scope, args);
             // sheet
             case SheetSpriteAtNode.NAME ->
                     new SheetSpriteAtNode(pos, scope, args);
@@ -392,6 +398,8 @@ public final class NodeDelegator {
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
             case SetFromSwatchNode.NAME ->
                     new SetFromSwatchNode(pos, scope, args);
+            // script
+            case RunStatNode.NAME -> new RunStatNode(pos, scope, args);
             // extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +
