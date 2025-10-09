@@ -18,8 +18,11 @@ public final class RunStatNode extends ScriptStatNode {
     }
 
     @Override
-    protected String funcName() {
-        return NAME;
+    public void semanticErrorCheck(final SymbolTable symbolTable) {
+        receiver.semanticErrorCheck(symbolTable);
+
+        for (ExpressionNode arg : arguments.args())
+            arg.semanticErrorCheck(symbolTable);
     }
 
     @Override
@@ -36,5 +39,10 @@ public final class RunStatNode extends ScriptStatNode {
             script.head().execute(scriptTable, args);
 
         return FuncControlFlow.cont();
+    }
+
+    @Override
+    protected String funcName() {
+        return NAME;
     }
 }

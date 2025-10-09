@@ -279,6 +279,8 @@ public final class NodeDelegator {
                     new ReplacementFuncNode(pos, scope);
             case ReplacementIndexNode.NAME ->
                     new ReplacementIndexNode(pos, scope);
+            // script
+            case ScriptPathNode.NAME -> new ScriptPathNode(pos, scope);
             // sheet
             case SheetIntPropNode.SPRITES_X,
                  SheetIntPropNode.SPRITES_Y,

@@ -18,8 +18,11 @@ public final class RunExprNode extends ScriptExprNode {
     }
 
     @Override
-    protected String funcName() {
-        return NAME;
+    public void semanticErrorCheck(final SymbolTable symbolTable) {
+        receiver.semanticErrorCheck(symbolTable);
+
+        for (ExpressionNode arg : arguments.args())
+            arg.semanticErrorCheck(symbolTable);
     }
 
     @Override
@@ -37,7 +40,7 @@ public final class RunExprNode extends ScriptExprNode {
     }
 
     @Override
-    public TypeNode getType(final SymbolTable symbolTable) {
-        return getScript(symbolTable).head().getReturnType();
+    protected String funcName() {
+        return NAME;
     }
 }

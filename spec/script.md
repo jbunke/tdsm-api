@@ -10,6 +10,18 @@
 >
 > The specification uses `S` to represent an arbitrary `script` instance in property and function definitions.
 
+## Properties
+
+### *`path`*
+
+```js 
+S.path -> string
+```
+
+**Description:**
+
+The absolute file path of the source file associated with this script object
+
 ## Functions
 
 ### `run`
