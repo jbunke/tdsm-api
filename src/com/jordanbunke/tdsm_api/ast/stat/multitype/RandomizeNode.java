@@ -21,9 +21,10 @@ public final class RandomizeNode extends GenericFStatNode {
             final TextPosition pos, final ExpressionNode scope,
             final ExpressionNode[] args
     ) {
-        super(pos, scope,
-                new TypeNode[] { LayerTypeNode.get(), StyleTypeNode.get() },
-                new Arguments(args));
+        super(pos, scope, new TypeNode[] {
+                ColSelTypeNode.get(), LayerTypeNode.get(),
+                StyleTypeNode.get()
+        }, new Arguments(args));
     }
 
     @Override

@@ -8,11 +8,15 @@
 
 ## v1.3.0
 
-*Released 2025-10-??* <!-- TODO -->
+*Released 2025-11-??* <!-- TODO -->
 
 ### Added:
 
 * `script` type
+
+### Fixed:
+
+* [#75](https://github.com/jbunke/tdsm/issues/75) - `col_sel::randomize` invocation throws compile error
 
 ## v1.2.0
 
