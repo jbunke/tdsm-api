@@ -45,6 +45,6 @@ public final class SetFromSwatchNode extends ColSelStatNode {
             UpdateChecker.get().ping(cs);
         }
 
-        return null;
+        return FuncControlFlow.cont();
     }
 }

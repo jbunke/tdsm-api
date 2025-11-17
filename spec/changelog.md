@@ -17,6 +17,7 @@
 ### Fixed:
 
 * [#75](https://github.com/jbunke/tdsm/issues/75) - `col_sel::randomize` invocation throws compile error
+* [#78](https://github.com/jbunke/tdsm/issues/78) - `col_sel::set_from_swatch` invocation leads to runtime error
 
 ## v1.2.0
 
