@@ -16,6 +16,7 @@ import com.jordanbunke.tdsm_api.ast.expr.color_proc.*;
 import com.jordanbunke.tdsm_api.ast.expr.ext.*;
 import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
+import com.jordanbunke.tdsm_api.ast.expr.multitype.GetColSelLayerNode;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.replacement.*;
 import com.jordanbunke.tdsm_api.ast.expr.script.*;
@@ -299,6 +300,9 @@ public final class NodeDelegator {
             final String fID, final ExpressionNode... args
     ) {
         return switch (fID) {
+            // multi-type
+            case GetColSelLayerNode.NAME ->
+                    new GetColSelLayerNode(pos, scope, args);
             // style
             case RenderNode.NAME -> new RenderNode(pos, scope, args);
             case GetAnimsNode.ALL -> GetAnimsNode.all(pos, scope, args);
@@ -325,6 +329,10 @@ public final class NodeDelegator {
             case GetLayerNode.HAS -> GetLayerNode.has(pos, scope, args);
             // layer
             case NumChoicesNode.NAME -> new NumChoicesNode(pos, scope, args);
+            case GetAssetChoiceNode.NAME ->
+                    new GetAssetChoiceNode(pos, scope, args);
+            case GetAssetChoiceAtNode.NAME ->
+                    new GetAssetChoiceAtNode(pos, scope, args);
             case GetChoiceNode.NAME -> new GetChoiceNode(pos, scope, args);
             case GetChoiceAtNode.NAME ->
                     new GetChoiceAtNode(pos, scope, args);
@@ -334,8 +342,6 @@ public final class NodeDelegator {
                     new NaiveMaskLogicNode(pos, scope, args);
             case LayerComposeNode.NAME ->
                     new LayerComposeNode(pos, scope, args);
-            case GetColSelLayerNode.NAME ->
-                    new GetColSelLayerNode(pos, scope, args);
             case GetNoChoiceNode.NAME -> new GetNoChoiceNode(pos, scope, args);
             case IsLockedNode.NAME -> new IsLockedNode(pos, scope, args);
             case GetValueNode.GET -> new GetValueNode(pos, scope, args);

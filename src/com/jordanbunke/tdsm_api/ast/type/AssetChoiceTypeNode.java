@@ -1,7 +1,7 @@
 package com.jordanbunke.tdsm_api.ast.type;
 
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
-import com.jordanbunke.tdsm.data.layer.support.AssetChoiceTemplate;
+import com.jordanbunke.tdsm_api.util.AssetChoiceConstruct;
 
 public final class AssetChoiceTypeNode extends ExtTypeNode {
     public static final String NAME = "asset_choice";
@@ -25,7 +25,7 @@ public final class AssetChoiceTypeNode extends ExtTypeNode {
 
     @Override
     public boolean complies(final Object o) {
-        return o instanceof AssetChoiceTemplate;
+        return o instanceof AssetChoiceConstruct;
     }
 
     @Override

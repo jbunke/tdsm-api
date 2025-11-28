@@ -18,9 +18,11 @@ import com.jordanbunke.tdsm.util.StringUtils;
 import com.jordanbunke.tdsm_api.ast.type.AssetChoiceTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.LayerTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.NoChoiceTypeNode;
+import com.jordanbunke.tdsm_api.util.AssetChoiceConstruct;
 import com.jordanbunke.tdsm_api.util.DataProcessor;
 import com.jordanbunke.tdsm_api.util.MetaFuncHelper;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 public final class InitAssetChoiceLayerNode extends InitExprNode {
@@ -53,8 +55,14 @@ public final class InitAssetChoiceLayerNode extends InitExprNode {
                         .mapToInt(o -> (int) o).toArray();
         final ChildFuncNode assetFetcherSource = (ChildFuncNode) vs[2],
                 composerSource = (ChildFuncNode) vs[5];
-        final AssetChoiceTemplate[] choices = ((ScriptArray) vs[3]).stream()
-                .map(o -> (AssetChoiceTemplate) o)
+        final AssetChoiceConstruct[] choiceConstructs = ((ScriptArray) vs[3]).stream()
+                .map(o -> (AssetChoiceConstruct) o)
+                .toArray(AssetChoiceConstruct[]::new);
+        final boolean allTemplates = !Arrays.stream(choiceConstructs)
+                .map(acc -> acc.realized)
+                .reduce(false, Boolean::logicalOr);
+        final AssetChoiceTemplate[] choices = Arrays.stream(choiceConstructs)
+                .map(AssetChoiceConstruct::getTemplate)
                 .toArray(AssetChoiceTemplate[]::new);
         final NoAssetChoice noChoice = (NoAssetChoice) vs[4];
 
@@ -75,6 +83,12 @@ public final class InitAssetChoiceLayerNode extends InitExprNode {
                     ScriptErrorLog.Message.CUSTOM_RT,
                     arguments.get(1).getPosition(),
                     "preview_coord expects an int[] of 2 elements");
+            return null;
+        } else if (!allTemplates) {
+            ScriptErrorLog.fireError(
+                    ScriptErrorLog.Message.CUSTOM_RT,
+                    arguments.get(3).getPosition(),
+                    "choices contains 1 or more realized asset_choice instances");
             return null;
         } else {
             try {

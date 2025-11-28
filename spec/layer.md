@@ -104,6 +104,22 @@ L.compose() -> (string -> image)
 
 **Returns** a function that takes a sprite ID as input and returns this layer's corresponding image output.
 
+### `get_asset_choice`
+
+```js
+L.get_asset_choice() -> asset_choice
+```
+
+<!-- TODO -->
+
+### `get_asset_choice_at`
+
+```js
+L.get_asset_choice_at(int index) -> asset_choice
+```
+
+<!-- TODO -->
+
 ### `get_choice`
 
 ```js 

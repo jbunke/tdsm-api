@@ -6,11 +6,44 @@
 |:-------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | An asset choice used to populate an asset choice layer | [`com.jordanbunke.tdsm.data.layer.support.AssetChoiceTemplate`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/support/AssetChoiceTemplate.java) |
 
-<!-- TODO - note if there are property or function definitions -->
+> **Note:**
+>
+> The specification uses `AC` to represent an arbitrary `asset_choice` instance in property and function definitions.
 
-<!-- TODO - properties -->
+## Properties
 
-<!-- TODO - functions -->
+### *`id`*
+
+```js
+AC.id -> string
+```
+
+**Description:**
+
+The identification code of an asset choice. Each asset choice in an asset choice layer must have a unique ID.
+
+## Functions
+
+### `get_col_sels`
+
+```js
+AC.get_col_sels() -> col_sel[]
+```
+
+**Returns** the influencing color selections defined as part of `AC`.
+
+### `randomize`
+
+```js
+AC.randomize();
+```
+
+**Description:**
+
+Randomizes each color selection that is defined as part of `AC`.
+
+> **Related material:**
+> * [`col_sel::randomize`](./col_sel.md#randomize)
 
 ---
 

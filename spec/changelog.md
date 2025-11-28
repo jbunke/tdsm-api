@@ -8,11 +8,18 @@
 
 ## v1.3.0
 
-*Released 2025-11-??* <!-- TODO -->
+*Released 2025-12-??* <!-- TODO -->
 
 ### Added:
 
 * `script` type
+* `asset_choice` properties and functions
+  * Property `id`
+  * `asset_choice::get_col_sels`
+  * `asset_choice::randomize`
+* `layer` functions
+  * `layer::get_asset_choice`
+  * `layer::get_asset_choice_at`
 
 ### Fixed:
 

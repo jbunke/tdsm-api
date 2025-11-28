@@ -1,22 +1,22 @@
-package com.jordanbunke.tdsm_api.ast.stat.multitype;
+package com.jordanbunke.tdsm_api.ast.expr.multitype;
 
 import com.jordanbunke.delta_time.scripting.ast.nodes.expression.ExpressionNode;
-import com.jordanbunke.delta_time.scripting.ast.nodes.statement.std_lib.DefFuncExecNode;
+import com.jordanbunke.delta_time.scripting.ast.nodes.expression.std_lib.DefFuncCallNode;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.Arguments;
 import com.jordanbunke.delta_time.scripting.util.Receiver;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 
-public abstract class GenericFStatNode extends DefFuncExecNode {
+public abstract class GenericFExprNode extends DefFuncCallNode {
     protected final Receiver receiver;
 
-    GenericFStatNode(
+    GenericFExprNode(
             final TextPosition pos,
             final ExpressionNode scope, final TypeNode[] scopeOptions,
-            final Arguments arguments
+            final TypeNode returnType, final Arguments arguments
     ) {
-        super(arguments, pos);
+        super(arguments, returnType, pos);
 
         receiver = new Receiver(scope, scopeOptions);
     }
