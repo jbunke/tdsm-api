@@ -2,9 +2,9 @@
 
 # `asset_choice`
 
-| Represents                                             | Class in *TDSM* source code                                                                                                                                                      |
-|:-------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| An asset choice used to populate an asset choice layer | [`com.jordanbunke.tdsm.data.layer.support.AssetChoiceTemplate`](https://github.com/jbunke/tdsm/blob/master/src/com/jordanbunke/tdsm/data/layer/support/AssetChoiceTemplate.java) |
+| Represents                                             | Class in *TDSM* source code                                                                                                                                        |
+|:-------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| An asset choice used to populate an asset choice layer | [`com.jordanbunke.tdsm_api.util.AssetChoiceConstruct`](https://github.com/jbunke/tdsm-api/blob/master/src/com/jordanbunke/tdsm_api/util/AssetChoiceConstruct.java) |
 
 > **Note:**
 >
