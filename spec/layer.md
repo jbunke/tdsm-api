@@ -308,14 +308,15 @@ L.randomize();
 
 Randomizes the value of `L`. The effect of randomization depends on the type of layer that `L` is:
 
-|      Layer type       |                                                             Effect                                                             |
-|:---------------------:|:------------------------------------------------------------------------------------------------------------------------------:|
-|  Asset choice layer   | Randomly sets the asset choice layer to one of its asset choice layers, or no choice, depending on its no choice configuration |
-|     Choice layer      |                                  Randomly sets the choice layer to one of its choice messages                                  |
-| Color selection layer |          Randomizes each color selection that comprises the CSL (see [`col_sel::randomize`](./col_sel.md#randomize))          |
-|      Group layer      |                                        Randomizes each member layer of the group layer                                         |
-|      Math layer       |         Randomly assigns the math layer an integer value within the inclusive bounds of its minimum and maximum values         |
-|   Other layer types   |                                                           No effect                                                            |
+|                             Layer type                             |                                                                                                                                      Effect                                                                                                                                      |
+|:------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|    [Asset choice layer](./theory/t_layer.md#asset-choice-layer)    | Randomly sets the asset choice layer to one of its asset choices, or no choice, depending on its no choice configuration. If it chooses an asset choice, the asset choice's color selections are randomized (see [`col_sel::randomize`](./col_sel.md#randomize)), if it has any. |
+|          [Choice layer](./theory/t_layer.md#choice-layer)          |                                                                                                           Randomly sets the choice layer to one of its choice messages                                                                                                           |
+| [Color selection layer](./theory/t_layer.md#color-selection-layer) |                                                                                   Randomizes each color selection that comprises the CSL (see [`col_sel::randomize`](./col_sel.md#randomize))                                                                                    |
+|        [Decision layer](./theory/t_layer.md#decision-layer)        |                                                                                                              Computes its output layer and attempts to randomize it                                                                                                              |
+|           [Group layer](./theory/t_layer.md#group-layer)           |                                                                                                                 Randomizes each member layer of the group layer                                                                                                                  |
+|            [Math layer](./theory/t_layer.md#math-layer)            |                                                                                  Randomly assigns the math layer an integer value within the inclusive bounds of its minimum and maximum values                                                                                  |
+|                         Other layer types                          |                                                                                                                                    No effect                                                                                                                                     |
 
 ### `set_value`
 

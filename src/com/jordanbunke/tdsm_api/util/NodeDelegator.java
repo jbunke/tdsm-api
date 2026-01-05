@@ -382,6 +382,8 @@ public final class NodeDelegator {
             case ResetConfigNode.RESET_LAYOUT, ResetConfigNode.RESET_PADDING,
                  ResetConfigNode.RESET_SEQUENCING ->
                     new ResetConfigNode(pos, scope, args, fID);
+            case ResetCustomizationNode.NAME ->
+                    new ResetCustomizationNode(pos, scope, args);
             case SetEdgeNode.NAME -> new SetEdgeNode(pos, scope, args);
             case SetPaddingNode.NAME -> new SetPaddingNode(pos, scope, args);
             case SetFramesPerDimNode.NAME ->
