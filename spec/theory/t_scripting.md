@@ -15,6 +15,7 @@ This page is an attempt to provide a crash course to the *DeltaScript* language 
 * [`manifest.tds`](#manifesttds)
   * [Folder structure](#folder-structure)
   * [Signature](#signature)
+* [Invoking a script within a script](#invoking-a-script-within-a-script)
 * [Global variables](#global-variables)
 * [Quirks of *DeltaScript*](#quirks-of-deltascript)
   * [Collection syntax](#collection-syntax)
@@ -148,6 +149,53 @@ The [header function](#script-layout) of `manifest.tds` must:
 ```
 
 The returned `style` should always be created by the `style` constructor: [`$Init::style`](../init.md#style).
+
+## Invoking a script within a script
+
+Besides [`manifest.tds`](#manifesttds), you can write other script files, which can be invoked from within another script.
+
+Assume we have two script files `A` and `B`. `A` is being executed.
+
+We have the following folder structure:
+
+```
+D:
+├── dir-1
+│   ├── subdir-1-1
+│   │   └── A.tds
+│   └── subdir-1-2
+└── dir-2
+    └── B.tds
+```
+
+To invoke script `B` from `A`:
+1. Use the constructor [`$Init::script`](../init.md#script) with the absolute path of `B`, or the relative path from `A` to `B`.
+2. Invoke the [`script`](../script.md) object with the function [`script::run`](../script.md#run), either as an expression or statement, depending on whether the script in question returns a value or not.
+
+<details open>
+    <summary><b>Example of <code>A.tds</code></b></summary>
+
+```js
+() {
+    print("Invoking script \"B.tds\"...");
+    
+    ~ script b = $Init.script("../../dir-2/B.tds"); // alternatively $Init.script("D:/dir-2/B.tds");
+    ~ int output = b.run(10, 4);
+    print("Output of \"B.tds\": " + output);
+}
+```
+</details>
+
+<details open>
+    <summary><b>Example of <code>B.tds</code></b></summary>
+
+```js
+// more concisely: (~ int op_a, ~ int op_b -> int) -> op_a + op_b
+(~ int op_a, ~ int op_b -> int) {
+    return op_a + op_b;
+}
+```
+</details>
 
 ## Global variables
 

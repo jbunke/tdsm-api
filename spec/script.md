@@ -26,4 +26,22 @@ The absolute file path of the source file associated with this script object
 
 ### `run`
 
-<!-- TODO -->
+1.  ```js
+    S.run(?);
+    ```
+    
+    **Description:**
+
+    Executes the void script `S`.
+
+    **Terminates with error if:**
+    * Invoked with arguments that do not match the number or types of parameters specified by `S`
+
+2.  ```js 
+    S.run(?) -> ?
+    ```
+    
+    **Returns** a value or object of an unknown type, which is the result of the execution of a value-returning script `S`.
+
+    **Terminates with error if:**
+    * Invoked with arguments that do not match the number or types of parameters specified by `S`

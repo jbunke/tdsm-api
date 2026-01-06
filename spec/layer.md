@@ -86,7 +86,8 @@ Adds each element in `selections` as an influencing color selection to this laye
     ```
     
     **Description:**
-    * Assigns a choice layer or an asset choice layer to the (asset) choice at the index `index` among the layer's (asset) choices
+    
+    Assigns a choice layer or an asset choice layer to the (asset) choice at the index `index` among the layer's (asset) choices
     
     **Parameters:**
     * `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices

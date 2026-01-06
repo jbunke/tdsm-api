@@ -165,7 +165,7 @@ $Init.col_sel_layer(string id, col_sel[] selections) -> layer
 * **Fails if:**
 * **Terminates with error if:**
 
-These headings apply to functions that whose parameters and/or receiver have to avoid specified conditions to produce a result or behave as intended. Rather than throwing an error, *void API functions* will simply ***fail***, and it will be as though the program execution simply skipped over the statement. On the other hand, *value-returning API functions* whose conditions are met will ***throw an error and execution will be suspended***.
+These headings apply to functions that whose parameters and/or receiver have to avoid specified conditions to produce a result or behave as intended. Rather than throwing an error, *void API functions* will simply ***fail***, and it will be as though the program execution simply skipped over the statement. On the other hand, *value-returning API functions* whose termination conditions are met will ***throw an error and execution will be suspended***.
 
 A function will fail or terminate if **any** of its failure/termination conditions is met. Where possible, these are formulated as boolean expressions, and can usually be reformulated to ensure correct behaviour.
 
@@ -186,7 +186,7 @@ layer_value_range(layer ml -> int) {
     if (ml.type == $MTDSM.MATH_L)
         return ml.max_value() - ml.min_value();
     else
-        return 0;
+        return -1;
 }
 ```
 
