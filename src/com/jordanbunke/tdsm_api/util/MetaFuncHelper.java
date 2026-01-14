@@ -4,8 +4,10 @@ import com.jordanbunke.delta_time.scripting.ast.nodes.function.*;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
 import com.jordanbunke.delta_time.scripting.ast.symbol_table.SymbolTable;
 import com.jordanbunke.delta_time.scripting.util.FuncHelper;
-import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
+import com.jordanbunke.delta_time.scripting.util.TypeCompatibility;
+
+import static com.jordanbunke.delta_time.scripting.util.ScriptErrorLog.*;
 
 import java.util.Objects;
 
@@ -33,9 +35,12 @@ public final class MetaFuncHelper {
         if (c.isInstance(obj))
             return c.cast(obj);
 
-        ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                argPos, "Incompatible types: expected " + c.getName() +
-                        " but got " + (obj == null ? "null" : obj.getClass().getName()));
+        final String expectedType = TypeCompatibility.resolveTypeName(c),
+                actualType = obj == null ? "null" :
+                        TypeCompatibility.resolveTypeName(obj.getClass());
+
+        fireRuntimeError(argPos, "Incompatible types: " +
+                expectedButGot(expectedType, actualType));
         return null;
     }
 

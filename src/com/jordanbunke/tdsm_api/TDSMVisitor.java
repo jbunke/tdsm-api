@@ -9,30 +9,47 @@ import com.jordanbunke.delta_time.scripting.ast.nodes.statement.StatementNode;
 import com.jordanbunke.delta_time.scripting.util.ScriptVisitor;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.delta_time.scripting.util.TypeCompatibility;
+import com.jordanbunke.delta_time.sprite.SpriteSheet;
+import com.jordanbunke.tdsm.data.Replacement;
 import com.jordanbunke.tdsm.data.layer.CustomizationLayer;
 import com.jordanbunke.tdsm.data.layer.support.ColorSelection;
 import com.jordanbunke.tdsm.data.layer.support.NoAssetChoice;
 import com.jordanbunke.tdsm.data.style.Style;
-import com.jordanbunke.tdsm_api.ast.type.ExtTypeNode;
+import com.jordanbunke.tdsm_api.ast.type.*;
+import com.jordanbunke.tdsm_api.util.AssetChoiceConstruct;
 import com.jordanbunke.tdsm_api.util.NodeDelegator;
+import com.jordanbunke.tdsm_api.util.TDSMScript;
 import com.jordanbunke.tdsm_api.util.Tokens;
 
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class TDSMVisitor extends ScriptVisitor {
     private static final String SCOPE_SEP = ".";
 
     /*
     * new types:
-    * anim, col_sel, layer, no_choice, style
+    * anim, asset_choice, col_sel, layer, no_choice,
+    * replacement, script, sheet, style
     * */
 
     static {
-        final Set<Class<?>> extensionTypeObjects = Set.of(
-                Animation.class, ColorSelection.class,
-                CustomizationLayer.class, NoAssetChoice.class, Style.class);
+        final Map<ExtTypeNode, Class<?>> extensionTypes = new HashMap<>();
 
-        extensionTypeObjects.forEach(TypeCompatibility::addBaseType);
+        extensionTypes.put(AnimTypeNode.get(), Animation.class);
+        extensionTypes.put(AssetChoiceTypeNode.get(), AssetChoiceConstruct.class);
+        extensionTypes.put(ColSelTypeNode.get(), ColorSelection.class);
+        extensionTypes.put(LayerTypeNode.get(), CustomizationLayer.class);
+        extensionTypes.put(NoChoiceTypeNode.get(), NoAssetChoice.class);
+        extensionTypes.put(ReplacementTypeNode.get(), Replacement.class);
+        extensionTypes.put(ScriptTypeNode.get(), TDSMScript.class);
+        extensionTypes.put(SheetTypeNode.get(), SpriteSheet.class);
+        extensionTypes.put(StyleTypeNode.get(), Style.class);
+
+        extensionTypes.keySet().forEach(k -> {
+            final Class<?> v = extensionTypes.get(k);
+            TypeCompatibility.addBaseType(k, v);
+        });
     }
 
     @Override

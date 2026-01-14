@@ -18,7 +18,7 @@ public abstract class ExtTypeNode extends TypeNode {
 
     @Override
     public final boolean equals(final Object o) {
-        return getClass().equals(o.getClass()) ||
+        return o != null && getClass().equals(o.getClass()) ||
                 (o instanceof BaseTypeNode t && t.isWildcard());
     }
 
