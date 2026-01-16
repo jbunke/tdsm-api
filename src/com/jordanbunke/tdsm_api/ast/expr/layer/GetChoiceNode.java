@@ -30,15 +30,13 @@ public final class GetChoiceNode extends LayerExprNode {
 
         if (layer instanceof ChoosingLayer cl) {
             if (cl instanceof AssetChoiceLayer acl && !acl.hasChoice())
-                ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                        getPosition(),
+                ScriptErrorLog.runtimeError(getPosition(),
                         "Asset choice layer '" + receiver.receiver() +
                                 "' has no selection");
             else
                 return cl.getChoiceID();
         } else
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    getPosition(),
+            ScriptErrorLog.runtimeError(getPosition(),
                     "Layer is not an asset choice layer or a choice layer");
         return null;
     }

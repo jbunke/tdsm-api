@@ -39,7 +39,7 @@ public final class MetaFuncHelper {
                 actualType = obj == null ? "null" :
                         TypeCompatibility.resolveTypeName(obj.getClass());
 
-        fireRuntimeError(argPos, "Incompatible types: " +
+        runtimeError(argPos, "Incompatible types: " +
                 expectedButGot(expectedType, actualType));
         return null;
     }

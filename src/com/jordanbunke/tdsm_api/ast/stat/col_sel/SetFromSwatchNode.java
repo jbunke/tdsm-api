@@ -34,8 +34,7 @@ public final class SetFromSwatchNode extends ColSelStatNode {
         final Color[] swatches = cs.getSwatches();
 
         if (index < 0 || index >= swatches.length)
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "The index (" + index + ") is invalid for the " +
                             "number of swatches in the color selection '" +
                             receiver.receiver() + "' (" +

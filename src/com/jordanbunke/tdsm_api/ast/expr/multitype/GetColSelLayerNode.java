@@ -51,8 +51,7 @@ public final class GetColSelLayerNode extends GenericFExprNode {
                         .peek(cs -> UpdateChecker.get().link(cs, layer))
                         .map(cs -> cs));
             } else {
-                ScriptErrorLog.fireError(
-                        ScriptErrorLog.Message.CUSTOM_RT, getPosition(),
+                ScriptErrorLog.runtimeError(getPosition(),
                         "The layer '" + receiver.receiver() +
                                 "' is not a color selection layer");
             }
@@ -67,8 +66,7 @@ public final class GetColSelLayerNode extends GenericFExprNode {
                         .peek(cs -> UpdateChecker.get().link(cs, layer))
                         .map(cs -> cs));
             } else {
-                ScriptErrorLog.fireError(
-                        ScriptErrorLog.Message.CUSTOM_RT, getPosition(),
+                ScriptErrorLog.runtimeError(getPosition(),
                         "Attempting to call " + NAME +
                                 "() on an unrealized asset_choice object '" +
                                 receiver.receiver() + "'");

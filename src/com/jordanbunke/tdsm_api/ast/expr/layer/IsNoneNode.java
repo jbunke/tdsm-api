@@ -30,8 +30,7 @@ public final class IsNoneNode extends LayerExprNode {
         if (layer instanceof AssetChoiceLayer acl)
             return !acl.hasChoice();
         else
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT, getPosition(),
+            ScriptErrorLog.runtimeError(getPosition(),
                     "The layer '" + receiver.receiver() +
                             "' is not an asset choice layer");
 

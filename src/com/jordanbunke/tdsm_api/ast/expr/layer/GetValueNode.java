@@ -60,8 +60,7 @@ public final class GetValueNode extends LayerExprNode {
                 default -> ml.getValue();
             };
         } else
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT, getPosition(),
+            ScriptErrorLog.runtimeError(getPosition(),
                     "The layer '" + receiver.receiver() +
                             "' is not a math layer");
 

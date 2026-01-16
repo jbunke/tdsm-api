@@ -35,13 +35,11 @@ public final class GetAssetChoiceAtNode extends LayerExprNode {
             final int numChoices = acl.getNumChoices();
 
             if (index < 0) {
-                ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                        arguments.get(0).getPosition(),
+                ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                         "Index cannot be negative");
                 return null;
             } else if (index >= numChoices) {
-                ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                        arguments.get(0).getPosition(),
+                ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                         "Index must be less than the number of possible choices");
                 return null;
             }
@@ -49,8 +47,7 @@ public final class GetAssetChoiceAtNode extends LayerExprNode {
             return AssetChoiceConstruct.real(acl.getChoiceAt(index));
         }
 
-        ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                getPosition(),
+        ScriptErrorLog.runtimeError(getPosition(),
                 "Attempting to call " + NAME +
                         "() on a layer isn't an asset choice layer");
         return null;

@@ -37,10 +37,9 @@ public final class InitScriptNode extends InitExprNode {
         final String content = FileIO.readFile(scriptPath);
 
         if (content == null)
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT, arg.getPosition(),
+            ScriptErrorLog.runtimeError(arg.getPosition(),
                     "Failed to read a script file at path \"" +
-                            scriptFP + "\"");
+                            PathHelper.formatPathString(scriptFP) + "\"");
 
         final HeadFuncNode script = TDSMInterpreter.get().build(content);
         script.semanticErrorCheck(SymbolTable.root(script, scriptPath));

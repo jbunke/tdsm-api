@@ -36,9 +36,7 @@ public final class InitColSelNode extends InitExprNode {
                 .map(o -> (Color) o).toArray(Color[]::new);
 
         if (name.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Color selection name must be non-empty");
             return null;
         }

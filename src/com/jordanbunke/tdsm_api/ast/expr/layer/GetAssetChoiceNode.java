@@ -32,13 +32,11 @@ public final class GetAssetChoiceNode extends LayerExprNode {
             if (acl.hasChoice())
                 return AssetChoiceConstruct.real(acl.getChoice());
             else
-                ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                        getPosition(),
+                ScriptErrorLog.runtimeError(getPosition(),
                         "Asset choice layer '" + receiver.receiver() +
                                 "' has no selection");
         } else
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    getPosition(),
+            ScriptErrorLog.runtimeError(getPosition(),
                     "Attempting to call " + NAME +
                             "() on a layer isn't an asset choice layer");
 

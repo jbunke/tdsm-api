@@ -76,8 +76,8 @@ public final class InitStyleNode extends InitExprNode {
             final int[] wh, final TextPosition argPos
     ) {
         if (wh.length != 2) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    argPos, "Argument bounds expected a two-integer array; received " +
+            ScriptErrorLog.runtimeError(argPos,
+                    "Argument bounds expected a two-integer array; received " +
                             wh.length);
             return null;
         }
@@ -85,13 +85,13 @@ public final class InitStyleNode extends InitExprNode {
         final int w = wh[0], h = wh[1];
 
         if (w < MIN_SPRITE_EXPORT_W || w > MAX_SPRITE_EXPORT_W) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    argPos, "Width (" + w + ") must be between " +
+            ScriptErrorLog.runtimeError(argPos,
+                    "Width (" + w + ") must be between " +
                             MIN_SPRITE_EXPORT_W + " and " + MAX_SPRITE_EXPORT_W);
             return null;
         } else if (h < MIN_SPRITE_EXPORT_H || h > MAX_SPRITE_EXPORT_H) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    argPos, "Height (" + h + ") must be between " +
+            ScriptErrorLog.runtimeError(argPos,
+                    "Height (" + h + ") must be between " +
                             MIN_SPRITE_EXPORT_H + " and " + MAX_SPRITE_EXPORT_H);
             return null;
         }

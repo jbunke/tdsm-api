@@ -30,8 +30,7 @@ public final class GetChoiceIndexNode extends LayerExprNode {
         if (layer instanceof ChoosingLayer cl)
             return cl.getChoiceIndex();
 
-        ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                getPosition(),
+        ScriptErrorLog.runtimeError(getPosition(),
                 "Layer is not an asset choice layer or a choice layer");
         return null;
     }

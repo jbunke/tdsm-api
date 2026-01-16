@@ -33,13 +33,11 @@ public final class GetChoiceAtNode extends LayerExprNode {
             final int numChoices = cl.getNumChoices();
 
             if (index < 0) {
-                ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                        arguments.get(0).getPosition(),
+                ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                         "Index cannot be negative");
                 return null;
             } else if (index >= numChoices) {
-                ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                        arguments.get(0).getPosition(),
+                ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                         "Index must be less than the number of possible choices");
                 return null;
             }
@@ -47,8 +45,7 @@ public final class GetChoiceAtNode extends LayerExprNode {
             return cl.getChoiceIDAt(index);
         }
 
-        ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                getPosition(),
+        ScriptErrorLog.runtimeError(getPosition(),
                 "Layer is not an asset choice layer or a choice layer");
         return null;
     }

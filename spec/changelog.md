@@ -8,11 +8,12 @@
 
 ## v1.3.0
 
-*Released 2025-12-??* <!-- TODO -->
+*Released 2026-01-19* <!-- TODO -->
 
 ### Added:
 
 * `script` type
+  * Constructor: `$Init::script`
 * `asset_choice` properties and functions
   * Property `id`
   * `asset_choice::get_col_sels`
@@ -20,6 +21,8 @@
 * `layer` functions
   * `layer::get_asset_choice`
   * `layer::get_asset_choice_at`
+* `style` functions
+  * `style::reset_custom`
 
 ### Fixed:
 

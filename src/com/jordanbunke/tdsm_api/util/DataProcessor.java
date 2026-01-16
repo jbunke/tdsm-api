@@ -68,9 +68,8 @@ public final class DataProcessor {
                         .findFirst().orElse(null);
 
         if (numDirs == null) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    argPos, "Passed " + amount +
-                            " directions to the style initializer, which is an invalid amount.");
+            ScriptErrorLog.runtimeError(argPos, "Passed " + amount +
+                    " directions to the style initializer, which is an invalid amount.");
             return null;
         }
 
@@ -80,10 +79,9 @@ public final class DataProcessor {
                 .peek(included::remove).toArray(Directions.Dir[]::new);
 
         if (order.length != amount) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    argPos, (amount - order.length) +
-                            " directions provided were either invalid for a " +
-                            numDirs + "-directional sprite style or were duplicates");
+            ScriptErrorLog.runtimeError(argPos, (amount - order.length) +
+                    " directions provided were either invalid for a " +
+                    numDirs + "-directional sprite style or were duplicates");
             return null;
         }
 

@@ -29,8 +29,7 @@ public final class GetStyleNode extends GlobalExprNode {
         final Style style = Styles.get(id);
 
         if (style == null)
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT, idExp.getPosition(),
+            ScriptErrorLog.runtimeError(idExp.getPosition(),
                     "Could not identify a sprite style matching the id \"" +
                             id + "\"");
 

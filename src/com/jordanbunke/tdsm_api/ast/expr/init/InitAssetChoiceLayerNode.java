@@ -67,27 +67,19 @@ public final class InitAssetChoiceLayerNode extends InitExprNode {
         final NoAssetChoice noChoice = (NoAssetChoice) vs[4];
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Layer ID must be non-empty");
             return null;
         } else if (bounds.length != 2) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "dims expects an int[] of 2 elements");
             return null;
         } else if (previewAt.length != 2) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "preview_coord expects an int[] of 2 elements");
             return null;
         } else if (!allTemplates) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(3).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(3).getPosition(),
                     "choices contains 1 or more realized asset_choice instances");
             return null;
         } else {
@@ -113,9 +105,7 @@ public final class InitAssetChoiceLayerNode extends InitExprNode {
                 return new AssetChoiceLayer(id, StringUtils.nameFromID(id),
                         dims, getter, choices, composer, noChoice, preview);
             } catch (IllegalArgumentException iae) {
-                ScriptErrorLog.fireError(
-                        ScriptErrorLog.Message.CUSTOM_RT,
-                        arguments.get(1).getPosition(),
+                ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                         "Width and height of the layer must be positive");
                 return null;
             }

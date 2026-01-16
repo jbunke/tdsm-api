@@ -51,8 +51,7 @@ public final class NodeDelegator {
         };
 
         if (t == null)
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_CT,
-                    pos, "Undefined type \"" + typeID + "\"");
+            ScriptErrorLog.semanticError(pos, "Undefined type \"" + typeID + "\"");
 
         return t;
     }

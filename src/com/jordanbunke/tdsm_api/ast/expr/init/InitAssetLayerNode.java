@@ -46,15 +46,11 @@ public final class InitAssetLayerNode extends InitExprNode {
                 replaceSource = (ChildFuncNode) vs[4];
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Layer ID must be non-empty");
             return null;
         } else if (dims.length != 2) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "dims expects an int[] of 2 elements");
             return null;
         } else {
@@ -77,9 +73,7 @@ public final class InitAssetLayerNode extends InitExprNode {
 
                 return new AssetLayer(id, bounds, asset, composer, replaceFunc);
             } catch (IllegalArgumentException iae) {
-                ScriptErrorLog.fireError(
-                        ScriptErrorLog.Message.CUSTOM_RT,
-                        arguments.get(1).getPosition(),
+                ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                         "Width and height of the layer must be positive");
                 return null;
             }
