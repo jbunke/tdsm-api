@@ -86,7 +86,8 @@ Adds each element in `selections` as an influencing color selection to this laye
     ```
     
     **Description:**
-    * Assigns a choice layer or an asset choice layer to the (asset) choice at the index `index` among the layer's (asset) choices
+    
+    Assigns a choice layer or an asset choice layer to the (asset) choice at the index `index` among the layer's (asset) choices
     
     **Parameters:**
     * `index` - The index of the (asset) choice among the choice layer or asset choice layer's array of (asset) choices
@@ -103,6 +104,22 @@ L.compose() -> (string -> image)
 ```
 
 **Returns** a function that takes a sprite ID as input and returns this layer's corresponding image output.
+
+### `get_asset_choice`
+
+```js
+L.get_asset_choice() -> asset_choice
+```
+
+<!-- TODO -->
+
+### `get_asset_choice_at`
+
+```js
+L.get_asset_choice_at(int index) -> asset_choice
+```
+
+<!-- TODO -->
 
 ### `get_choice`
 
@@ -292,14 +309,15 @@ L.randomize();
 
 Randomizes the value of `L`. The effect of randomization depends on the type of layer that `L` is:
 
-|      Layer type       |                                                             Effect                                                             |
-|:---------------------:|:------------------------------------------------------------------------------------------------------------------------------:|
-|  Asset choice layer   | Randomly sets the asset choice layer to one of its asset choice layers, or no choice, depending on its no choice configuration |
-|     Choice layer      |                                  Randomly sets the choice layer to one of its choice messages                                  |
-| Color selection layer |          Randomizes each color selection that comprises the CSL (see [`col_sel::randomize`](./col_sel.md#randomize))          |
-|      Group layer      |                                        Randomizes each member layer of the group layer                                         |
-|      Math layer       |         Randomly assigns the math layer an integer value within the inclusive bounds of its minimum and maximum values         |
-|   Other layer types   |                                                           No effect                                                            |
+|                             Layer type                             |                                                                                                                                      Effect                                                                                                                                      |
+|:------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|    [Asset choice layer](./theory/t_layer.md#asset-choice-layer)    | Randomly sets the asset choice layer to one of its asset choices, or no choice, depending on its no choice configuration. If it chooses an asset choice, the asset choice's color selections are randomized (see [`col_sel::randomize`](./col_sel.md#randomize)), if it has any. |
+|          [Choice layer](./theory/t_layer.md#choice-layer)          |                                                                                                           Randomly sets the choice layer to one of its choice messages                                                                                                           |
+| [Color selection layer](./theory/t_layer.md#color-selection-layer) |                                                                                   Randomizes each color selection that comprises the CSL (see [`col_sel::randomize`](./col_sel.md#randomize))                                                                                    |
+|        [Decision layer](./theory/t_layer.md#decision-layer)        |                                                                                                              Computes its output layer and attempts to randomize it                                                                                                              |
+|           [Group layer](./theory/t_layer.md#group-layer)           |                                                                                                                 Randomizes each member layer of the group layer                                                                                                                  |
+|            [Math layer](./theory/t_layer.md#math-layer)            |                                                                                  Randomly assigns the math layer an integer value within the inclusive bounds of its minimum and maximum values                                                                                  |
+|                         Other layer types                          |                                                                                                                                    No effect                                                                                                                                     |
 
 ### `set_value`
 

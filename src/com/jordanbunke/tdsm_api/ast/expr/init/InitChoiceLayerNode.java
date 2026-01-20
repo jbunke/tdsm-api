@@ -33,15 +33,11 @@ public final class InitChoiceLayerNode extends InitExprNode {
                 .map(String::valueOf).toArray(String[]::new);
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Layer ID must be non-empty");
             return null;
         } else if (choices.length == 0) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "Choice layer must contain at least one choice");
             return null;
         }

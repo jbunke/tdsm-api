@@ -31,8 +31,7 @@ public final class GetNoChoiceNode extends LayerExprNode {
         if (layer instanceof AssetChoiceLayer acl)
             return acl.noAssetChoice;
         else
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT, getPosition(),
+            ScriptErrorLog.runtimeError(getPosition(),
                     "The layer '" + receiver.receiver() +
                             "' is not an asset choice layer");
 

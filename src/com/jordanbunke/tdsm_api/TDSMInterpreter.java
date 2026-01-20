@@ -4,6 +4,7 @@ import com.jordanbunke.clink.Clink;
 import com.jordanbunke.delta_time.scripting.Interpreter;
 import com.jordanbunke.delta_time.scripting.ast.nodes.function.HeadFuncNode;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
+import com.jordanbunke.delta_time.scripting.util.Error;
 import com.jordanbunke.delta_time.scripting.util.ScriptErrorLog;
 import com.jordanbunke.delta_time.scripting.util.TextPosition;
 import com.jordanbunke.tdsm_api.util.MetaFuncHelper;
@@ -52,9 +53,9 @@ public final class TDSMInterpreter extends Interpreter {
 
     @Override
     public void displayErrors() {
-        final String[] errors = ScriptErrorLog.getErrors();
+        final Error[] errors = ScriptErrorLog.getErrors();
 
-        for (String error : errors)
-            Clink.writeError(error);
+        for (Error error : errors)
+            Clink.writeError(error.toString());
     }
 }

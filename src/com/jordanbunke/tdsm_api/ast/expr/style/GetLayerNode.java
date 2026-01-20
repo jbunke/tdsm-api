@@ -53,8 +53,7 @@ public final class GetLayerNode extends StyleExprNode {
 
         if (get) {
             if (layer == null)
-                ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                        arguments.get(0).getPosition(),
+                ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                         "The style '" + receiver.receiver() +
                                 "' does not have a layer matching the ID '" +
                                 id + "'");

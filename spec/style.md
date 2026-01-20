@@ -283,6 +283,26 @@ S.render() -> image
 **Terminates with error if:**
 * `!S.has_output()` <!-- TODO - implementation -->
 
+### `reset_custom`
+
+```js
+S.reset_custom();
+```
+
+**Description:**
+
+Resets all the top-level customization layers of sprite style `S` to their initial/default state. The effect of being reset depends on the type of layer:
+
+|                             Layer type                             |                                                                                                Effect                                                                                                 |
+|:------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|    [Asset choice layer](./theory/t_layer.md#asset-choice-layer)    | Sets the asset choice layer to no choice if no choice is valid, or to the first asset choice if it is not. If the first asset choice is chosen, its color selections are reset to their first swatch. |
+|          [Choice layer](./theory/t_layer.md#choice-layer)          |                                                                          Resets the choice layer to its first choice message                                                                          |
+| [Color selection layer](./theory/t_layer.md#color-selection-layer) |                                                                Resets each color selection that comprises the CSL to its first swatch                                                                 |
+|        [Decision layer](./theory/t_layer.md#decision-layer)        |                                                                          Computes its output layer and attempts to reset it                                                                           |
+|           [Group layer](./theory/t_layer.md#group-layer)           |                                                                              Resets each member layer of the group layer                                                                              |
+|            [Math layer](./theory/t_layer.md#math-layer)            |                              Assigns the math layer its initial/default value, which was specified in the constructor (see [`$Init::math_layer`](./init.md#math_layer))                               |
+|                         Other layer types                          |                                                                                               No effect                                                                                               |
+
 ### `reset_layout`
 
 ```js

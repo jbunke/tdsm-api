@@ -36,9 +36,7 @@ public final class InitGroupLayerNode extends InitExprNode {
                 .toArray(CustomizationLayer[]::new);
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Layer ID must be non-empty");
             return null;
         }

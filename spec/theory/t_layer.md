@@ -40,7 +40,7 @@ Similarly, a layer type is either *rendered* or *non-rendered*. Rendered layers 
 
 **Constructor:** [`$Init::asset_choice_layer`](../init.md#asset_choice_layer)
 
-**Asset choice layers** have the user choose from multiple [asset choices](./t_asset_choice.md). It may be possible for users to choose to assign *no selection*. Asset choice layers can be combined with dependent layers that match their choice to facilitate asset selections that span multiple layers (e.g. defining hairstyle as an asset choice layer with a dependent layer to represent the back of the head, rendered below the base head).
+**Asset choice layers** have the user choose from multiple [asset choices](./t_asset_choice.md). It may be possible for users to choose to assign *no selection*. Asset choice layers can be combined with [dependent layers](#dependent-layer) that match their choice to facilitate asset selections that span multiple layers (e.g. defining hairstyle as an asset choice layer with a dependent layer to represent the back of the head, rendered below the base head).
 
 ![](./assets/asset-choice-layer.png)
 

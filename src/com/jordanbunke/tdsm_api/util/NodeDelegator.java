@@ -16,8 +16,10 @@ import com.jordanbunke.tdsm_api.ast.expr.color_proc.*;
 import com.jordanbunke.tdsm_api.ast.expr.ext.*;
 import com.jordanbunke.tdsm_api.ast.expr.init.*;
 import com.jordanbunke.tdsm_api.ast.expr.layer.*;
+import com.jordanbunke.tdsm_api.ast.expr.multitype.GetColSelLayerNode;
 import com.jordanbunke.tdsm_api.ast.expr.no_choice.*;
 import com.jordanbunke.tdsm_api.ast.expr.replacement.*;
+import com.jordanbunke.tdsm_api.ast.expr.script.*;
 import com.jordanbunke.tdsm_api.ast.expr.sheet.*;
 import com.jordanbunke.tdsm_api.ast.expr.style.*;
 import com.jordanbunke.tdsm_api.ast.expr.util.*;
@@ -25,6 +27,7 @@ import com.jordanbunke.tdsm_api.ast.stat.global.*;
 import com.jordanbunke.tdsm_api.ast.stat.col_sel.*;
 import com.jordanbunke.tdsm_api.ast.stat.layer.*;
 import com.jordanbunke.tdsm_api.ast.stat.multitype.RandomizeNode;
+import com.jordanbunke.tdsm_api.ast.stat.script.*;
 import com.jordanbunke.tdsm_api.ast.stat.style.*;
 import com.jordanbunke.tdsm_api.ast.stat.util.*;
 import com.jordanbunke.tdsm_api.ast.type.*;
@@ -40,6 +43,7 @@ public final class NodeDelegator {
             case LayerTypeNode.NAME -> new LayerTypeNode(pos);
             case NoChoiceTypeNode.NAME -> new NoChoiceTypeNode(pos);
             case ReplacementTypeNode.NAME -> new ReplacementTypeNode(pos);
+            case ScriptTypeNode.NAME -> new ScriptTypeNode(pos);
             case SheetTypeNode.NAME -> new SheetTypeNode(pos);
             case StyleTypeNode.NAME -> new StyleTypeNode(pos);
             // extend here
@@ -47,8 +51,7 @@ public final class NodeDelegator {
         };
 
         if (t == null)
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_CT,
-                    pos, "Undefined type \"" + typeID + "\"");
+            ScriptErrorLog.semanticError(pos, "Undefined type \"" + typeID + "\"");
 
         return t;
     }
@@ -170,6 +173,7 @@ public final class NodeDelegator {
                     new InitNoChoiceProbNode(pos, args);
             case InitReplacementNode.NAME ->
                     new InitReplacementNode(pos, args);
+            case InitScriptNode.NAME -> new InitScriptNode(pos, args);
             case InitSheetNode.NAME -> new InitSheetNode(pos, args);
             case InitSimpleCoordFuncNode.NAME ->
                     new InitSimpleCoordFuncNode(pos, args);
@@ -275,6 +279,8 @@ public final class NodeDelegator {
                     new ReplacementFuncNode(pos, scope);
             case ReplacementIndexNode.NAME ->
                     new ReplacementIndexNode(pos, scope);
+            // script
+            case ScriptPathNode.NAME -> new ScriptPathNode(pos, scope);
             // sheet
             case SheetIntPropNode.SPRITES_X,
                  SheetIntPropNode.SPRITES_Y,
@@ -293,6 +299,9 @@ public final class NodeDelegator {
             final String fID, final ExpressionNode... args
     ) {
         return switch (fID) {
+            // multi-type
+            case GetColSelLayerNode.NAME ->
+                    new GetColSelLayerNode(pos, scope, args);
             // style
             case RenderNode.NAME -> new RenderNode(pos, scope, args);
             case GetAnimsNode.ALL -> GetAnimsNode.all(pos, scope, args);
@@ -319,6 +328,10 @@ public final class NodeDelegator {
             case GetLayerNode.HAS -> GetLayerNode.has(pos, scope, args);
             // layer
             case NumChoicesNode.NAME -> new NumChoicesNode(pos, scope, args);
+            case GetAssetChoiceNode.NAME ->
+                    new GetAssetChoiceNode(pos, scope, args);
+            case GetAssetChoiceAtNode.NAME ->
+                    new GetAssetChoiceAtNode(pos, scope, args);
             case GetChoiceNode.NAME -> new GetChoiceNode(pos, scope, args);
             case GetChoiceAtNode.NAME ->
                     new GetChoiceAtNode(pos, scope, args);
@@ -328,8 +341,6 @@ public final class NodeDelegator {
                     new NaiveMaskLogicNode(pos, scope, args);
             case LayerComposeNode.NAME ->
                     new LayerComposeNode(pos, scope, args);
-            case GetColSelLayerNode.NAME ->
-                    new GetColSelLayerNode(pos, scope, args);
             case GetNoChoiceNode.NAME -> new GetNoChoiceNode(pos, scope, args);
             case IsLockedNode.NAME -> new IsLockedNode(pos, scope, args);
             case GetValueNode.GET -> new GetValueNode(pos, scope, args);
@@ -345,6 +356,8 @@ public final class NodeDelegator {
             // no_choice
             case NoChoiceProbNode.NAME ->
                     new NoChoiceProbNode(pos, scope, args);
+            // script
+            case RunExprNode.NAME -> new RunExprNode(pos, scope, args);
             // sheet
             case SheetSpriteAtNode.NAME ->
                     new SheetSpriteAtNode(pos, scope, args);
@@ -368,6 +381,8 @@ public final class NodeDelegator {
             case ResetConfigNode.RESET_LAYOUT, ResetConfigNode.RESET_PADDING,
                  ResetConfigNode.RESET_SEQUENCING ->
                     new ResetConfigNode(pos, scope, args, fID);
+            case ResetCustomizationNode.NAME ->
+                    new ResetCustomizationNode(pos, scope, args);
             case SetEdgeNode.NAME -> new SetEdgeNode(pos, scope, args);
             case SetPaddingNode.NAME -> new SetPaddingNode(pos, scope, args);
             case SetFramesPerDimNode.NAME ->
@@ -392,6 +407,8 @@ public final class NodeDelegator {
             case SetColorNode.NAME -> new SetColorNode(pos, scope, args);
             case SetFromSwatchNode.NAME ->
                     new SetFromSwatchNode(pos, scope, args);
+            // script
+            case RunStatNode.NAME -> new RunStatNode(pos, scope, args);
             // extend here
             default -> new IllegalStatementNode(pos,
                     "No scoped function \"" + fID + "\" with " +

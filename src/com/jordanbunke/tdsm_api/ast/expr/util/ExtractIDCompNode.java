@@ -73,9 +73,7 @@ public final class ExtractIDCompNode extends UtilExprNode {
                 try {
                     yield Integer.parseInt(raw);
                 } catch (NumberFormatException nfe) {
-                    ScriptErrorLog.fireError(
-                            ScriptErrorLog.Message.CUSTOM_RT,
-                            arg.getPosition(),
+                    ScriptErrorLog.runtimeError(arg.getPosition(),
                             "Invalid format: frame number could not be parsed from sprite ID \"" +
                                     spriteID + "\"");
                     yield null;

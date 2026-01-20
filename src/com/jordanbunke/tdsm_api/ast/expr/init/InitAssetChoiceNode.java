@@ -13,6 +13,7 @@ import com.jordanbunke.tdsm.data.layer.support.AssetChoiceTemplate;
 import com.jordanbunke.tdsm.data.layer.support.ColorSelection;
 import com.jordanbunke.tdsm_api.ast.type.AssetChoiceTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.ColSelTypeNode;
+import com.jordanbunke.tdsm_api.util.AssetChoiceConstruct;
 import com.jordanbunke.tdsm_api.util.DataProcessor;
 import com.jordanbunke.tdsm_api.util.MetaFuncHelper;
 
@@ -33,7 +34,7 @@ public final class InitAssetChoiceNode extends InitExprNode {
     }
 
     @Override
-    public AssetChoiceTemplate evaluate(final SymbolTable symbolTable) {
+    public AssetChoiceConstruct evaluate(final SymbolTable symbolTable) {
         final Object[] vs = arguments.evaluate(symbolTable);
 
         final String id = (String) vs[0];
@@ -43,9 +44,7 @@ public final class InitAssetChoiceNode extends InitExprNode {
                 .toArray(ColorSelection[]::new);
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Asset choice ID must be non-empty");
             return null;
         }
@@ -55,6 +54,7 @@ public final class InitAssetChoiceNode extends InitExprNode {
                         symbolTable, Replacement.class,
                         arguments.get(1).getPosition(), color);
 
-        return new AssetChoiceTemplate(id, replaceFunc, selections);
+        return AssetChoiceConstruct.template(
+                new AssetChoiceTemplate(id, replaceFunc, selections));
     }
 }

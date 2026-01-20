@@ -29,9 +29,7 @@ public final class GetEdgeNode extends StyleExprNode {
         final int edgeIndex = (int) arguments.evaluate(symbolTable)[0];
 
         if (edgeIndex < 0 || edgeIndex >= Edge.values().length)
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "The edge index (" + edgeIndex + ") is invalid");
         else
             return style.getEdgePadding(Edge.values()[edgeIndex]);

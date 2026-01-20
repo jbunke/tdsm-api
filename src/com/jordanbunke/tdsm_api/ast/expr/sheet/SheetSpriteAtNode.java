@@ -34,15 +34,11 @@ public final class SheetSpriteAtNode extends SheetExprNode {
         final int x = (int) vs[0], y = (int) vs[1];
 
         if (x < 0 || x >= sheet.spritesX) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "X coordinate is out of bounds; should be 0 <= x < sprites_x");
             return null;
         } else if (y < 0 || y >= sheet.spritesY) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "Y coordinate is out of bounds; should be 0 <= y < sprites_y");
             return null;
         }

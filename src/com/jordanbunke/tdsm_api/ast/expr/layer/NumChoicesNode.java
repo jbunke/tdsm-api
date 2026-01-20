@@ -30,8 +30,7 @@ public final class NumChoicesNode extends LayerExprNode {
         if (layer instanceof ChoosingLayer cl)
             return cl.getNumChoices();
 
-        ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                getPosition(),
+        ScriptErrorLog.runtimeError(getPosition(),
                 "Layer is not an asset choice layer or a choice layer");
         return null;
     }

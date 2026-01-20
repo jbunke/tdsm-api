@@ -48,22 +48,16 @@ public final class InitAnimNode extends InitExprNode {
         final int frameCount = ticksPerFrame.length;
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Animation must have a non-empty id");
             return null;
         } else if (frameCount == 0) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "Animation must have at least 1 frame");
             return null;
         } else if (Arrays.stream(ticksPerFrame).filter(i -> i <= 0)
                 .findAny().isPresent()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "All animation frames must last for at least 1 tick");
             return null;
         }
@@ -85,8 +79,7 @@ public final class InitAnimNode extends InitExprNode {
                     symbolTable, ScriptArray.class, pos, i);
 
             if (arr.size() != 2) {
-                ScriptErrorLog.fireError(
-                        ScriptErrorLog.Message.CUSTOM_RT, pos,
+                ScriptErrorLog.runtimeError(pos,
                         "Frame coordinate function yielded an array of " +
                                 arr.size() + " elements instead of 2");
                 return null;
@@ -94,18 +87,15 @@ public final class InitAnimNode extends InitExprNode {
                 final Object xo = arr.get(0), yo = arr.get(1);
 
                 if (!(xo instanceof Integer x && yo instanceof Integer y)) {
-                    ScriptErrorLog.fireError(
-                            ScriptErrorLog.Message.CUSTOM_RT, pos,
+                    ScriptErrorLog.runtimeError(pos,
                             "Frame coordinate function should yield an int[]");
                     return null;
                 } else if (x < 0) {
-                    ScriptErrorLog.fireError(
-                            ScriptErrorLog.Message.CUSTOM_RT, pos,
+                    ScriptErrorLog.runtimeError(pos,
                             "The frame coordinate function yielded a negative X value");
                     return null;
                 } else if (y < 0) {
-                    ScriptErrorLog.fireError(
-                            ScriptErrorLog.Message.CUSTOM_RT, pos,
+                    ScriptErrorLog.runtimeError(pos,
                             "The frame coordinate function yielded a negative Y value");
                     return null;
                 } else {

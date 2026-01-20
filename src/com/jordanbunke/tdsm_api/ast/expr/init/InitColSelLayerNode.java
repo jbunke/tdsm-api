@@ -36,15 +36,11 @@ public final class InitColSelLayerNode extends InitExprNode {
                 .toArray(ColorSelection[]::new);
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Layer ID must be non-empty");
             return null;
         } else if (selections.length == 0) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "Color selection layer must consist of at least one color selection");
             return null;
         }

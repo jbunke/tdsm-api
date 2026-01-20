@@ -11,8 +11,10 @@ import com.jordanbunke.tdsm.data.Animation;
 import com.jordanbunke.tdsm.data.layer.CustomizationLayer;
 import com.jordanbunke.tdsm.data.style.Style;
 import com.jordanbunke.tdsm_api.ast.type.AnimTypeNode;
+import com.jordanbunke.tdsm_api.ast.type.AssetChoiceTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.LayerTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.StyleTypeNode;
+import com.jordanbunke.tdsm_api.util.AssetChoiceConstruct;
 
 public final class IDPropertyNode extends DefFuncCallNode {
     public static final String NAME = "id";
@@ -25,7 +27,8 @@ public final class IDPropertyNode extends DefFuncCallNode {
         super(Arguments.none(), TypeNode.getString(), pos);
 
         receiver = new Receiver(scope, new TypeNode[] {
-                StyleTypeNode.get(), LayerTypeNode.get(), AnimTypeNode.get()
+                StyleTypeNode.get(), LayerTypeNode.get(),
+                AnimTypeNode.get(), AssetChoiceTypeNode.get()
         });
     }
 
@@ -56,6 +59,11 @@ public final class IDPropertyNode extends DefFuncCallNode {
             final CustomizationLayer layer =
                     (CustomizationLayer) receiver.evaluate(symbolTable);
             return layer.id;
+        } else if (type instanceof AssetChoiceTypeNode) {
+            // layer
+            final AssetChoiceConstruct assetChoice =
+                    (AssetChoiceConstruct) receiver.evaluate(symbolTable);
+            return assetChoice.id;
         } else {
             // anim
             final Animation anim = (Animation) receiver.evaluate(symbolTable);

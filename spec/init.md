@@ -331,6 +331,22 @@ $Init.replacement(int index, (color -> color) func) -> replacement
 > * When performed on [***asset layers***](./theory/t_layer.md#asset-layer), the influencing color selections constitute the color selections added to the asset layer via [`layer::add_influences`](./layer.md#add_influences), in the order they were added.
 > * When performed on [***asset choices***](./theory/t_asset_choice.md), the influencing color selections constitute the color selections defined as part of the asset choice (see [`$Init::asset_choice`](#asset_choice)), followed by the color selections added to the asset choice's parent asset choice layer via [`layer::add_influences`](./layer.md#add_influences).
 
+### `script`
+
+```js
+$Init.script(string path) -> script
+```
+
+**Returns** a script object corresponding to the source file at `path`.
+
+**Parameters:**
+* `path` - The relative or absolute file path of the source file to be compiled.
+
+**Terminates with error if:**
+* `path` does not correspond to a readable text file
+* The file at `path` cannot be parsed as a syntactically correct *DeltaScript* (TDSM) script
+* The file at `path` contains semantic errors
+
 ### `sheet`
 
 ```js 

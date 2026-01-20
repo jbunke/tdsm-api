@@ -30,10 +30,8 @@ public final class GetDecisionNode extends LayerExprNode {
         if (layer instanceof DecisionLayer dl)
             return dl.getDecision();
         else
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT, getPosition(),
-                    "The layer '" + receiver.receiver() +
-                            "' is not a decision layer");
+            ScriptErrorLog.runtimeError(getPosition(),
+                    "The layer '" + receiver.receiver() + "' is not a decision layer");
 
         return null;
     }

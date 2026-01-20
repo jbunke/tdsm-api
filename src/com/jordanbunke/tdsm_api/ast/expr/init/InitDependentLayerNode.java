@@ -42,21 +42,15 @@ public final class InitDependentLayerNode extends InitExprNode {
         final int relIndex = (int) vs[3];
 
         if (id.isEmpty()) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Layer ID must be non-empty");
             return null;
         } else if (!(refLayer instanceof AssetChoiceLayer refACL)) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(2).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(2).getPosition(),
                     "Reference layer must be an asset choice layer");
             return null;
         } else if (relIndex == 0) {
-            ScriptErrorLog.fireError(
-                    ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(0).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(0).getPosition(),
                     "Relative index cannot be 0");
             return null;
         } else {

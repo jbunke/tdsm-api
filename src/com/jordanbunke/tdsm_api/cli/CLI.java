@@ -43,7 +43,7 @@ public final class CLI {
 
         final String[] lines = new String[] {
                 "Command-line interface for " + ProgramInfo.PROGRAM_NAME +
-                        " " + ProgramInfo.getVersion().toString(),
+                        " " + ProgramInfo.formatVersion(),
                 "(c) 2025 Jordan Bunke",
                 StringProc.altHighlight(Clink.Mode.UPDATE,
                         "Type ", HelpCommand.HELP, " to get started")

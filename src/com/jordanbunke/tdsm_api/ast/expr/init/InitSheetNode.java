@@ -32,23 +32,19 @@ public final class InitSheetNode extends InitExprNode {
         final int spriteW = (int) vs[1], spriteH = (int) vs[2];
 
         if (spriteW <= 0) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "Sprite width must be a positive integer");
             return null;
         } else if (spriteH <= 0) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(2).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(2).getPosition(),
                     "Sprite height must be a positive integer");
             return null;
         } else if (source.getWidth() % spriteW != 0) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(1).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(1).getPosition(),
                     "Sprite width must divide the source image's width without remainder");
             return null;
         } else if (source.getHeight() % spriteH != 0) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    arguments.get(2).getPosition(),
+            ScriptErrorLog.runtimeError(arguments.get(2).getPosition(),
                     "Sprite height must divide the source image's height without remainder");
             return null;
         }

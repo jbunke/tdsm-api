@@ -45,8 +45,7 @@ public final class NaiveMaskLogicNode extends LayerExprNode {
                 (ChildFuncNode) arguments.get(0).evaluate(symbolTable);
 
         if (!(layer instanceof AbstractACLayer projector)) {
-            ScriptErrorLog.fireError(ScriptErrorLog.Message.CUSTOM_RT,
-                    getPosition(),
+            ScriptErrorLog.runtimeError(getPosition(),
                     "Layer must be an asset choice layer or dependent layer");
             return null;
         } else {
