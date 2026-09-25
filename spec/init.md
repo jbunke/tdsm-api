@@ -193,16 +193,11 @@ $Init.default_composer(string[] directions, bool orientation, anim[] anims) -> (
 * `anims` - An array of animations, in their source sprite sheet sequencing order.
 
 **Terminates with error if:**
-* `!(#|directions == 4 || #|directions == 6 || #|directions == 8)`<sup>a</sup>
+* `#|directions == 0`
+* `#|directions > 8`
+* `directions[i] == directions[j]` for some `i,j` where `i != j`
 * `#|anims == 0` <!-- TODO - implementation -->
 
-> **Note:**
->
-> a - Beyond merely being an array of a valid length, `directions` must be some [permutation](https://en.wikipedia.org/wiki/Permutation) of a valid set of directions:
-> * **4 directions:** `[ $TDSM.N, $TDSM.W, $TDSM.S, $TDSM.E ]`
-> * **6 directions:** `[ $TDSM.N, $TDSM.NW, $TDSM.SW, $TDSM.S, $TDSM.SE, $TDSM.NE ]`
-> * **8 directions:** `[ $TDSM.N, $TDSM.NW, $TDSM.W, $TDSM.SW, $TDSM.S, $TDSM.SE, $TDSM.E, $TDSM.NE ]`
->
 > **Related material:**
 > * [Direction constants](./global.md#directions)
 
@@ -400,16 +395,11 @@ $Init.style(string id, int[] dims, string[] directions, bool orientation, anim[]
 * `#|dims != 2`
 * `dims[$TDSM.X] < 1 || dims[$TDSM.Y] < 1`
 * `dims[$TDSM.X] > 128 || dims[$TDSM.Y] > 128`
-* `!(#|directions == 4 || #|directions == 6 || #|directions == 8)`<sup>a</sup>
+* `#|directions == 0`
+* `#|directions > 8`
+* `directions[i] == directions[j]` for some `i,j` where `i != j`
 * `#|anims == 0` <!-- TODO - implementation -->
 * `!(layers.has($Init.CUSTOM) && layers.has($Init.ASSEMBLY))`
 
-> **Note:**
-> 
-> a - Beyond merely being an array of a valid length, `directions` must be some [permutation](https://en.wikipedia.org/wiki/Permutation) of a valid set of directions:
-> * **4 directions:** `[ $TDSM.N, $TDSM.W, $TDSM.S, $TDSM.E ]`
-> * **6 directions:** `[ $TDSM.N, $TDSM.NW, $TDSM.SW, $TDSM.S, $TDSM.SE, $TDSM.NE ]`
-> * **8 directions:** `[ $TDSM.N, $TDSM.NW, $TDSM.W, $TDSM.SW, $TDSM.S, $TDSM.SE, $TDSM.E, $TDSM.NE ]`
->
 > **Related material:**
 > * [Direction constants](./global.md#directions)

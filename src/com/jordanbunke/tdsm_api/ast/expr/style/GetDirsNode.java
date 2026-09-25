@@ -48,7 +48,7 @@ public final class GetDirsNode extends StyleExprNode {
         final Style style = getStyle(symbolTable);
 
         return new ScriptArray(Arrays.stream(all
-                ? style.directions.order() : style.exportDirections())
+                ? style.directions.order : style.exportDirections())
                 .map(DirConversion::from));
     }
 }

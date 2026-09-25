@@ -14,7 +14,6 @@ import com.jordanbunke.tdsm_api.ast.type.ReplacementTypeNode;
 import com.jordanbunke.tdsm_api.ast.type.SheetTypeNode;
 
 import java.util.Arrays;
-import java.util.Set;
 
 public final class DataProcessor {
     public static final int DIRECTION = 0, ANIM = 1, FRAME = 2;
@@ -48,7 +47,7 @@ public final class DataProcessor {
             if (anim == null)
                 return FAIL;
 
-            if (directions.orientation())
+            if (directions.orientation)
                 return anim.coordFunc.apply(frame).displace(0, dirIndex);
             else
                 return anim.coordFunc.apply(frame).displace(dirIndex, 0);
@@ -61,38 +60,39 @@ public final class DataProcessor {
     ) {
         final int amount = dirStrings.length;
 
-        final Directions.NumDirs numDirs =
-                Arrays.stream(Directions.NumDirs.values())
-                        .filter(nd -> Integer.parseInt(
-                                nd.toString()) == amount)
-                        .findFirst().orElse(null);
-
-        if (numDirs == null) {
-            ScriptErrorLog.runtimeError(argPos, "Passed " + amount +
-                    " directions to the style initializer, which is an invalid amount.");
+        if (amount == 0) {
+            ScriptErrorLog.runtimeError(argPos, "Passed empty directions array");
+            return null;
+        } else if (amount > Directions.MAX_DIRECTIONS) {
+            ScriptErrorLog.runtimeError(argPos,
+                    "Passed more than the maximum amount of directions (" +
+                            Directions.MAX_DIRECTIONS +
+                            ") in the directions array");
             return null;
         }
 
-        final Set<Directions.Dir> included = numDirs.getIncluded();
         final Directions.Dir[] order = Arrays.stream(dirStrings)
-                .map(Directions::get).filter(included::contains)
-                .peek(included::remove).toArray(Directions.Dir[]::new);
+                .map(Directions::get).toArray(Directions.Dir[]::new);
+        final Directions directions = new Directions(orientation, order);
 
-        if (order.length != amount) {
-            ScriptErrorLog.runtimeError(argPos, (amount - order.length) +
-                    " directions provided were either invalid for a " +
-                    numDirs + "-directional sprite style or were duplicates");
+        if (directions.containsInvalid()) {
+            ScriptErrorLog.runtimeError(argPos,
+                    "One or more directions in the directions array could not be parsed");
+            return null;
+        } else if (!directions.noDuplicates) {
+            ScriptErrorLog.runtimeError(argPos,
+                    "Directions array contained duplicate elements");
             return null;
         }
 
-        return new Directions(numDirs, orientation, order);
+        return directions;
     }
 
     private static int indexOfDir(
             final Directions directions, final Directions.Dir target
     ) {
-        for (int i = 0; i < directions.order().length; i++)
-            if (target == directions.order()[i])
+        for (int i = 0; i < directions.order.length; i++)
+            if (target == directions.order[i])
                 return i;
 
         return -1;
