@@ -8,7 +8,7 @@
 
 ## v1.3.1
 
-*Released 2026-09-24*
+*Released 2026-09-25*
 
 ### Changed:
 
