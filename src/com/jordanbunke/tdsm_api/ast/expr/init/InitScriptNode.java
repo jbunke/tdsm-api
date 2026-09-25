@@ -1,6 +1,7 @@
 package com.jordanbunke.tdsm_api.ast.expr.init;
 
 import com.jordanbunke.delta_time.io.FileIO;
+import com.jordanbunke.delta_time.io.PathUtils;
 import com.jordanbunke.delta_time.scripting.ast.nodes.expression.ExpressionNode;
 import com.jordanbunke.delta_time.scripting.ast.nodes.function.HeadFuncNode;
 import com.jordanbunke.delta_time.scripting.ast.nodes.types.TypeNode;
@@ -39,7 +40,7 @@ public final class InitScriptNode extends InitExprNode {
         if (content == null)
             ScriptErrorLog.runtimeError(arg.getPosition(),
                     "Failed to read a script file at path \"" +
-                            PathHelper.formatPathString(scriptFP) + "\"");
+                            PathUtils.formatPathString(scriptFP) + "\"");
 
         final HeadFuncNode script = TDSMInterpreter.get().build(content);
         script.semanticErrorCheck(SymbolTable.root(script, scriptPath));

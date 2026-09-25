@@ -39,7 +39,7 @@ public final class CLI {
     }
 
     private static void welcomeMessage() {
-        ProgramInfo.readProgramFile(false);
+        ProgramInfo.readProgramFile();
 
         final String[] lines = new String[] {
                 "Command-line interface for " + ProgramInfo.PROGRAM_NAME +

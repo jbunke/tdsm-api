@@ -6,9 +6,19 @@
 > 
 > Release versions refer to the version of *Top Down Sprite Maker* where the listed API changes were introduced. The API **does not** have a separate versioning system.
 
+## v1.3.1
+
+*Released 2026-09-25*
+
+### Changed:
+
+* Eased restrictions on the directions array parameter of the following functions:
+  * `$Init::default_composer`
+  * `$Init::style`
+
 ## v1.3.0
 
-*Released 2026-01-19* <!-- TODO -->
+*Released 2026-01-19*
 
 ### Added:
 
